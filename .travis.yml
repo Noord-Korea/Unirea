@@ -6,7 +6,6 @@ addons:
   sonarcloud:
     organization: braindead-dev-github
     branches:
-      - masterClient
       - masterServer
 
 
