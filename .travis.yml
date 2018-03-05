@@ -5,7 +5,6 @@ jdk: oraclejdk8
 addons:
   sonarcloud:
     organization: braindead-dev-github
-    token: 9935aa6f61e6a989cf5f021301f999b1216265db
 
 notifications:
     email: false
