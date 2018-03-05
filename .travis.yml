@@ -7,6 +7,7 @@ addons:
     organization: braindead-dev-github
     branches:
       - masterServer
+      - developmentServer
 
 
 notifications:
