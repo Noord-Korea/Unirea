@@ -26,3 +26,6 @@ android:
 
 notifications:
     email: false
+    
+before_install:
+    - chmod +x gradlew
