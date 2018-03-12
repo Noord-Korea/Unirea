@@ -17,6 +17,10 @@ android:
         # SDK VERION USED FOR COMPILING
         - android-$ANDROID_API_LEVEL
         - android-$EMULATOR_API_LEVEL
+        
+        - tools
+        - platform-tools
+        - extra-android-m2repository
       
     # LICENSE AGREEMENTS
     licenses:
