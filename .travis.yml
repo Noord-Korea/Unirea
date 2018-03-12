@@ -18,7 +18,7 @@ android:
         - android-$ANDROID_API_LEVEL
         - android-$EMULATOR_API_LEVEL
       
-    # LICENSE AGREEMENTS
+    # LICENSE AGREEMENTSf
     licenses:
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
@@ -36,7 +36,9 @@ notifications:
 before_install:
     - chmod +x gradlew   
     - yes | sdkmanager "build-tools;26.0.2"
-    - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+    
+before_script:
+    - echo no | android create avd --force -n test -t "android-"$ANDROID_API_LEVEL
+    - emulator -avd test -no-skin -no-window &
+    - android-wait-for-emulator
+    - adb shell input keyevent 82 &
