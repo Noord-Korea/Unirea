@@ -1,9 +1,21 @@
 language: android
+jdk: oraclejdk8
+
+env:
+    global:
+        - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
+        - ANDROID_API_LEVEL = 26
+        - EMULATOR_API_LEVEL = 26
+        - ADB_INSTALL_TIMEOUT = 8
+
 android:
     components:
-        - build-tools-26.0.2
-        - android-26
-        - extra
+        # BUILD TOOLS VERSION
+        - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+        
+        # SDK VERION USED FOR COMPILING
+        - android-$ANDROID_API_LEVEL
+        - android-$EMULATOR_API_LEVEL
 
 #addons:
 #  sonarcloud:
@@ -15,5 +27,5 @@ android:
 notifications:
     email: false
     
-before_install:
- - chmod +x gradlew
+before_script:
+    - echo no | android create avd --force -n test -t 
