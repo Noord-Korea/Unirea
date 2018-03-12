@@ -34,4 +34,3 @@ notifications:
     
 before_install:
     - chmod +x gradlew   
-    - yes | sdkmanager "build-tools;26.0.2"
