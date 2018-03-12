@@ -16,6 +16,10 @@ android:
         # SDK VERION USED FOR COMPILING
         - android-$ANDROID_API_LEVEL
         - android-$EMULATOR_API_LEVEL
+      
+    # LICENSE AGREEMENTS
+    licenses:
+        - 'android-sdk-license-.+'
 
 #addons:
 #  sonarcloud:
