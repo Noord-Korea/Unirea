@@ -3,7 +3,7 @@ package com.server;
 import com.server.exception.GameNotRunningException;
 import com.server.tick.*;
 
-public class game {
+public class Game {
 
     private boolean run;
     private Tick building;
@@ -11,7 +11,7 @@ public class game {
     private Tick resource;
     private Tick troopMovement;
 
-    public game() {
+    public Game() {
         run = false;
         building = new Building();
         recruiting = new Recruiting();
@@ -26,7 +26,7 @@ public class game {
     /**
      * This will execute the game tick.
      * The order is: building, resources, recruiting and troopmovement
-     * @throws GameNotRunningException
+     * @throws GameNotRunningException if the game isn't started
      */
     public void tick() throws GameNotRunningException {
         if(!run){
