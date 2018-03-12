@@ -31,6 +31,7 @@ android:
         - extra-google-m2repository
         - extra-android-m2repository
         - addon-google_apis-google-26
+        - sys-img-x86-android-23
       
     # LICENSE AGREEMENTS
     licenses:
