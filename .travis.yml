@@ -5,12 +5,12 @@ android:
         - android-26
         - extra
 
-addons:
-  sonarcloud:
-    organization: braindead-dev-github
-    branches:
-      - masterClient
-      - developmentClient
+#addons:
+#  sonarcloud:
+#    organization: braindead-dev-github
+#    branches:
+#      - masterClient
+#      - developmentClient
 
 notifications:
     email: false
