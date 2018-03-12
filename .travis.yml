@@ -22,6 +22,15 @@ android:
         - tools
         - platform-tools
         - extra-android-m2repository
+        
+        - sys-img-armeabi-v7a-android-26
+        - sys-img-armeabi-v7a-android-17
+        - sys-img-armeabi-v7a-android-23
+        
+        - extra-google-google_play_services
+        - extra-google-m2repository
+        - extra-android-m2repository
+        - addon-google_apis-google-26
       
     # LICENSE AGREEMENTS
     licenses:
