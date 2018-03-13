@@ -15,7 +15,7 @@ env:
     global:
         - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
         - ANDROID_API_LEVEL = 26
-        - EMULATOR_API_LEVEL = 24
+        - EMULATOR_API_LEVEL = 23
         - ADB_INSTALL_TIMEOUT = 8
 
 android:
@@ -28,13 +28,13 @@ android:
         
         # SDK VERION USED FOR COMPILING
         - android-26
-        - android-24
+        - android-23
         
         - extra-google-m2repository
         - extra-android-m2repository
         
         - sys-img-armeabi-v7a-addon-google_apis-google-26
-        - sys-img-armeabi-v7a-android-24 # the fix!
+        - sys-img-armeabi-v7a-android-23 # the fix!
       
     # LICENSE AGREEMENTS
     licenses:
@@ -53,11 +53,11 @@ notifications:
     
 before_install:
     - chmod +x gradlew  
-    - yes | sdkmanager --licenses
+    - yes | sdkmanager "build-tools;26.0.2"
     
 before_script:
     - android list targets
-    - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
+    - echo no | android create avd --force -n test -t android-23 --abi armeabi-v7a
     - emulator -avd test -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
