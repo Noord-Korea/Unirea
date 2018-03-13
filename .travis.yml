@@ -38,11 +38,6 @@ android:
         
         - sys-img-armeabi-v7a-addon-google_apis-google-26
         - sys-img-armeabi-v7a-google_apis-23
-      
-    # LICENSE AGREEMENTS
-    licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
 
 #addons:
 #  sonarcloud:
@@ -59,8 +54,6 @@ before_install:
     - yes | sdkmanager "build-tools;26.0.2"
     
 before_script:
-    - android list targets
-    - android list sdk --extended --no-ui --all
     - echo no | android create avd --force -n test -t android-23 --abi google_apis/armeabi-v7a
     - emulator -avd test -no-skin -no-window &
     - android-wait-for-emulator
