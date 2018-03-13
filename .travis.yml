@@ -36,7 +36,7 @@ android:
         - extra-android-m2repository
         
         - sys-img-armeabi-v7a-addon-google_apis-google-26
-        - sys-img-armeabi-v7a-addon-google_apis-google-23
+        - sys-img-armeabi-v7a-google_apis-23
       
     # LICENSE AGREEMENTS
     licenses:
