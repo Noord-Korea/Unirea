@@ -15,7 +15,7 @@ env:
     global:
         - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
         - ANDROID_API_LEVEL = 26
-        - EMULATOR_API_LEVEL = 23
+        - EMULATOR_API_LEVEL = 25
         - ADB_INSTALL_TIMEOUT = 8
 
 android:
