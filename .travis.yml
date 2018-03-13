@@ -21,9 +21,6 @@ env:
 
 android:
     components:
-        - tools
-        - platform-tools
-        - tools
         # BUILD TOOLS VERSION
         - build-tools-26.0.2
         
@@ -55,6 +52,6 @@ before_install:
     
 before_script:
     - echo no | android create avd --force -n test -t android-23 --abi google_apis/armeabi-v7a
-    - emulator -avd test -no-skin -no-audio -no-window -gpu off &
+    - emulator -avd test -no-skin -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
