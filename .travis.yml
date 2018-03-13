@@ -29,12 +29,6 @@ android:
         - android-23
         - addon-google_apis-google-26
         - addon-google_apis-google-23
-        
-        - extra-google-m2repository
-        - extra-android-m2repository
-        
-        - sys-img-armeabi-v7a-addon-google_apis-google-26
-        - sys-img-armeabi-v7a-google_apis-23
 
 #addons:
 #  sonarcloud:
