@@ -6,10 +6,10 @@ android:
     components:
         - platform-tools
         - tools
-        - build-tools-24.0.2
-        - android-22
+        - build-tools-26.0.2
+        - android-23
         - android-24
-        - sys-img-armeabi-v7a-android-22
+        - sys-img-armeabi-v7a-android-24
         - extra-android-m2repository
     
     licenses:
@@ -22,7 +22,7 @@ before_install:
     
 before_script:
     # Create and start emulator
-    - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+    - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
     - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
