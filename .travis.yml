@@ -29,6 +29,8 @@ android:
         # SDK VERION USED FOR COMPILING
         - android-26
         - android-23
+        - addon-google_apis-google-26
+        - addon-google_apis-google-23
         
         - extra-google-m2repository
         - extra-android-m2repository
