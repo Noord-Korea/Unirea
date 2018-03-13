@@ -53,7 +53,7 @@ notifications:
     
 before_install:
     - chmod +x gradlew  
-    - yes | sdkmanager "build-tools;26.0.2"
+    - yes | sdkmanager --licenses
     
 before_script:
     - android list targets
