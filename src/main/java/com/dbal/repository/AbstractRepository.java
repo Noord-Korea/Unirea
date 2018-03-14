@@ -2,6 +2,7 @@ package com.dbal.repository;
 
 import com.dbal.HibernateUtil;
 import com.dbal.Util;
+import com.dbal.specification.Specifiable;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -103,12 +104,42 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         return entity;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<T> findAll() {
+    public T findOne(Specifiable spec) {
+
         Session session = openSession();
 
         Class<T> classType = getDomainClass();
         Criteria criteria = session.createCriteria(classType);
+
+        criteria = buildCriteria(criteria, spec);
+
+        T entity;
+
+        try {
+            entity = (T) criteria.uniqueResult();
+            return entity;
+        } catch (HibernateException he) {
+            Util.logException(he);
+        } finally {
+            session.close();
+        }
+
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> findAll() {
+        return findAll(null);
+    }
+
+    public List<T> findAll(Specifiable spec) {
+        Session session = openSession();
+
+        Class<T> classType = getDomainClass();
+        Criteria criteria = session.createCriteria(classType);
+        if(spec != null) {
+            criteria = buildCriteria(criteria, spec);
+        }
 
         List<T> entities;
 
@@ -180,5 +211,14 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         }
 
         return null;
+    }
+
+    private Criteria buildCriteria(Criteria criteria, Specifiable spec) {
+
+        if (spec != null) {
+            spec.toCriteria(criteria);
+        }
+
+        return criteria;
     }
 }

@@ -1,5 +1,7 @@
 package com.server;
 
+import com.dbal.repository.PlayerRepository;
+import com.dbal.specification.PlayerSpecification;
 import com.models.Player;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,7 +17,7 @@ public class main {
         //Stop the very annoying "spam" from hibernate
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 
-        final Configuration configuration = new Configuration().configure();
+        /*final Configuration configuration = new Configuration().configure();
         final StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         final SessionFactory factory = configuration.buildSessionFactory(builder.build());
         final Session session = factory.openSession();
@@ -41,6 +43,20 @@ public class main {
 
         //Close session
         session.close();
-        factory.close();
+        factory.close();*/
+
+
+        Player player = new Player("Azho", "bramkempen@gmail.com", "test123");
+        PlayerRepository playerRepository = new PlayerRepository();
+        playerRepository.save(player);
+
+        player = playerRepository.findOne(10);
+        player.setUsername("Wauw");
+        playerRepository.save(player);
+
+        List<Player> players = playerRepository.findAll(PlayerSpecification.getByEmail("bramkempen@gmail.com"));
+        for (Player row: players) {
+            System.out.println(row.getId() + " " + row.getUsername());
+        }
     }
 }
