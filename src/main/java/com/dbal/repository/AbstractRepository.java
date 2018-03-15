@@ -20,8 +20,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
     public abstract Class<T> getDomainClass();
 
     public Session openSession(){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        return session;
+        return HibernateUtil.getSessionFactory().openSession();
     }
 
     public void delete(ID id) throws RuntimeException {
