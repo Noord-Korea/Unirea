@@ -13,7 +13,16 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 env:
+    - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
+    - ANDROID_API_LEVEL = 26
+    - EMULATOR_API_LEVEL = 24
+    - ADB_INSTALL_TIMEOUT = 8
     global:
+        - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
+        - ANDROID_API_LEVEL = 26
+        - EMULATOR_API_LEVEL = 24
+        - ADB_INSTALL_TIMEOUT = 8
+    matrix:
         - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
         - ANDROID_API_LEVEL = 26
         - EMULATOR_API_LEVEL = 24
