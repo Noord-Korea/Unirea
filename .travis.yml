@@ -13,11 +13,13 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 env:
-    - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
-    - ANDROID_API_LEVEL = 26
-    - EMULATOR_API_LEVEL = 24
-    - ADB_INSTALL_TIMEOUT = 8
-        
+    global:
+        - ADB_INSTALL_TIMEOUT = 8
+     
+script: 
+    - export ANDROID_BUILD_TOOLS_VERSION = 26.0.2
+    - export ANDROID_API_LEVEL = 26
+    - export EMULATOR_API_LEVEL = 24     
 
 android:
     components:
@@ -38,7 +40,7 @@ android:
 
 notifications:
     email: false
-    
+  
 before_install:
     - chmod +x gradlew  
     - yes | sdkmanager "build-tools;26.0.2"
