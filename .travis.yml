@@ -41,7 +41,7 @@ notifications:
     
 before_install:
     - chmod +x gradlew  
-    - yes | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
+    - yes | sdkmanager "build-tools;26.0.2"
     
 before_script:
     - android list targets
