@@ -22,12 +22,12 @@ env:
 android:
     components:
         # BUILD TOOLS VERSION
-        - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+        - build-tools-ANDROID_BUILD_TOOLS_VERSION
         
         # SDK VERION USED FOR COMPILING
-        - android-$ANDROID_API_LEVEL
-        - android-$EMULATOR_API_LEVEL
-        - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
+        - android-ANDROID_API_LEVEL
+        - android-EMULATOR_API_LEVEL
+        - sys-img-armeabi-v7a-android-EMULATOR_API_LEVEL
 
 #addons:
 #  sonarcloud:
