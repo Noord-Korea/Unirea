@@ -22,12 +22,12 @@ env:
 android:
     components:
         # BUILD TOOLS VERSION
-        - build-tools-26.0.2
+        - build-tools-$ANDROID_BUILD_TOOLS_VERSION
         
         # SDK VERION USED FOR COMPILING
-        - android-26
-        - android-24
-        - sys-img-armeabi-v7a-android-24
+        - android-$ANDROID_API_LEVEL
+        - android-$EMULATOR_API_LEVEL
+        - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
 
 #addons:
 #  sonarcloud:
@@ -41,11 +41,11 @@ notifications:
     
 before_install:
     - chmod +x gradlew  
-    - yes | sdkmanager "build-tools;26.0.2"
+    - yes | sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION"
     
 before_script:
     - android list targets
-    - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
+    - echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL --abi armeabi-v7a
     - emulator -avd test -no-skin -no-window &
     - android-wait-for-emulator
     - adb shell input keyevent 82 &
