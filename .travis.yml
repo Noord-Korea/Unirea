@@ -16,7 +16,7 @@ env:
     global:
         - ANDROID_BUILD_TOOLS_VERSION = 26.0.2
         - ANDROID_API_LEVEL = 26
-        - EMULATOR_API_LEVEL = 23
+        - EMULATOR_API_LEVEL = 24
         - ADB_INSTALL_TIMEOUT = 8
 
 android:
@@ -44,6 +44,7 @@ before_install:
     - yes | sdkmanager "build-tools;26.0.2"
     
 before_script:
+    - android list targets
     - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
     - emulator -avd test -no-skin -no-window &
     - android-wait-for-emulator
