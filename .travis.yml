@@ -14,9 +14,11 @@ cache:
     - $HOME/.android/build-cache
 env:
     global:
-        - ADB_INSTALL_TIMEOUT = 8
-     
-    
+        - ANDROID_BUILD_TOOLS_VERSION = "26.0.2"
+        - ANDROID_API_LEVEL = "26"
+        - EMULATOR_API_LEVEL = "24"
+        - ADB_INSTALL_TIMEOUT = "8"
+        
 
 android:
     components:
@@ -37,15 +39,12 @@ android:
 
 notifications:
     email: false
-  
+    
 before_install:
     - chmod +x gradlew  
     - yes | sdkmanager "build-tools;26.0.2"
     
 before_script:
-    - export ANDROID_BUILD_TOOLS_VERSION = 26.0.2
-    - export ANDROID_API_LEVEL = 26
-    - export EMULATOR_API_LEVEL = 24     
     - android list targets
     - echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL --abi armeabi-v7a
     - emulator -avd test -no-skin -no-window &
