@@ -5,13 +5,20 @@ import javax.persistence.*;
 @Entity
 @Table(name="Player")
 public class Player {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String username;
     private String email;
     private String passHash;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Player_Clan",
+            joinColumns = {@JoinColumn(name = "player_id")},
+            inverseJoinColumns = {@JoinColumn(name = "clan_id")}
+    )
+    private Clan clan;
 
     public Player() {
     }
@@ -21,6 +28,8 @@ public class Player {
         this.email = email;
         this.passHash = passHash;
     }
+
+
 
     public int getId() {
         return id;
