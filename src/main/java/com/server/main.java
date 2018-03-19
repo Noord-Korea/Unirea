@@ -38,13 +38,15 @@ public class main {
         System.out.println(4);
 
         player.setUsername("Wauw");
+        //player.setClan(clan);
         playerRepository.save(player);
 
         System.out.println(5);
 
         List<Clan> clans = clanRepository.findAll();
+        System.out.println(clans);
         for (Clan row: clans) {
-            System.out.println(clan.getName());
+            System.out.println(row.getName());
             for (Player rowPlayer: row.getPlayers()) {
                 System.out.println(rowPlayer.getUsername());
             }

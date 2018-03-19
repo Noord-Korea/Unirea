@@ -4,6 +4,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,13 +26,13 @@ public class Clan {
     }
 
     @OneToMany(mappedBy = "clan", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Player> players = new HashSet<>();
+    private List<Player> players = new ArrayList<>();
 
-    public Set<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Set<Player> players) {
+    public void setPlayers(List<Player> players) {
         this.players = players;
     }
 

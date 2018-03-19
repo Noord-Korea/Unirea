@@ -15,8 +15,10 @@ public class Player {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Player_Clan",
-            joinColumns = {@JoinColumn(name = "player_id")},
-            inverseJoinColumns = {@JoinColumn(name = "clan_id")}
+            joinColumns = {@JoinColumn(name = "player_id",
+                    referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "clan_id",
+                    referencedColumnName = "id")}
     )
     private Clan clan;
 
@@ -41,6 +43,14 @@ public class Player {
 
     public String getEmail() {
         return email;
+    }
+
+    public Clan getClan() {
+        return clan;
+    }
+
+    public void setClan(Clan clan) {
+        this.clan = clan;
     }
 
     public void setUsername(String username) {
