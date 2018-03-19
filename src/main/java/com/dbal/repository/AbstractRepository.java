@@ -48,7 +48,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
-            tx.rollback();
+            if(tx != null)
+                tx.rollback();
         } finally {
             session.close();
         }
@@ -71,7 +72,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         } catch (RuntimeException e) {
             Util.logException(e);
             try {
-                tx.rollback();
+                if(tx != null)
+                    tx.rollback();
             } catch (HibernateException he) {
                 Util.logException(he);
             }
@@ -95,7 +97,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
-            tx.rollback();
+            if(tx != null)
+                tx.rollback();
         } finally {
             session.close();
         }
@@ -170,7 +173,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             return entity;
         } catch (RuntimeException e) {
             Util.logException(e);
-            tx.rollback();
+            if(tx != null)
+                tx.rollback();
         } finally {
             session.close();
         }
@@ -201,7 +205,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         } catch (RuntimeException e) {
             Util.logException(e);
             try {
-                tx.rollback();
+                if(tx != null)
+                    tx.rollback();
             } catch (HibernateException he) {
                 Util.logException(he);
             }
