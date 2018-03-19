@@ -43,13 +43,11 @@ public class main {
 
         System.out.println(5);
 
+        int i = 0;
         List<Clan> clans = clanRepository.findAll();
-        System.out.println(clans);
         for (Clan row: clans) {
+            System.out.println(i);i++;
             System.out.println(row.getName());
-            for (Player rowPlayer: row.getPlayers()) {
-                System.out.println(rowPlayer.getUsername());
-            }
         }
 
     }

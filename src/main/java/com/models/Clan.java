@@ -15,7 +15,7 @@ public class Clan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int clanid;
     private String name;
 
     public Clan() {
@@ -41,7 +41,7 @@ public class Clan {
     }
 
     public int getId() {
-        return id;
+        return clanid;
     }
 
     public String getName() {

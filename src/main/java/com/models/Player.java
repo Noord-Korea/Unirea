@@ -7,18 +7,18 @@ import javax.persistence.*;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int playerid;
     private String username;
     private String email;
     private String passHash;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinTable(
             name = "Player_Clan",
             joinColumns = {@JoinColumn(name = "player_id",
-                    referencedColumnName = "id")},
+                    referencedColumnName = "playerid")},
             inverseJoinColumns = {@JoinColumn(name = "clan_id",
-                    referencedColumnName = "id")}
+                    referencedColumnName = "clanid")}
     )
     private Clan clan;
 
@@ -34,7 +34,7 @@ public class Player {
 
 
     public int getId() {
-        return id;
+        return playerid;
     }
 
     public String getUsername() {
