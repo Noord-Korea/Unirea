@@ -24,7 +24,7 @@ public class Clan {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "clan", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clan", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {
