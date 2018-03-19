@@ -12,4 +12,13 @@ public abstract class PlayerSpecification {
             }
         };
     }
+
+    public static Specifiable getByUsername(String username){
+        return new AbstractSpecification() {
+            @Override
+            public Criterion toCriterion() {
+                return Restrictions.eq("username", username);
+            }
+        };
+    }
 }
