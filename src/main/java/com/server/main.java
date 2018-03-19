@@ -11,7 +11,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 import java.text.MessageFormat;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class main {
@@ -33,6 +35,11 @@ public class main {
         System.out.println(3);
 
         clan.addPlayer(player);
+        System.out.println(clan.getName()+" players:");
+        for (Player row: clan.getPlayers()) {
+            System.out.println(row.getEmail());
+        }
+
         clanRepository.save(clan);
 
         System.out.println(4);

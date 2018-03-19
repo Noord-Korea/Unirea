@@ -13,13 +13,7 @@ public class Player {
     private String passHash;
 
     @ManyToOne
-    @JoinTable(
-            name = "Player_Clan",
-            joinColumns = {@JoinColumn(name = "player_id",
-                    referencedColumnName = "playerid")},
-            inverseJoinColumns = {@JoinColumn(name = "clan_id",
-                    referencedColumnName = "clanid")}
-    )
+    @JoinColumn(name = "clan_id")
     private Clan clan;
 
     public Player() {

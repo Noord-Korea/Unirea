@@ -25,8 +25,8 @@ public class Clan {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "clan", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Player> players = new ArrayList<>();
+    @OneToMany(mappedBy = "clan", cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, fetch = FetchType.EAGER)
+    private List<Player> players;
 
     public List<Player> getPlayers() {
         return players;
@@ -37,6 +37,9 @@ public class Clan {
     }
 
     public void addPlayer(Player player){
+        if(this.players == null){
+            this.players = new ArrayList<>();
+        }
         this.players.add(player);
     }
 

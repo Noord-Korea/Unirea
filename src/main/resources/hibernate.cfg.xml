@@ -40,7 +40,7 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">update</property> <!--create or update-->
+        <property name="hbm2ddl.auto">create</property> <!--create or update-->
 
         <!-- The mapping information of entities -->
         <mapping class="com.models.Player"/>
