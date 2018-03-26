@@ -38,6 +38,7 @@ public class main {
         System.out.println(clan.getName()+" players:");
         for (Player row: clan.getPlayers()) {
             System.out.println(row.getEmail());
+
         }
 
         clanRepository.save(clan);
@@ -55,6 +56,9 @@ public class main {
         for (Clan row: clans) {
             System.out.println(i);i++;
             System.out.println(row.getName());
+            for (Player playerRow: row.getPlayers()) {
+                System.out.println(playerRow.getEmail());
+            }
         }
 
     }
