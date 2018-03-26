@@ -1,41 +1,26 @@
 import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.PlayerSpecification;
 import com.models.Player;
-import org.hibernate.Hibernate;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
-import org.hibernate.tool.hbm2ddl.Target;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.List;
 import java.util.logging.Level;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-public class PlayerRepoTest {
+public class PlayerRepoTest extends AbstractTest {
     private PlayerRepository repo;
-
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void TestInitialize() {
+        emptyTable("Player");
         repo = new PlayerRepository();
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
-        recreateDatabase();
-
-    }
-
-    private void recreateDatabase() {
-        Configuration configuration = new Configuration().configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-        SchemaExport schemaExport = new SchemaExport(serviceRegistry, configuration);
-        schemaExport.create(Target.BOTH);
     }
 
     @Test
@@ -57,15 +42,17 @@ public class PlayerRepoTest {
     }
 
     @Test
-    public void testFindOne() {
+    public void testFindOneUsername() {
+        Player result = repo.findOne(PlayerSpecification.getByUsername("test"));
+        assertEquals(null, result);
         Player player = new Player("test", "test@gmail.com", "test");
         repo.save(player);
-        Player result = repo.findOne(PlayerSpecification.getByUsername("test"));
+        result = repo.findOne(PlayerSpecification.getByUsername("test"));
         assertEquals(player.getId(), result.getId());
     }
 
     @Test
-    public void testFineOneNull() {
+    public void testFindOneNull() {
         Player result = repo.findOne(1);
         assertEquals(null, result);
     }
@@ -81,8 +68,8 @@ public class PlayerRepoTest {
     }
 
     @Test
-    public void testDeleteNonExistant() {
+    public void testDeleteNonExistent() {
+        exception.expect(IllegalArgumentException.class);
         repo.delete(1);
     }
-
 }
