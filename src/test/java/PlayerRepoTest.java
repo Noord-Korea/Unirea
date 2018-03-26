@@ -24,21 +24,23 @@ public class PlayerRepoTest extends AbstractTest {
     }
 
     @Test
-    public void testFindAll() {
-        //database is being cleared at beginning of tests
-        for (int i = 0; i < 10; i++) {
-            repo.save(new Player("test" + i, "test1@gmail.com", "test1"));
-        }
-        int result = repo.findAll().size();
-        assertEquals(10, result);
-    }
-
-    @Test
-    public void testSave() {
+    public void testSaveValid() {
         int before = repo.findAll().size();
         repo.save(new Player("wauw", "bas@gmail.com", "test"));
         int after = repo.findAll().size();
         assertNotEquals(before, after);
+    }
+
+    @Test
+    public void testSaveInvalidUsername() {
+        exception.expect(IllegalArgumentException.class);
+        repo.save(new Player("", "test@gmail.com", "test"));
+    }
+
+    @Test
+    public void testSaveInvalidEmail() {
+        exception.expect(IllegalArgumentException.class);
+        repo.save(new Player("test", "test", "test"));
     }
 
     @Test
@@ -49,6 +51,37 @@ public class PlayerRepoTest extends AbstractTest {
         repo.save(player);
         result = repo.findOne(PlayerSpecification.getByUsername("test"));
         assertEquals(player.getId(), result.getId());
+    }
+
+    @Test
+    public void testFindOneUsernameEmpty() {
+        exception.expect(IllegalArgumentException.class);
+        repo.findOne(PlayerSpecification.getByUsername(""));
+    }
+    @Test
+    public void testFindOneEmail(){
+        Player result = repo.findOne(PlayerSpecification.getByEmail("test@gmail.com"));
+        assertEquals(null, result);
+        Player player = new Player("test", "test@gmail.com", "test");
+        repo.save(player);
+        result = repo.findOne(PlayerSpecification.getByEmail("test@gmail.com"));
+        assertEquals(player.getId(), result.getId());
+    }
+    @Test
+    public void testFindOneEmailEmpty() {
+
+    }
+
+    @Test
+    public void testFindAll() {
+        assertEquals(0, repo.findAll().size());
+        repo.save(new Player("test", "test@gmail.com", "test1"));
+        assertEquals(1, repo.findAll().size());
+        for (int i = 0; i < 10; i++) {
+            repo.save(new Player("test" + i, "test" + i + "@gmail.com", "test1"));
+        }
+        int result = repo.findAll().size();
+        assertEquals(11, result);
     }
 
     @Test
