@@ -25,21 +25,19 @@ public class Clan {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "clan")
-    private List<Player> players;
+    @OneToMany(mappedBy = "clan", fetch = FetchType.EAGER)
+    private Set<Player> players = new HashSet<>();
 
-    public List<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(Set<Player> players) {
         this.players = players;
     }
 
     public void addPlayer(Player player){
-        if(this.players == null){
-            this.players = new ArrayList<>();
-        }
+        player.setClan(this);
         this.players.add(player);
     }
 
