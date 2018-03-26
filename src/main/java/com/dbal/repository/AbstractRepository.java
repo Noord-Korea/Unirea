@@ -23,12 +23,12 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         return HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void delete(ID id) throws RuntimeException {
+    public void delete(ID id) {
 
         T entity = findOne(id);
 
         if(entity == null){
-            return;
+            throw new IllegalArgumentException("Entity can't be null");
         }
 
         delete(entity);
@@ -36,7 +36,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
 
     public void delete(T entity) {
         if(entity == null){
-            return;
+            throw new IllegalArgumentException("Entity can't be null");
         }
 
         Session session = openSession();
@@ -59,7 +59,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
     public void delete(Iterable<? extends T> entities) {
 
         if(entities == null){
-            return;
+            throw new IllegalArgumentException("Entity can't be null");
         }
 
         Session session = openSession();
@@ -160,7 +160,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
     public <S extends T> S save(S entity) {
 
         if(entity == null){
-            return null;
+            throw new IllegalArgumentException("Entity can't be null");
         }
 
         Session session = openSession();
@@ -186,7 +186,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
     public <S extends T> List<S> save(Iterable<S> entities) {
 
         if(entities == null){
-            return null;
+            throw new IllegalArgumentException("Entities can't be null");
         }
 
         List<S> result = new ArrayList<S>();

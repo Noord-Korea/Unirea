@@ -34,6 +34,9 @@ public class Clan {
 
     public void setPlayers(Set<Player> players) {
         this.players = players;
+        for (Player player : players) {
+            player.setClan(this);
+        }
     }
 
     public void addPlayer(Player player){
