@@ -12,7 +12,7 @@ public class Player {
     private String email;
     private String passHash;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, fetch = FetchType.EAGER)
     @JoinColumn(name = "clan_id")
     private Clan clan;
 

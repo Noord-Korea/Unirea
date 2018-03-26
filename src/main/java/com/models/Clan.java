@@ -25,7 +25,7 @@ public class Clan {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "clan", cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "clan")
     private List<Player> players;
 
     public List<Player> getPlayers() {
