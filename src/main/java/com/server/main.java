@@ -22,8 +22,5 @@ public class main {
         //java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         PlayerRepository playerRepository = new PlayerRepository();
         ClanRepository clanRepository = new ClanRepository();
-
-        
-
     }
 }
