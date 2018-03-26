@@ -16,6 +16,7 @@ import java.util.List;
 
 public abstract class AbstractRepository<T, Id extends Serializable> {
 
+    private static String entityNull = "Entity can't be null";
     public abstract Class<T> getDomainClass();
 
     public Session openSession(){
@@ -27,7 +28,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         T entity = findOne(id);
 
         if(entity == null){
-            throw new IllegalArgumentException("Entity can't be null");
+            throw new IllegalArgumentException(entityNull);
         }
 
         delete(entity);
@@ -35,7 +36,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
 
     public void delete(T entity) {
         if(entity == null){
-            throw new IllegalArgumentException("Entity can't be null");
+            throw new IllegalArgumentException(entityNull);
         }
 
         Session session = openSession();
@@ -58,7 +59,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
     public void delete(Iterable<? extends T> entities) {
 
         if(entities == null){
-            throw new IllegalArgumentException("Entity can't be null");
+            throw new IllegalArgumentException("Entities can't be null");
         }
 
         Session session = openSession();
@@ -139,7 +140,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         Class<T> classType = getDomainClass();
         Criteria criteria = session.createCriteria(classType);
         if(spec != null) {
-            criteria = buildCriteria(criteria, spec);
+            //criteria = buildCriteria(criteria, spec);
         }
 
         List<T> entities;
@@ -153,13 +154,13 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
             session.close();
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     public <S extends T> S save(S entity) {
 
         if(entity == null){
-            throw new IllegalArgumentException("Entity can't be null");
+            throw new IllegalArgumentException(entityNull);
         }
 
         Session session = openSession();

@@ -1,12 +1,8 @@
 package com.models;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +21,7 @@ public class Clan {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "clan", fetch = FetchType.EAGER)
+    @OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "clan", fetch = FetchType.EAGER)
     private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {
