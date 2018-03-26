@@ -8,10 +8,8 @@ public abstract class PlayerSpecification {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Specifiable getByEmail(String email){
-        if(email.equals("")){
-            throw new IllegalArgumentException("Please fill in an email-address!");
-        }
+    public static Specifiable getByEmail(String email) {
+
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
@@ -20,10 +18,8 @@ public abstract class PlayerSpecification {
         };
     }
 
-    public static Specifiable getByUsername(String username){
-        if(username.equals("")){
-            throw new IllegalArgumentException("Please fill in an username!");
-        }
+    public static Specifiable getByUsername(String username) {
+
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {

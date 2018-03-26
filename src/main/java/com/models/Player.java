@@ -1,18 +1,23 @@
 package com.models;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="Player")
+@Table(name = "Player")
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int playerid;
+    @NotNull
     private String username;
+    @NotNull
     private String email;
+    @NotNull
     private String passHash;
 
-    @ManyToOne(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "clan_id")
     private Clan clan;
 
@@ -24,7 +29,6 @@ public class Player {
         this.email = email;
         this.passHash = passHash;
     }
-
 
 
     public int getId() {

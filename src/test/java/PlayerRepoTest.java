@@ -23,6 +23,10 @@ public class PlayerRepoTest extends AbstractTest {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 
+    private void insertOnePlayer() {
+        repo.save(new Player("test", "test@gmail.com", "test"));
+    }
+
     @Test
     public void testSaveValid() {
         int before = repo.findAll().size();
@@ -33,14 +37,19 @@ public class PlayerRepoTest extends AbstractTest {
 
     @Test
     public void testSaveInvalidUsername() {
+        Player player = repo.save(new Player("", "test@gmail.com", "test"));
+        assertEquals(null, player);
+    }
+    @Test
+    public void testSaveInvalidUsernameNull(){
         exception.expect(IllegalArgumentException.class);
-        repo.save(new Player("", "test@gmail.com", "test"));
+        Player player = repo.save(new Player(null, "test@gmail.com", "test"));
     }
 
     @Test
     public void testSaveInvalidEmail() {
-        exception.expect(IllegalArgumentException.class);
-        repo.save(new Player("test", "test", "test"));
+        Player player = repo.save(new Player("test", "test", "test"));
+        assertEquals(null, player);
     }
 
     @Test
@@ -55,11 +64,12 @@ public class PlayerRepoTest extends AbstractTest {
 
     @Test
     public void testFindOneUsernameEmpty() {
-        exception.expect(IllegalArgumentException.class);
-        repo.findOne(PlayerSpecification.getByUsername(""));
+        Player player = repo.findOne(PlayerSpecification.getByUsername(""));
+        assertEquals(null, player);
     }
+
     @Test
-    public void testFindOneEmail(){
+    public void testFindOneEmail() {
         Player result = repo.findOne(PlayerSpecification.getByEmail("test@gmail.com"));
         assertEquals(null, result);
         Player player = new Player("test", "test@gmail.com", "test");
@@ -67,9 +77,19 @@ public class PlayerRepoTest extends AbstractTest {
         result = repo.findOne(PlayerSpecification.getByEmail("test@gmail.com"));
         assertEquals(player.getId(), result.getId());
     }
+
     @Test
     public void testFindOneEmailEmpty() {
+        insertOnePlayer();
+        Player player = repo.findOne(PlayerSpecification.getByEmail(""));
+        assertEquals(null, player);
+    }
 
+    @Test
+    public void testFindOneEmailNull() {
+        insertOnePlayer();
+        Player player = repo.findOne(PlayerSpecification.getByEmail(null));
+        assertEquals(null, player);
     }
 
     @Test
