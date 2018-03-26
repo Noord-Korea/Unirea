@@ -7,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.annotations.Sort;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class AbstractRepository<T, ID extends Serializable> {
+public abstract class AbstractRepository<T, Id extends Serializable> {
 
     public abstract Class<T> getDomainClass();
 
@@ -23,7 +22,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         return HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void delete(ID id) {
+    public void delete(Id id) {
 
         T entity = findOne(id);
 
@@ -67,7 +66,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
 
         try {
             tx = session.beginTransaction();
-            entities.forEach(entity -> session.delete(entity));
+            entities.forEach(session::delete);
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
@@ -83,7 +82,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
     }
 
     @SuppressWarnings("unchecked")
-    public T findOne(ID id) {
+    public T findOne(Id id) {
 
         Class<T> classType = getDomainClass();
         T entity = null;
