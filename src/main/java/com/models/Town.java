@@ -19,7 +19,7 @@ public class Town {
     @NotNull
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
+    @OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town", fetch = FetchType.EAGER)
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
 
     public Set<TownResources> getTownResources() {

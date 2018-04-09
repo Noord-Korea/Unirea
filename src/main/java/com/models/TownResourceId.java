@@ -1,6 +1,8 @@
 package com.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
@@ -9,7 +11,7 @@ public class TownResourceId implements Serializable{
     private Town town;
     private Resource resource;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     public Town getTown() {
         return town;
     }
@@ -18,7 +20,7 @@ public class TownResourceId implements Serializable{
         this.town = town;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     public Resource getResource() {
         return resource;
     }

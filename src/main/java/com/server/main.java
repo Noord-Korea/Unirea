@@ -15,11 +15,12 @@ import com.server.tick.TroopMovement;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 public class main {
     public static void main(String[] args) {
         //Stop the very annoying "spam" from hibernate
-        //java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         PlayerRepository playerRepository = new PlayerRepository();
         ClanRepository clanRepository = new ClanRepository();
 
@@ -31,40 +32,45 @@ public class main {
         Runnable resourceTick = new ResourceTick();
         Runnable troopMovement = new TroopMovement();
 
-        ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);
 
-        exec.scheduleAtFixedRate(resourceTick, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(building, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(recruiting, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(troopMovement, 0, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(resourceTick, 0, 5, TimeUnit.SECONDS);
 
 
-        Resource resource = new Resource();
-        resource.setName("Hout");
-        resourceRepository.save(resource);
+        Resource resource1 = new Resource();
+        resource1.setName("Hout");
+        resourceRepository.save(resource1);
 
-        resource = new Resource();
-        resource.setName("Banaan");
-        resourceRepository.save(resource);
+        Resource resource2 = new Resource();
+        resource2.setName("Banaan");
+        resourceRepository.save(resource2);
 
-
-        boolean running = false;
+        boolean running = true;
         int i = 0;
         while (running) {
             System.out.println("Main thread");
             running = i != 100;
 
-            Town town = new Town();
-            town.setName("Bram");
-            townRepository.save(town);
+            Town town1 = new Town();
+            town1.setName("Bram");
+            townRepository.save(town1);
 
-            TownResources townResources = new TownResources();
-            townResources.setTown(town);
-            townResources.setResource(resource);
-            townResources.setValue(10);
+            TownResources townResources1 = new TownResources();
+            townResources1.setTown(town1);
+            townResources1.setResource(resource1);
+            townResources1.setValue(10);
 
-            town.addTownResource(townResources);
-            townRepository.save(town);
+            TownResources townResources2 = new TownResources();
+            townResources2.setTown(town1);
+            townResources2.setResource(resource2);
+            townResources2.setValue(12);
+
+            town1.addTownResource(townResources1);
+            town1.addTownResource(townResources2);
+            townRepository.save(town1);
 
             i++;
             try {
