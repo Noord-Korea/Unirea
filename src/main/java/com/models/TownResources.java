@@ -1,6 +1,4 @@
 package com.models;
-
-
 import javax.persistence.*;
 
 @Entity
@@ -11,7 +9,6 @@ import javax.persistence.*;
         @AssociationOverride(name = "pk.resource",
                 joinColumns = @JoinColumn(name = "RESOURCE_ID"))
 })
-
 public class TownResources {
 
     private TownResourceId pk = new TownResourceId();
