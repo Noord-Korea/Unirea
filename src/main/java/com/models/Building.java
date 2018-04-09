@@ -5,7 +5,7 @@ import com.sun.istack.internal.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "BuildingTick")
+@Table(name = "Building")
 
 public class Building {
     @Id

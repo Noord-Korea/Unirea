@@ -5,11 +5,12 @@ import com.sun.istack.internal.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ResourceTick")
+@Table(name = "Resource")
 
 public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "RESOURCE_ID", unique = true, nullable = false)
     private int id;
 
     @NotNull

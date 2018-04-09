@@ -7,9 +7,9 @@ import javax.persistence.*;
 @Table(name = "Town_Resource")
 @AssociationOverrides({
         @AssociationOverride(name = "pk.town",
-                joinColumns = @JoinColumn(name = "id")),
+                joinColumns = @JoinColumn(name = "TOWN_ID")),
         @AssociationOverride(name = "pk.resource",
-                joinColumns = @JoinColumn(name = "id"))
+                joinColumns = @JoinColumn(name = "RESOURCE_ID"))
 })
 
 public class TownResources {

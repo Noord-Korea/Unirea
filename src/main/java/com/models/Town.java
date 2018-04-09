@@ -13,10 +13,12 @@ import java.util.Set;
 public class Town {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "TOWN_ID", unique = true, nullable = false)
     private int id;
 
     @NotNull
     private String name;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
 

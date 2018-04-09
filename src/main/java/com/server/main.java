@@ -38,11 +38,34 @@ public class main {
         exec.scheduleAtFixedRate(recruiting, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(troopMovement, 0, 5, TimeUnit.SECONDS);
 
+
+        Resource resource = new Resource();
+        resource.setName("Hout");
+        resourceRepository.save(resource);
+
+        resource = new Resource();
+        resource.setName("Banaan");
+        resourceRepository.save(resource);
+
+
         boolean running = false;
         int i = 0;
         while (running) {
             System.out.println("Main thread");
             running = i != 100;
+
+            Town town = new Town();
+            town.setName("Bram");
+            townRepository.save(town);
+
+            TownResources townResources = new TownResources();
+            townResources.setTown(town);
+            townResources.setResource(resource);
+            townResources.setValue(10);
+
+            town.addTownResource(townResources);
+            townRepository.save(town);
+
             i++;
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -50,20 +73,5 @@ public class main {
                 e.printStackTrace();
             }
         }
-
-        Town town = new Town();
-        town.setName("Bram");
-        townRepository.save(town);
-        Resource resource = new Resource();
-        resource.setName("hout");
-        resourceRepository.save(resource);
-
-        TownResources townResources = new TownResources();
-        townResources.setTown(town);
-        townResources.setResource(resource);
-        townResources.setValue(10);
-
-        town.addTownResource(townResources);
-        townRepository.save(town);
     }
 }

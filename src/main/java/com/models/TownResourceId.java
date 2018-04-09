@@ -2,9 +2,10 @@ package com.models;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Embeddable
-public class TownResourceId {
+public class TownResourceId implements Serializable{
     private Town town;
     private Resource resource;
 
