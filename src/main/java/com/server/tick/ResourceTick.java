@@ -20,11 +20,21 @@ public class ResourceTick implements Runnable{
     public void run() {
         System.out.println("ResourceTick Running");
 
-        List<Town> towns = this.townRepository.findAll();
-        for (Town town : towns) {
-            for (TownResources townResources : town.getTownResources()) {
-                townResources.setValue(townResources.getValue()+1);
-            }
+        Town town = this.townRepository.findOne(1);
+
+        if(town == null){
+            System.out.println("Town is null");
+        }else {
+            System.out.println(town.getName());
         }
+        /*
+        for (Town town : towns) {
+            System.out.println(town.getName());
+            /*for (TownResources townResources : town.getTownResources()) {
+                //townResources.setValue(townResources.getValue()+1);
+                //System.out.println(townResources.getValue());
+            }*/
+            //townRepository.save(town);
+
     }
 }
