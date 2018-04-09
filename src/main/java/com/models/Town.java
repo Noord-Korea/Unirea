@@ -17,9 +17,9 @@ public class Town {
 
     @NotNull
     private String name;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
     public Set<TownResources> getTownResources() {
         return townResources;
     }
