@@ -1,31 +1,44 @@
 package com.server;
 
+import com.dbal.repository.ClanRepository;
+import com.dbal.repository.PlayerRepository;
 import com.dbal.repository.ResourceRepository;
 import com.dbal.repository.TownRepository;
 import com.models.Resource;
 import com.models.Town;
 import com.models.TownResources;
+import com.server.tick.BuildingTick;
+import com.server.tick.RecruitingTick;
+import com.server.tick.ResourceTick;
+import com.server.tick.TroopMovement;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class main {
     public static void main(String[] args) {
         //Stop the very annoying "spam" from hibernate
         //java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-    /*    PlayerRepository playerRepository = new PlayerRepository();
+        PlayerRepository playerRepository = new PlayerRepository();
         ClanRepository clanRepository = new ClanRepository();
+
+        TownRepository townRepository = new TownRepository();
+        ResourceRepository resourceRepository = new ResourceRepository();
 
         Runnable building =     new BuildingTick();
         Runnable recruiting =   new RecruitingTick();
-        Runnable resource =     new ResourceTick();
+        Runnable resourceTick =     new ResourceTick();
         Runnable troopMovement = new TroopMovement();
 
         ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 
-        exec.scheduleAtFixedRate(resource, 0, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(resourceTick, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(building, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(recruiting, 0, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(troopMovement, 0, 5, TimeUnit.SECONDS);
 
-        boolean running = true;
+        boolean running = false;
         int i = 0;
         while (running){
             System.out.println("Main thread");
@@ -36,9 +49,8 @@ public class main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
-        TownRepository townRepository = new TownRepository();
-        ResourceRepository resourceRepository = new ResourceRepository();
+        }
+
         Town town = new Town();
         town.setName("Bram");
         townRepository.save(town);
