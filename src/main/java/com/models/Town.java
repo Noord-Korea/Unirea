@@ -17,12 +17,12 @@ public class Town {
 
     @NotNull
     private String name;
+    private Set<TownResources> townResources = new HashSet<TownResources>(0);
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
     public Set<TownResources> getTownResources() {
         return townResources;
     }
-
-    private Set<TownResources> townResources = new HashSet<TownResources>(0);
 
     public void setTownResources(Set<TownResources> townResources) {
         this.townResources = townResources;
