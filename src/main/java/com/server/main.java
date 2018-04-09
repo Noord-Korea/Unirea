@@ -26,9 +26,9 @@ public class main {
         TownRepository townRepository = new TownRepository();
         ResourceRepository resourceRepository = new ResourceRepository();
 
-        Runnable building =     new BuildingTick();
-        Runnable recruiting =   new RecruitingTick();
-        Runnable resourceTick =     new ResourceTick();
+        Runnable building = new BuildingTick();
+        Runnable recruiting = new RecruitingTick();
+        Runnable resourceTick = new ResourceTick();
         Runnable troopMovement = new TroopMovement();
 
         ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
@@ -40,7 +40,7 @@ public class main {
 
         boolean running = false;
         int i = 0;
-        while (running){
+        while (running) {
             System.out.println("Main thread");
             running = i != 100;
             i++;
