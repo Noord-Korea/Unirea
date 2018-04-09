@@ -13,9 +13,9 @@ public class Game {
 
     public Game() {
         run = false;
-        building = new Building();
-        recruiting = new Recruiting();
-        resource = new Resource();
+        building = new BuildingTick();
+        recruiting = new RecruitingTick();
+        resource = new ResourceTick();
         troopMovement = new TroopMovement();
     }
 
