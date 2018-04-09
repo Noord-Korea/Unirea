@@ -6,10 +6,10 @@ import com.server.tick.*;
 public class Game {
 
     private boolean run;
-    private Tick building;
-    private Tick recruiting;
-    private Tick resource;
-    private Tick troopMovement;
+    private Runnable building;
+    private Runnable recruiting;
+    private Runnable resource;
+    private Runnable troopMovement;
 
     public Game() {
         run = false;
@@ -33,9 +33,9 @@ public class Game {
             throw new GameNotRunningException();
         }
 
-        building.update();
-        resource.update();
-        recruiting.update();
-        troopMovement.update();
+        building.run();
+        resource.run();
+        recruiting.run();
+        troopMovement.run();
     }
 }
