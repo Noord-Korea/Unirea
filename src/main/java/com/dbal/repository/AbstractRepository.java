@@ -19,7 +19,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
     private static String entityNull = "Entity can't be null";
     public abstract Class<T> getDomainClass();
 
-    public Session openSession(){
+    public synchronized Session openSession(){
         return HibernateUtil.getSessionFactory().openSession();
     }
 

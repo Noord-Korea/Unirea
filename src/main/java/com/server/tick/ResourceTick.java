@@ -20,8 +20,10 @@ public class ResourceTick implements Runnable{
     public void run() {
         System.out.println("ResourceTick Running");
 
-        Town town = this.townRepository.findOne(1);
+        TownRepository tmp = new TownRepository();
 
+        Town town = tmp.findOne(1);
+        System.out.println("Got Town");
         if(town == null){
             System.out.println("Town is null");
         }else {

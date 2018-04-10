@@ -37,6 +37,7 @@ public class HibernateUtil {
         sessionFactory.close();
         Util.logInfo("Connection and Session Factory is closed.");
     }
+
     private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
