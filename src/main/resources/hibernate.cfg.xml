@@ -50,6 +50,16 @@
         <mapping class="com.models.Building"/>
         <mapping class="com.models.TownResourceId"/>
         <mapping class="com.models.TownResources"/>
+        <mapping class="com.models.TownBuildingId"/>
+        <mapping class="com.models.TownBuildings"/>
+        <mapping class="com.models.BuildingQueue"/>
+        <mapping class="com.models.TownArmyId"/>
+        <mapping class="com.models.TownArmy"/>
+        <mapping class="com.models.Army"/>
+
+
+
+
 
 
 
