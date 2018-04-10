@@ -34,10 +34,10 @@ public class main {
 
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);
 
-        exec.scheduleAtFixedRate(building, 0, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(recruiting, 0, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(troopMovement, 0, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(resourceTick, 0, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
 
 
         Resource resource1 = new Resource();
@@ -47,6 +47,10 @@ public class main {
         Resource resource2 = new Resource();
         resource2.setName("Banaan");
         resourceRepository.save(resource2);
+
+        Town town10 = new Town();
+        town10.setName("Town");
+        townRepository.save(town10);
 
         boolean running = true;
         int i = 0;
@@ -72,9 +76,10 @@ public class main {
             town1.addTownResource(townResources2);
             townRepository.save(town1);
 
+
             i++;
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
