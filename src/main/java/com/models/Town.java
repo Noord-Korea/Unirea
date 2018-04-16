@@ -1,9 +1,8 @@
 package com.models;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 import java.util.HashSet;
 import java.util.Set;
 
