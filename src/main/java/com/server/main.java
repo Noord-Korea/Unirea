@@ -1,9 +1,6 @@
 package com.server;
 
-import com.dbal.repository.ClanRepository;
-import com.dbal.repository.PlayerRepository;
-import com.dbal.repository.ResourceRepository;
-import com.dbal.repository.TownRepository;
+import com.dbal.repository.*;
 import com.models.Resource;
 import com.models.Town;
 import com.models.TownResources;
@@ -21,11 +18,11 @@ public class main {
     public static void main(String[] args) {
         //Stop the very annoying "spam" from hibernate
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        PlayerRepository playerRepository = new PlayerRepository();
-        ClanRepository clanRepository = new ClanRepository();
+        IRepository playerRepository = new PlayerRepository();
+        IRepository clanRepository = new ClanRepository();
 
-        TownRepository townRepository = new TownRepository();
-        ResourceRepository resourceRepository = new ResourceRepository();
+        IRepository townRepository = new TownRepository();
+        IRepository resourceRepository = new ResourceRepository();
 
         Runnable building = new BuildingTick();
         Runnable recruiting = new RecruitingTick();

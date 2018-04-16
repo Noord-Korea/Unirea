@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class AbstractRepository<T, Id extends Serializable> {
+public abstract class AbstractRepository<T, Id extends Serializable> implements IRepository<T, Id> {
 
     private static String entityNull = "Entity can't be null";
-    public abstract Class<T> getDomainClass();
 
+    @Override
     public Session openSession(){
         return HibernateUtil.getSessionFactory().openSession();
         //return threadSafeSession.get();
@@ -33,6 +33,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
 
 
 
+    @Override
     public void delete(Id id) {
 
         T entity = findOne(id);
@@ -44,6 +45,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         delete(entity);
     }
 
+    @Override
     public void delete(T entity) {
         if(entity == null){
             throw new IllegalArgumentException(entityNull);
@@ -66,6 +68,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
 
     }
 
+    @Override
     public void delete(Iterable<? extends T> entities) {
 
         if(entities == null){
@@ -92,6 +95,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         }
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public T findOne(Id id) {
 
@@ -116,6 +120,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         return entity;
     }
 
+    @Override
     public T findOne(Specifiable spec) {
 
         Session session = openSession();
@@ -139,11 +144,13 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         return null;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
         return findAll(null);
     }
 
+    @Override
     public List<T> findAll(Specifiable spec) {
         Session session = openSession();
 
@@ -167,6 +174,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         return new ArrayList<>();
     }
 
+    @Override
     public <S extends T> S save(S entity) {
 
         if(entity == null){
@@ -192,6 +200,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> {
         return null;
     }
 
+    @Override
     @Transactional
     public <S extends T> List<S> save(Iterable<S> entities) {
 
