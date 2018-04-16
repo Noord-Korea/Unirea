@@ -24,6 +24,14 @@ public class Army {
     public Army() {
     }
 
+    public ArmyCategory getArmyCategory() {
+        return armyCategory;
+    }
+
+    public void setArmyCategory(ArmyCategory armyCategory) {
+        this.armyCategory = armyCategory;
+    }
+
     public int getId() {
         return id;
     }
