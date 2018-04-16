@@ -1,6 +1,8 @@
 package com.models;
 
 
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.*;
 
 
@@ -13,9 +15,21 @@ public class Army {
     @Column(name = "ARMY_ID", unique = true, nullable = false)
     private int id;
 
+    @NotNull
     private String name;
 
+    @NotNull
+    private ArmyCategory armyCategory;
+
     public Army() {
+    }
+
+    public ArmyCategory getArmyCategory() {
+        return armyCategory;
+    }
+
+    public void setArmyCategory(ArmyCategory armyCategory) {
+        this.armyCategory = armyCategory;
     }
 
     public int getId() {

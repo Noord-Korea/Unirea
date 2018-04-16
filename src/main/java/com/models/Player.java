@@ -1,8 +1,8 @@
 package com.models;
 
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Player")
