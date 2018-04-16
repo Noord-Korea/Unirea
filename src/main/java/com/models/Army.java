@@ -1,6 +1,8 @@
 package com.models;
 
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 
 
@@ -13,7 +15,11 @@ public class Army {
     @Column(name = "ARMY_ID", unique = true, nullable = false)
     private int id;
 
+    @NotNull
     private String name;
+
+    @NotNull
+    private ArmyCategory armyCategory;
 
     public Army() {
     }
