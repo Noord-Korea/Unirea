@@ -35,22 +35,6 @@ public class PlayerRepoTest extends AbstractTest {
         assertNotEquals(before, after);
     }
 
-    @Test
-    public void testSaveInvalidUsername() {
-        Player player = repo.save(new Player("", "test@gmail.com", "test"));
-        assertEquals(null, player);
-    }
-    @Test
-    public void testSaveInvalidUsernameNull(){
-        exception.expect(IllegalArgumentException.class);
-        Player player = repo.save(new Player(null, "test@gmail.com", "test"));
-    }
-
-    @Test
-    public void testSaveInvalidEmail() {
-        Player player = repo.save(new Player("test", "test", "test"));
-        assertEquals(null, player);
-    }
 
     @Test
     public void testFindOneUsername() {

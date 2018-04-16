@@ -3,6 +3,8 @@ package com.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "Player")
@@ -26,7 +28,7 @@ public class Player {
 
     public Player(String username, String email, String passHash) {
         this.username = username;
-        this.email = email;
+        setEmail(email);
         this.passHash = passHash;
     }
 
@@ -56,6 +58,16 @@ public class Player {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        if (validate(email)) {
+            this.email = email;
+        }
+    }
+
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    private static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
     }
 }
