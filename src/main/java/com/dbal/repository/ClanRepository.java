@@ -7,4 +7,5 @@ public class ClanRepository extends AbstractRepository<Clan, Integer> {
     public Class<Clan> getDomainClass() {
         return Clan.class;
     }
+
 }

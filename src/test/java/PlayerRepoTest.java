@@ -23,7 +23,8 @@ public class PlayerRepoTest extends AbstractTest {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 
-    private void insertOnePlayer() {
+
+    private void insertOneValidPlayer() {
         repo.save(new Player("test", "test@gmail.com", "test"));
     }
 
@@ -64,14 +65,14 @@ public class PlayerRepoTest extends AbstractTest {
 
     @Test
     public void testFindOneEmailEmpty() {
-        insertOnePlayer();
+        insertOneValidPlayer();
         Player player = repo.findOne(PlayerSpecification.getByEmail(""));
         assertEquals(null, player);
     }
 
     @Test
     public void testFindOneEmailNull() {
-        insertOnePlayer();
+        insertOneValidPlayer();
         Player player = repo.findOne(PlayerSpecification.getByEmail(null));
         assertEquals(null, player);
     }
@@ -109,4 +110,5 @@ public class PlayerRepoTest extends AbstractTest {
         exception.expect(IllegalArgumentException.class);
         repo.delete(1);
     }
+
 }
