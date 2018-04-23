@@ -8,30 +8,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-@Path("/abs")
-public class ScoreService {
+@Path("/account")
+public class AccountService {
     @GET
-    @Path("/{value}")
-    public Response getMsg(@PathParam("value") String msg) {
+    @Path("/login/{value}")
+    public Response getLogin(@PathParam("value") String msg) {
         ScoreResponse response = new ScoreResponse();
-        response.setOperation("abs");
+        response.setOperation("login");
         response.setExpression(msg);
-        try {
-            int value = Integer.parseInt(msg);
-            int result = (value<0)? -value:value;
-            response.setResult(Integer.toString(result));
-        } catch (NumberFormatException nfe) {
-            response.setResult("invalid value");
-        }
         Gson gson = new Gson();
         String output = gson.toJson(response);
         return Response.status(200).entity(output).build();
     }
     @GET
-    @Path("/test/{value}")
-    public Response getMsgTest(@PathParam("value") String msg) {
+    @Path("/register/{value}")
+    public Response getRegister(@PathParam("value") String msg) {
         ScoreResponse response = new ScoreResponse();
-        response.setOperation("abs");
+        response.setOperation("register");
         response.setExpression(msg);
         try {
             int value = Integer.parseInt(msg);
