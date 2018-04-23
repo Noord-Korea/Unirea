@@ -1,5 +1,6 @@
 package com.restserver;
 
+import com.restserver.services.AccountService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;

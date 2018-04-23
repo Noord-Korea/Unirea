@@ -1,16 +1,15 @@
-package com.restserver;
+package com.restserver.services;
 
 import com.google.gson.Gson;
-import com.restserver.Shared.ScoreResponse;
 
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 @Path("/account")
 public class AccountService {
-    @GET
+    @POST
     @Path("/login/{value}")
     public Response getLogin(@PathParam("value") String msg) {
         ScoreResponse response = new ScoreResponse();
@@ -20,7 +19,7 @@ public class AccountService {
         String output = gson.toJson(response);
         return Response.status(200).entity(output).build();
     }
-    @GET
+    @POST
     @Path("/register/{value}")
     public Response getRegister(@PathParam("value") String msg) {
         ScoreResponse response = new ScoreResponse();
