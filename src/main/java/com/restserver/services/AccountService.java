@@ -28,7 +28,7 @@ public class AccountService {
         Login login = gson.fromJson(data, Login.class);
         System.out.println(login.getEmail());
         System.out.println(login.getPassword());
-        String output = "Geslaagd";
+        String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
         handler.Login(login);
 
@@ -44,7 +44,7 @@ public class AccountService {
         System.out.println(register.getEmail());
         System.out.println(register.getPassword());
         System.out.println(register.getUsername());
-        String output = "Geslaagd";
+        String output = "Geslaagd Email: " + register.getEmail() + " Username: " + register.getUsername() + " Password: " + register.getPassword();
 
         return Response.status(200).entity(output).build();
     }
