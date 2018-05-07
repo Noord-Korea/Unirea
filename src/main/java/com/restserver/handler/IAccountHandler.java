@@ -4,7 +4,7 @@ import com.restserver.json.result.account.*;
 
 public interface IAccountHandler {
     void Login(Login data);
-    void Logout();
+    void Logout(Logout data);
 
     void Register(Register data);
     void ChangePassword(ChangePassword data);
