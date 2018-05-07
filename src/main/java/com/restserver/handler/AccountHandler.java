@@ -9,8 +9,8 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public void Logout() {
-
+    public void Logout(Logout data) {
+        
     }
 
     @Override
