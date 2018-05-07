@@ -1,4 +1,4 @@
-package com.restserver.json.result;
+package com.restserver.json.result.account;
 
 public class Register implements Result {
     private String email;

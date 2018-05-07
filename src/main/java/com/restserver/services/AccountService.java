@@ -1,10 +1,10 @@
 package com.restserver.services;
 
 import com.google.gson.Gson;
-import com.restserver.handler.AccountHandler;
 import com.restserver.handler.IAccountHandler;
-import com.restserver.json.result.Login;
-import com.restserver.json.result.Register;
+import com.restserver.json.result.account.ChangePassword;
+import com.restserver.json.result.account.Login;
+import com.restserver.json.result.account.Register;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -45,6 +45,21 @@ public class AccountService {
         System.out.println(register.getPassword());
         System.out.println(register.getUsername());
         String output = "Geslaagd Email: " + register.getEmail() + " Username: " + register.getUsername() + " Password: " + register.getPassword();
+
+        return Response.status(200).entity(output).build();
+    }
+
+    @POST @Consumes("application/json")
+    @Path("/changepassword")
+    public Response getChangePassword(String data) {
+        System.out.println(data);
+        Gson gson = new Gson();
+        ChangePassword changePassword = gson.fromJson(data, ChangePassword.class);
+        System.out.println(changePassword.getEmail());
+        System.out.println(changePassword.getUsername());
+        System.out.println(changePassword.getNewPassword());
+        System.out.println(changePassword.getVerifyPassword());
+        String output = "Geslaagd Email: " + changePassword.getEmail() + " Username: " + changePassword.getUsername() + " New Password: " + changePassword.getNewPassword() + " Verify Password: " + changePassword.getVerifyPassword();
 
         return Response.status(200).entity(output).build();
     }

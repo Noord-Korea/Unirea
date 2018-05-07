@@ -1,7 +1,7 @@
 package com.restserver.handler;
 
-import com.restserver.json.result.Login;
-import com.restserver.json.result.Register;
+import com.restserver.json.result.account.Login;
+import com.restserver.json.result.account.Register;
 
 public class AccountHandler implements IAccountHandler {
     @Override
