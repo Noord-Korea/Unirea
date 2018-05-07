@@ -1,4 +1,4 @@
-package com.restserver.json.result.account;
+package com.restserver.json.request.account;
 
 public class Logout {
     private String username;

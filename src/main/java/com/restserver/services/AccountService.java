@@ -2,9 +2,9 @@ package com.restserver.services;
 
 import com.google.gson.Gson;
 import com.restserver.handler.IAccountHandler;
-import com.restserver.json.result.account.ChangePassword;
-import com.restserver.json.result.account.Login;
-import com.restserver.json.result.account.Register;
+import com.restserver.json.request.account.ChangePassword;
+import com.restserver.json.request.account.Login;
+import com.restserver.json.request.account.Register;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

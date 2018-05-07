@@ -1,6 +1,6 @@
 package com.restserver.test;
 import com.google.gson.Gson;
-import com.restserver.json.result.account.Login;
+import com.restserver.json.request.account.Login;
 
 import java.io.BufferedReader;
 import java.io.IOException;

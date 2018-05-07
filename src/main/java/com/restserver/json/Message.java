@@ -3,7 +3,7 @@ package com.restserver.json;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.restserver.json.result.account.Result;
+import com.restserver.json.request.account.Result;
 
 public class Message {
     private String action;
