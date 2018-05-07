@@ -1,5 +1,6 @@
 package com.restserver;
 
+import com.restserver.handler.AccountHandler;
 import com.restserver.services.AccountService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.FilterHolder;
@@ -30,6 +31,9 @@ public class RestServer {
         ServletHolder jerseyServlet =
                 context.addServlet(ServletContainer.class, "/*");
         jerseyServlet.setInitOrder(0);
+
+        AccountHandler accountHandler = new AccountHandler();
+        AccountService.setHandler(accountHandler);
 
         // Tells the Jersey Servlet which REST service/class to load.
         jerseyServlet.setInitParameter("jersey.config.server.provider.classnames",

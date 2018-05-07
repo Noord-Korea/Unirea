@@ -1,6 +1,8 @@
 package com.restserver.services;
 
 import com.google.gson.Gson;
+import com.restserver.handler.AccountHandler;
+import com.restserver.handler.Handler;
 import com.restserver.json.result.Login;
 import com.restserver.json.result.Register;
 
@@ -12,6 +14,12 @@ import javax.ws.rs.core.Response;
 @Path("/account")
 public class AccountService {
 
+    private static AccountHandler handler;
+
+    public static void setHandler(AccountHandler accountHandler){
+        handler = accountHandler;
+    }
+
     @POST @Consumes("application/json")
     @Path("/login")
     public Response getLogin(String data) {
@@ -21,6 +29,8 @@ public class AccountService {
         System.out.println(login.getEmail());
         System.out.println(login.getPassword());
         String output = "Geslaagd";
+
+        handler.Login(login);
 
         return Response.status(200).entity(output).build();
     }
