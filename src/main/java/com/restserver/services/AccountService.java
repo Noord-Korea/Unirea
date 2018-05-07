@@ -15,7 +15,7 @@ public class AccountService {
     @POST @Consumes("application/json")
     @Path("/login")
     public Response getLogin(Login data) {
-        System.out.println(data.getUsername());
+        System.out.println(data.getEmail());
         System.out.println(data.getPassword());
 
         Gson gson = new Gson();
