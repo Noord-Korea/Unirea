@@ -6,4 +6,5 @@ import com.restserver.json.result.Register;
 public interface IAccountHandler {
     void Login(Login data);
     void Register(Register data);
+    void ChangePassword();
 }
