@@ -56,7 +56,6 @@ public class Town {
 
     public int getId() {
         return id;
-
     }
 
     public Set<TownBuildings> getTownBuildings() {
@@ -80,5 +79,9 @@ public class Town {
     }
 
     public Town() {
+    }
+
+    public Town(String name) {
+        this.name = name;
     }
 }

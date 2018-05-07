@@ -28,7 +28,9 @@ public class Player {
 
     public Player(String username, String email, String passHash) {
         this.username = username;
-        setEmail(email);
+       if(!setEmail(email)) {
+           throw new IllegalArgumentException("Email is invalid");
+       }
         this.passHash = passHash;
     }
 
@@ -57,10 +59,12 @@ public class Player {
         this.username = username;
     }
 
-    public void setEmail(String email) {
+    public boolean setEmail(String email) {
         if (validate(email)) {
             this.email = email;
+            return true;
         }
+        return false;
     }
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =

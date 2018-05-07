@@ -18,6 +18,9 @@ public class Resource {
     public Resource() {
     }
 
+    public Resource(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
