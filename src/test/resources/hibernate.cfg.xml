@@ -13,25 +13,25 @@
         <property name="connection.password"/>
         -->
 
-        <property name = "hibernate.dialect">
+        <property name="hibernate.dialect">
             org.hibernate.dialect.MySQLDialect
         </property>
 
-        <property name = "hibernate.connection.driver_class">
+        <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
         </property>
 
         <!-- Assume test is the database name -->
 
-        <property name = "hibernate.connection.url">
+        <property name="hibernate.connection.url">
             jdbc:mysql://77.164.24.110:3306/TestUnirea
         </property>
 
-        <property name = "hibernate.connection.username">
+        <property name="hibernate.connection.username">
             Unirea
         </property>
 
-        <property name = "hibernate.connection.password">
+        <property name="hibernate.connection.password">
             test123
         </property>
 
@@ -45,7 +45,18 @@
         <!-- The mapping information of entities -->
         <mapping class="com.models.Player"/>
         <mapping class="com.models.Clan"/>
-
+        <mapping class="com.models.Resource"/>
+        <mapping class="com.models.Town"/>
+        <mapping class="com.models.Building"/>
+        <mapping class="com.models.TownResourceId"/>
+        <mapping class="com.models.TownResources"/>
+        <mapping class="com.models.TownBuildingId"/>
+        <mapping class="com.models.TownBuildings"/>
+        <mapping class="com.models.BuildingQueue"/>
+        <mapping class="com.models.TownArmyId"/>
+        <mapping class="com.models.TownArmy"/>
+        <mapping class="com.models.Army"/>
+        <mapping class="com.models.ArmyCategory"/>
 
 
     </session-factory>

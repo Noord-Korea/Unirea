@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class PlayerRepoTest extends AbstractTest {
+public class PlayerRepoTest extends AbstractRepoTest {
     private PlayerRepository repo;
     @Rule
     public ExpectedException exception = ExpectedException.none();

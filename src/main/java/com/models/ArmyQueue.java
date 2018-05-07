@@ -43,6 +43,7 @@ public class ArmyQueue {
     public void setValue(int value) {
         this.value = value;
     }
+
     @Transient
     public Town getTown() {
         return pk.getTown();

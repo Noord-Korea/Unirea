@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.logging.Level;
 
-public class ClanRepoTest extends AbstractTest {
+public class ClanRepoTest extends AbstractRepoTest {
 
     private ClanRepository repo;
     private Clan clan;
@@ -41,7 +41,7 @@ public class ClanRepoTest extends AbstractTest {
     public void testFindOneName() {
         Clan result = repo.findOne(ClanSpecification.getbyName("clan"));
         assertEquals(result, null);
-        Clan clan = repo.save(new Clan("Clan"));
+        insertClan();
         result = repo.findOne(ClanSpecification.getbyName("clan"));
         assertEquals(clan.getId(), result.getId());
     }

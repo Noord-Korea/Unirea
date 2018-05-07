@@ -4,6 +4,8 @@ package com.models;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -18,7 +20,9 @@ public class Army {
     @NotNull
     private String name;
 
-    @NotNull
+
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "armycategory_id")
     private ArmyCategory armyCategory;
 
     public Army() {
