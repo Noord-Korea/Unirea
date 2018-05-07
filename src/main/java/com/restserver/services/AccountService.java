@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 
 @Path("/account")
 public class AccountService {
+
     @POST @Consumes("application/json")
     @Path("/login")
     public Response getLogin(Login data) {
