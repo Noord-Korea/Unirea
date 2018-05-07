@@ -1,16 +1,22 @@
-package com.restserver.json.result;
+package com.restserver.json.result.account;
 
-public class Login implements Result {
+public class UpdateAccount {
     private String username;
+    private String email;
     private String password;
 
-    public Login(String username, String password) {
+    public UpdateAccount(String username, String email, String password) {
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
