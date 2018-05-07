@@ -1,8 +1,6 @@
 package com.restserver.handler;
 
-import com.restserver.json.result.account.ChangePassword;
-import com.restserver.json.result.account.Login;
-import com.restserver.json.result.account.Register;
+import com.restserver.json.result.account.*;
 
 public interface IAccountHandler {
     void Login(Login data);
@@ -11,10 +9,10 @@ public interface IAccountHandler {
     void Register(Register data);
     void ChangePassword(ChangePassword data);
 
-    void Update();
+    void Update(UpdateAccount data);
 
-    void HolidayReplacement();
-    void Delete();
+    void HolidayReplacement(HolidayReplacement data);
+    void Delete(Delete data);
 
 
 }
