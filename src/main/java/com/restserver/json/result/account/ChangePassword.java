@@ -6,35 +6,26 @@ public class ChangePassword {
     private String newPassword;
     private String verifyPassword;
 
-    public String getUsername() {
-        return username;
+    public ChangePassword(String username, String email, String newPassword, String verifyPassword) {
+        this.username = username;
+        this.email = email;
+        this.newPassword = newPassword;
+        this.verifyPassword = verifyPassword;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getNewPassword() {
         return newPassword;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
     public String getVerifyPassword() {
         return verifyPassword;
-    }
-
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
     }
 }

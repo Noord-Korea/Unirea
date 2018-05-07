@@ -22,12 +22,9 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/login")
-    public Response getLogin(String data) {
-        System.out.println(data);
+    public Response Login(String data) {
         Gson gson = new Gson();
         Login login = gson.fromJson(data, Login.class);
-        System.out.println(login.getEmail());
-        System.out.println(login.getPassword());
         String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
         handler.Login(login);
@@ -37,13 +34,9 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/register")
-    public Response getRegister(String data) {
-        System.out.println(data);
+    public Response Register(String data) {
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
-        System.out.println(register.getEmail());
-        System.out.println(register.getPassword());
-        System.out.println(register.getUsername());
         String output = "Geslaagd Email: " + register.getEmail() + " Username: " + register.getUsername() + " Password: " + register.getPassword();
 
         return Response.status(200).entity(output).build();
@@ -51,14 +44,9 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/changepassword")
-    public Response getChangePassword(String data) {
-        System.out.println(data);
+    public Response ChangePassword(String data) {
         Gson gson = new Gson();
         ChangePassword changePassword = gson.fromJson(data, ChangePassword.class);
-        System.out.println(changePassword.getEmail());
-        System.out.println(changePassword.getUsername());
-        System.out.println(changePassword.getNewPassword());
-        System.out.println(changePassword.getVerifyPassword());
         String output = "Geslaagd Email: " + changePassword.getEmail() + " Username: " + changePassword.getUsername() + " New Password: " + changePassword.getNewPassword() + " Verify Password: " + changePassword.getVerifyPassword();
 
         return Response.status(200).entity(output).build();
