@@ -54,8 +54,8 @@ public class TownRepoTest extends AbstractRepoTest{
     @Test
     public void testDeleteTown() {
         insertTown();
-        int reposizeBefore = repo.findAll().size();
-        assertEquals(1, reposizeBefore);
+        int repoSizeBefore = repo.findAll().size();
+        assertEquals(1, repoSizeBefore);
 
         repo.delete(town);
 
