@@ -82,6 +82,7 @@ public class PlayerRepoTest extends AbstractRepoTest {
         assertEquals(0, repo.findAll().size());
         repo.save(new Player("test", "test@gmail.com", "test1"));
         assertEquals(1, repo.findAll().size());
+
         for (int i = 0; i < 10; i++) {
             repo.save(new Player("test" + i, "test" + i + "@gmail.com", "test1"));
         }
@@ -98,11 +99,14 @@ public class PlayerRepoTest extends AbstractRepoTest {
     @Test
     public void testDelete() {
         Player player = new Player("test", "test@gmail.com", "test");
+
         repo.save(player);
-        int reposize = repo.findAll().size();
+        int repoSize = repo.findAll().size();
+        assertEquals(1, repoSize);
+
         repo.delete(player);
-        int reposizeafter = repo.findAll().size();
-        assertEquals(reposize - 1, reposizeafter);
+        int repoSizeAfter = repo.findAll().size();
+        assertEquals(0, repoSizeAfter);
     }
 
     @Test
