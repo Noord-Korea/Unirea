@@ -1,5 +1,6 @@
 package com.restserver;
 
+import com.dbal.repository.PlayerRepository;
 import com.restserver.handler.AccountHandler;
 import com.restserver.services.AccountService;
 import org.eclipse.jetty.server.Server;
@@ -32,7 +33,7 @@ public class RestServer {
                 context.addServlet(ServletContainer.class, "/*");
         jerseyServlet.setInitOrder(0);
 
-        AccountHandler accountHandler = new AccountHandler();
+        AccountHandler accountHandler = new AccountHandler(new PlayerRepository());
         AccountService.setHandler(accountHandler);
 
         // Tells the Jersey Servlet which REST service/class to load.
