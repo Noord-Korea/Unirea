@@ -45,7 +45,7 @@ public class AccountHandler implements IAccountHandler {
                 return new Reply(Status.Error,e.getMessage());
             }
             repository.save(player);
-            return new Reply(Status.Ok, "Succesfully registered");
+            return new Reply(Status.Ok, "Successfully registered");
         } else{
             return new Reply(Status.Conflict, "Email is already used");
         }
