@@ -3,6 +3,7 @@ package com.restserver.accesstoken;
 import com.models.Player;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class AccessToken {
 
@@ -39,5 +40,10 @@ public class AccessToken {
 
     public Date getExpires() {
         return expires;
+    }
+
+    public void refresh(){
+        long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
+        this.expires = new Date(System.currentTimeMillis() + expirationTime);
     }
 }

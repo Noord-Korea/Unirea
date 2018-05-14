@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class AccessTokenFactory implements IAccessTokenFactory {
     @Override
     public AccessToken newToken(Player player) {
-        return new AccessToken(generateUUID(),20,player, new Date(System.currentTimeMillis()), generateExpirationDate());
+        return new AccessToken(generateUUID(),20,player, new Date(System.currentTimeMillis()), generateExpirationDate(20));
     }
 
     private String generateUUID(){
@@ -18,9 +18,8 @@ public class AccessTokenFactory implements IAccessTokenFactory {
         return uuid;
     }
 
-    private Date generateExpirationDate(){
-        long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
-        Date expiry = new Date(System.currentTimeMillis() + expirationTime);
-        return expiry;
+    private Date generateExpirationDate(int expiration){
+        long expirationTime = TimeUnit.MILLISECONDS.convert(expiration, TimeUnit.MINUTES);
+        return new Date(System.currentTimeMillis() + expirationTime);
     }
 }

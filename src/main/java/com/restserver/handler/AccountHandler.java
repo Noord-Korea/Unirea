@@ -26,7 +26,7 @@ public class AccountHandler implements IAccountHandler {
         } else if (!player.getEmail().equals(data.getEmail()) || !(player.checkPassword(data.getPassword()))){
             return new Reply(Status.NoAccess, "Your login credentials were incorrect");
         }
-        return new Reply(Status.Ok,"Hij heeft nog geen error gegooid");
+        return new Reply(Status.Ok,"Logged in");
 
     }
 
