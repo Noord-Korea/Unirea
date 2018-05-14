@@ -4,7 +4,8 @@ public class Login extends BaseRequest{
     private String email;
     private String password;
 
-    public Login(String email, String password) {
+    public Login(String token, String email, String password) {
+        super(token);
         this.email = email;
         this.password = password;
     }
