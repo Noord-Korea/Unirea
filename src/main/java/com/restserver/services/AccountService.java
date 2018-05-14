@@ -30,7 +30,7 @@ public class AccountService {
 
         Reply response = handler.Login(login);
 
-        return Response.status(200).entity(output).build();
+        return Response.status(response.getStatus().getCode()).entity(output).build();
     }
 
     @POST @Consumes("application/json")
