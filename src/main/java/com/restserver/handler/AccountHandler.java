@@ -3,7 +3,7 @@ package com.restserver.handler;
 import com.dbal.repository.IRepository;
 import com.dbal.specification.PlayerSpecification;
 import com.models.Player;
-import com.restserver.accesstoken.AccessToken;
+import com.models.AccessToken;
 import com.restserver.accesstoken.AccessTokenFactory;
 import com.restserver.accesstoken.IAccessTokenFactory;
 import com.restserver.json.request.account.*;
@@ -26,7 +26,7 @@ public class AccountHandler implements IAccountHandler {
         } else if (!player.getEmail().equals(data.getEmail()) || !(player.checkPassword(data.getPassword()))){
             return new Reply(Status.NoAccess, "Your login credentials were incorrect");
         }
-        return new Reply(Status.Ok,"Logged in");
+        return new Reply(Status.Ok,"Success");
 
     }
 
