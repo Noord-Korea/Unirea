@@ -12,11 +12,13 @@ public class AccessTokenUtil {
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
         if(accessToken == null){
-            if(accessLevel == AccessTokenLevel.NoLogin){
-                return true;
-            }
-            return false;
+            return accessLevel == AccessTokenLevel.NoLogin;
         }
-        return false;
+
+        if(accessToken.isExpired()){
+            return accessLevel == AccessTokenLevel.NoLogin;
+        }
+        accessToken.refresh();
+        return true;
     }
 }
