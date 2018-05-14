@@ -1,7 +1,7 @@
 package com.restserver.handler;
 
 import com.models.Player;
-import com.restserver.accesstoken.AccessToken;
+import com.models.AccessToken;
 import com.restserver.json.request.account.*;
 import com.restserver.json.response.Reply;
 

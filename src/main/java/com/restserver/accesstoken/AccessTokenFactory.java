@@ -1,5 +1,6 @@
 package com.restserver.accesstoken;
 
+import com.models.AccessToken;
 import com.models.Player;
 
 import java.util.Date;
@@ -20,7 +21,6 @@ public class AccessTokenFactory implements IAccessTokenFactory {
 
     private Date generateExpirationDate(){
         long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
-        Date expiry = new Date(System.currentTimeMillis() + expirationTime);
-        return expiry;
+        return new Date(System.currentTimeMillis() + expirationTime);
     }
 }
