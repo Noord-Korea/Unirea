@@ -1,6 +1,6 @@
 package com.restserver.json.request.account;
 
-public class UpdateAccount {
+public class UpdateAccount extends BaseRequest{
     private String username;
     private String email;
     private String password;

@@ -1,6 +1,6 @@
 package com.restserver.json.request.account;
 
-public class ChangePassword {
+public class ChangePassword extends BaseRequest{
     private String username;
     private String email;
     private String newPassword;
