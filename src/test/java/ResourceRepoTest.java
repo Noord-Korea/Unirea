@@ -9,7 +9,6 @@ import org.junit.rules.ExpectedException;
 import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class ResourceRepoTest extends AbstractRepoTest {
 
@@ -17,7 +16,7 @@ public class ResourceRepoTest extends AbstractRepoTest {
     private Resource resource;
 
     @Rule
-   public ExpectedException exception = ExpectedException.none();
+    public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void testInitialize() {
@@ -32,28 +31,36 @@ public class ResourceRepoTest extends AbstractRepoTest {
 
     @Test
     public void testSaveResource() {
-        int sizebefore = repo.findAll().size();
+        int sizeBefore = repo.findAll().size();
+        assertEquals(0, sizeBefore);
+
         insertResource();
-        int sizeafter = repo.findAll().size();
-        assertNotEquals(sizebefore, sizeafter);
+
+        int sizeAfter = repo.findAll().size();
+        assertEquals(1, sizeAfter);
     }
 
     @Test
     public void testFindOneByName() {
         Resource result = repo.findOne(ResourceSpecification.getByName("resource"));
-        assertEquals(result, null);
+        assertEquals(null, result);
+
         insertResource();
-        Resource findresource = repo.findOne(ResourceSpecification.getByName("resource"));
-        assertEquals(resource.getId(), findresource.getId());
+
+        Resource findResource = repo.findOne(ResourceSpecification.getByName("resource"));
+        assertEquals(resource.getId(), findResource.getId());
     }
 
     @Test
     public void testDeleteResource() {
         insertResource();
-        int reposizebefore = repo.findAll().size();
+        int repoSizeBefore = repo.findAll().size();
+        assertEquals(1, repoSizeBefore);
+
         repo.delete(resource);
-        int reposizeafter = repo.findAll().size();
-        assertEquals(reposizebefore - 1, reposizeafter);
+
+        int repoSizeAfter = repo.findAll().size();
+        assertEquals(0, repoSizeAfter);
     }
 
     @Test
@@ -61,6 +68,4 @@ public class ResourceRepoTest extends AbstractRepoTest {
         exception.expect(IllegalArgumentException.class);
         repo.delete(1);
     }
-
-
 }
