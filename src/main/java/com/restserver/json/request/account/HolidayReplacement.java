@@ -1,6 +1,6 @@
 package com.restserver.json.request.account;
 
-public class HolidayReplacement {
+public class HolidayReplacement extends BaseRequest{
     private String username;
     private String usernameHolidayReplacement;
 

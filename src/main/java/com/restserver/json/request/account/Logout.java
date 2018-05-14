@@ -1,6 +1,6 @@
 package com.restserver.json.request.account;
 
-public class Logout {
+public class Logout extends BaseRequest{
     private String username;
 
     public Logout(String username) {
