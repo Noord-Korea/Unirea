@@ -37,7 +37,7 @@ public class TownRepoTest extends AbstractRepoTest{
         insertTown();
 
         int sizeAfter = repo.findAll().size();
-        assertNotEquals(1, sizeAfter);
+        assertEquals(1, sizeAfter);
     }
 
     @Test

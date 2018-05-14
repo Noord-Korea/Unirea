@@ -31,9 +31,10 @@ public class PlayerRepoTest extends AbstractRepoTest {
     @Test
     public void testSaveValid() {
         int before = repo.findAll().size();
-        repo.save(new Player("wauw", "bas@gmail.com", "test"));
+        assertEquals(0, before);
+        repo.save(new Player("wow", "bas@gmail.com", "test"));
         int after = repo.findAll().size();
-        assertNotEquals(before, after);
+        assertEquals(1, after);
     }
 
 

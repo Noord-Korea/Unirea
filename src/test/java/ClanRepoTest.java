@@ -28,9 +28,12 @@ public class ClanRepoTest extends AbstractRepoTest {
     @Test
     public void testSaveClan() {
         int clans = repo.findAll().size();
+        assertEquals(0, clans);
+
         insertClan();
-        int clansafter = repo.findAll().size();
-        assertNotEquals(clans, clansafter);
+
+        int clansAfter = repo.findAll().size();
+        assertEquals(1, clansAfter);
     }
 
     private void insertClan() {
@@ -40,7 +43,7 @@ public class ClanRepoTest extends AbstractRepoTest {
     @Test
     public void testFindOneName() {
         Clan result = repo.findOne(ClanSpecification.getbyName("clan"));
-        assertEquals(result, null);
+        assertEquals(null, result);
         insertClan();
         result = repo.findOne(ClanSpecification.getbyName("clan"));
         assertEquals(clan.getId(), result.getId());
@@ -49,11 +52,14 @@ public class ClanRepoTest extends AbstractRepoTest {
     @Test
     public void testDeleteClan() {
         Clan clan = new Clan("Clan");
+
         repo.save(clan);
-        int reposize = repo.findAll().size();
+        int repoSize = repo.findAll().size();
+        assertEquals(1, repoSize);
+
         repo.delete(clan);
-        int reposizeafter = repo.findAll().size();
-        assertEquals(reposize - 1, reposizeafter);
+        int repoSizeAfter = repo.findAll().size();
+        assertEquals(0, repoSizeAfter);
     }
 
     @Test
