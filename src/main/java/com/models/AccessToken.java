@@ -10,6 +10,7 @@ public class AccessToken {
 
     @Id
     private String accessToken;
+
     @NotNull
     private int expiresIn;
 
