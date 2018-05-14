@@ -19,8 +19,8 @@ public class AccessTokenFactory implements IAccessTokenFactory {
         return uuid;
     }
 
-    private Date generateExpirationDate(){
-        long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
+    private Date generateExpirationDate(int expiration){
+        long expirationTime = TimeUnit.MILLISECONDS.convert(expiration, TimeUnit.MINUTES);
         return new Date(System.currentTimeMillis() + expirationTime);
     }
 }

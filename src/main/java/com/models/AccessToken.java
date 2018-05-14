@@ -3,6 +3,7 @@ package com.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Entity
 @Table(name = "AccessToken")
@@ -44,5 +45,10 @@ public class AccessToken {
 
     public Date getExpires() {
         return expires;
+    }
+
+    public void refresh(){
+        long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
+        this.expires = new Date(System.currentTimeMillis() + expirationTime);
     }
 }
