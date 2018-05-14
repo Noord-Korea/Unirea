@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class AccessTokenFactory implements IAccessTokenFactory {
     @Override
     public AccessToken newToken(Player player) {
-        return new AccessToken(generateUUID(),20,player, new Date(System.currentTimeMillis()), generateExpirationDate());
+        return new AccessToken(generateUUID(), player, new Date(System.currentTimeMillis()), generateExpirationDate());
     }
 
     private String generateUUID(){

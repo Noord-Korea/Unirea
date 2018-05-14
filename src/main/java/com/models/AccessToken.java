@@ -11,9 +11,6 @@ public class AccessToken {
     @Id
     private String accessToken;
 
-    @NotNull
-    private int expiresIn;
-
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")
     private Player player;
@@ -26,9 +23,8 @@ public class AccessToken {
     public AccessToken() {
     }
 
-    public AccessToken(String accessToken, int expiresIn, Player player, Date issued, Date expires) {
+    public AccessToken(String accessToken, Player player, Date issued, Date expires) {
         this.accessToken = accessToken;
-        this.expiresIn = expiresIn;
         this.player = player;
         this.issued = issued;
         this.expires = expires;
@@ -36,10 +32,6 @@ public class AccessToken {
 
     public String getAccessToken() {
         return accessToken;
-    }
-
-    public int getExpiresIn() {
-        return expiresIn;
     }
 
     public Player getPlayer() {
