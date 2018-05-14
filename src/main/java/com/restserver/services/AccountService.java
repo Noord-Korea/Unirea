@@ -39,6 +39,8 @@ public class AccountService {
         Register register = gson.fromJson(data, Register.class);
         String output = "Geslaagd Email: " + register.getEmail() + " Username: " + register.getUsername() + " Password: " + register.getPassword();
 
+        handler.Register(register);
+
         return Response.status(200).entity(output).build();
     }
 
@@ -48,6 +50,8 @@ public class AccountService {
         Gson gson = new Gson();
         ChangePassword changePassword = gson.fromJson(data, ChangePassword.class);
         String output = "Geslaagd Email: " + changePassword.getEmail() + " Username: " + changePassword.getUsername() + " New Password: " + changePassword.getNewPassword() + " Verify Password: " + changePassword.getVerifyPassword();
+
+        handler.ChangePassword(changePassword);
 
         return Response.status(200).entity(output).build();
     }
