@@ -5,8 +5,13 @@ import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.models.AccessToken;
 import com.models.Player;
+import com.restserver.accesstoken.AccessTokenFactory;
+import com.restserver.accesstoken.IAccessTokenFactory;
 
 public class AccessTokenUtil {
+
+    private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
+
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
         AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
@@ -20,5 +25,9 @@ public class AccessTokenUtil {
         }
         accessToken.refresh();
         return true;
+    }
+
+    public static AccessToken newToken(Player player){
+        return accessTokenFactory.newToken(player);
     }
 }
