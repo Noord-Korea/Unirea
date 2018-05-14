@@ -5,16 +5,16 @@ import com.restserver.json.response.Reply;
 import com.restserver.json.request.account.*;
 
 public interface IAccountHandler {
-    Reply Login(Login data);
-    Reply Logout(Logout data);
+    Reply login(Login data);
+    Reply logout(Logout data);
 
-    Reply Register(Register data);
-    Reply ChangePassword(ChangePassword data);
+    Reply register(Register data);
+    Reply changePassword(ChangePassword data);
 
-    Reply Update(UpdateAccount data);
+    Reply update(UpdateAccount data);
 
-    Reply HolidayReplacement(HolidayReplacement data);
-    Reply Delete(Delete data);
+    Reply holidayReplacement(HolidayReplacement data);
+    Reply delete(Delete data);
 
 
 }

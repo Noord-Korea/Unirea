@@ -15,7 +15,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public Reply Login(Login data) {
+    public Reply login(Login data) {
         Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null){
             return new Reply(Status.NotFound, "Player doesn't exist");
@@ -27,12 +27,12 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public Reply Logout(Logout data) {
+    public Reply logout(Logout data) {
         return null;
     }
 
     @Override
-    public Reply Register(Register data) {
+    public Reply register(Register data) {
         Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null){
             try {
@@ -48,22 +48,22 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public Reply ChangePassword(ChangePassword data) {
+    public Reply changePassword(ChangePassword data) {
         return null;
     }
 
     @Override
-    public Reply Update(UpdateAccount data) {
+    public Reply update(UpdateAccount data) {
         return null;
     }
 
     @Override
-    public Reply HolidayReplacement(HolidayReplacement data) {
+    public Reply holidayReplacement(HolidayReplacement data) {
         return null;
     }
 
     @Override
-    public Reply Delete(Delete data) {
+    public Reply delete(Delete data) {
         return null;
     }
 }
