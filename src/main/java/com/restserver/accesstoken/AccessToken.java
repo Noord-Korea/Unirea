@@ -1,5 +1,7 @@
 package com.restserver.accesstoken;
 
+import com.models.Player;
+
 import java.util.Date;
 
 public class AccessToken {
@@ -11,7 +13,7 @@ public class AccessToken {
     private Date expires;
 
 
-    public AccessToken(String accessToken, int expiresIn, String username, Date issued, Date expires) {
+    public AccessToken(String accessToken, int expiresIn, Player player, Date issued, Date expires) {
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
         this.username = username;

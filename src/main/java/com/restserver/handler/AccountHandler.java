@@ -72,7 +72,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccessToken generateAccessToken(String username){
-        return accessTokenFactory.newToken(username);
+    public AccessToken generateAccessToken(Player player){
+        return accessTokenFactory.newToken(player);
     }
 }

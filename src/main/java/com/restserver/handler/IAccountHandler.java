@@ -1,5 +1,6 @@
 package com.restserver.handler;
 
+import com.models.Player;
 import com.restserver.accesstoken.AccessToken;
 import com.restserver.json.request.account.*;
 import com.restserver.json.response.Reply;
@@ -15,7 +16,7 @@ public interface IAccountHandler {
 
     Reply holidayReplacement(HolidayReplacement data);
     Reply delete(Delete data);
-    AccessToken generateAccessToken(String username);
+    AccessToken generateAccessToken(Player player);
 
 
 }

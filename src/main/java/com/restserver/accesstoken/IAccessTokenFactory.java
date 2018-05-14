@@ -1,6 +1,8 @@
 package com.restserver.accesstoken;
 
+import com.models.Player;
+
 public interface IAccessTokenFactory {
-    AccessToken newToken(String username);
+    AccessToken newToken(Player player);
 
 }

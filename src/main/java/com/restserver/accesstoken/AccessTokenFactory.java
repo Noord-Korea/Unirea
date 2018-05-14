@@ -1,13 +1,15 @@
 package com.restserver.accesstoken;
 
+import com.models.Player;
+
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class AccessTokenFactory implements IAccessTokenFactory {
     @Override
-    public AccessToken newToken(String username) {
-        return new AccessToken(generateUUID(),20,username, new Date(System.currentTimeMillis()), generateExpirationDate());
+    public AccessToken newToken(Player player) {
+        return new AccessToken(generateUUID(),20,player, new Date(System.currentTimeMillis()), generateExpirationDate());
     }
 
     private String generateUUID(){
