@@ -1,20 +1,22 @@
 package com.restserver.handler;
 
+import com.models.Player;
+import com.models.AccessToken;
 import com.restserver.json.request.account.*;
-import com.restserver.json.response.Response;
-import com.restserver.json.request.account.*;
+import com.restserver.json.response.Reply;
 
 public interface IAccountHandler {
-    Response Login(Login data);
-    void Logout(Logout data);
+    Reply login(Login data);
+    Reply logout(Logout data);
 
-    void Register(Register data);
-    void ChangePassword(ChangePassword data);
+    Reply register(Register data);
+    Reply changePassword(ChangePassword data);
 
-    void Update(UpdateAccount data);
+    Reply update(UpdateAccount data);
 
-    void HolidayReplacement(HolidayReplacement data);
-    void Delete(Delete data);
+    Reply holidayReplacement(HolidayReplacement data);
+    Reply delete(Delete data);
+    AccessToken generateAccessToken(Player player);
 
 
 }

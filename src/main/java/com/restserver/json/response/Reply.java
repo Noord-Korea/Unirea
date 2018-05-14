@@ -1,15 +1,15 @@
 package com.restserver.json.response;
 
-public class Response {
-    private int status;
+public class Reply {
+    private Status status;
     private String message;
 
-    public Response(int status, String message) {
+    public Reply(Status status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 

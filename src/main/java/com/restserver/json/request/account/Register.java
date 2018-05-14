@@ -1,6 +1,8 @@
 package com.restserver.json.request.account;
 
-public class Register implements Result {
+import com.restserver.json.request.IResult;
+
+public class Register implements IResult {
     private String email;
     private String username;
     private String password;

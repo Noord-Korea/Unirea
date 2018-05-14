@@ -5,6 +5,7 @@ import com.restserver.handler.IAccountHandler;
 import com.restserver.json.request.account.ChangePassword;
 import com.restserver.json.request.account.Login;
 import com.restserver.json.request.account.Register;
+import com.restserver.json.response.Reply;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -22,32 +23,40 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/login")
-    public Response Login(String data) {
+    public Response login(String data) {
         Gson gson = new Gson();
         Login login = gson.fromJson(data, Login.class);
         String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
-        handler.Login(login);
+        Reply response = handler.login(login);
 
-        return Response.status(200).entity(output).build();
+        return Response.status(response.getStatus().getCode()).entity(output).build();
     }
 
     @POST @Consumes("application/json")
     @Path("/register")
-    public Response Register(String data) {
+    public Response register(String data) {
+        System.out.println(data);
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
-        String output = "Geslaagd Email: " + register.getEmail() + " Username: " + register.getUsername() + " Password: " + register.getPassword();
+        String output = "Geslaagd Email: " + register.getEmail() + " Password: " + register.getPassword();
+        System.out.println(output);
+        Reply reply = handler.register(register);
 
-        return Response.status(200).entity(output).build();
+        System.out.println(reply.getStatus());
+        System.out.println(reply.getMessage());
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
     }
 
     @POST @Consumes("application/json")
     @Path("/changepassword")
-    public Response ChangePassword(String data) {
+    public Response changePassword(String data) {
         Gson gson = new Gson();
         ChangePassword changePassword = gson.fromJson(data, ChangePassword.class);
         String output = "Geslaagd Email: " + changePassword.getEmail() + " Username: " + changePassword.getUsername() + " New Password: " + changePassword.getNewPassword() + " Verify Password: " + changePassword.getVerifyPassword();
+
+        handler.changePassword(changePassword);
 
         return Response.status(200).entity(output).build();
     }

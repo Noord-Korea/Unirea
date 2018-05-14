@@ -1,5 +1,6 @@
 package com.restserver;
 
+import com.dbal.repository.PlayerRepository;
 import com.restserver.handler.AccountHandler;
 import com.restserver.services.AccountService;
 import org.eclipse.jetty.server.Server;
@@ -11,9 +12,11 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
+import java.util.logging.Level;
 
 public class RestServer {
     public static void main(String[] args) throws Exception {
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
         ServletContextHandler context = new
                 ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
@@ -32,7 +35,7 @@ public class RestServer {
                 context.addServlet(ServletContainer.class, "/*");
         jerseyServlet.setInitOrder(0);
 
-        AccountHandler accountHandler = new AccountHandler();
+        AccountHandler accountHandler = new AccountHandler(new PlayerRepository());
         AccountService.setHandler(accountHandler);
 
         // Tells the Jersey Servlet which REST service/class to load.

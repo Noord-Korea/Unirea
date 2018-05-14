@@ -1,6 +1,8 @@
 package com.models;
 
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.regex.Matcher;
@@ -26,12 +28,12 @@ public class Player {
     public Player() {
     }
 
-    public Player(String username, String email, String passHash) {
+    public Player(String username, String email, String password) {
         this.username = username;
-       if(!setEmail(email)) {
+        if(!setEmail(email)) {
            throw new IllegalArgumentException("Email is invalid");
-       }
-        this.passHash = passHash;
+        }
+        this.passHash = hashPassword(password);
     }
 
 
@@ -65,6 +67,19 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    public boolean checkPassword(String password){
+        return BCrypt.checkpw(password, this.passHash);
+    }
+
+    public void setPassword(String password){
+        this.passHash = hashPassword(password);
+    }
+
+    private String hashPassword(String password){
+        String salt = BCrypt.gensalt(11);
+        return BCrypt.hashpw(password, salt);
     }
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =

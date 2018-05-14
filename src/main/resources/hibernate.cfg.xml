@@ -57,6 +57,7 @@
         <mapping class="com.models.TownArmy"/>
         <mapping class="com.models.Army"/>
         <mapping class="com.models.ArmyCategory"/>
+        <mapping class="com.models.AccessToken"/>
 
 
 
