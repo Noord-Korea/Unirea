@@ -27,7 +27,7 @@ public class AccountService {
         Login login = gson.fromJson(data, Login.class);
         String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
-        handler.Login(login);
+        com.restserver.json.response.Response response = handler.Login(login);
 
         return Response.status(200).entity(output).build();
     }
