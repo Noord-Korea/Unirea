@@ -9,7 +9,8 @@ public enum Status {
     Error(400),
     NoAuth(401),
     NoAccess(403),
-    NotFound(404);
+    NotFound(404),
+    Conflict(409);
 
     private static final Map<Integer,Status> lookup
             = new HashMap<Integer,Status>();

@@ -12,9 +12,11 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
+import java.util.logging.Level;
 
 public class RestServer {
     public static void main(String[] args) throws Exception {
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
         ServletContextHandler context = new
                 ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");

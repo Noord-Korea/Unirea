@@ -16,14 +16,13 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply Login(Login data) {
-        Reply reply;
         Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null){
-            reply = new Reply(Status.NotFound, "Player doesn't exist");
-        } else if (player.getEmail() != data.getEmail() || player.getPassword() != data.getPassword()){
-            reply = new Reply(Status.NoAccess, "Your login credentials were incorrect");
+            return new Reply(Status.NotFound, "Player doesn't exist");
+        } else if (player.getEmail() != data.getEmail() /*|| player.getPassword() != data.getPassword()*/){
+            return new Reply(Status.NoAccess, "Your login credentials were incorrect");
         }
-        return reply;
+        return new Reply(Status.Ok,"Hij heeft nog geen error gegooid");
 
     }
 
@@ -34,15 +33,18 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply Register(Register data) {
-        Reply reply;
         Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null){
-            repository.save(data);
-            reply = new Reply(Status.Ok, "Succesfully registered");
+            try {
+                player = new Player(data.getUsername(), data.getEmail(), data.getPassword());
+            } catch (IllegalArgumentException e){
+                return new Reply(Status.Error,e.getMessage());
+            }
+            repository.save(player);
+            return new Reply(Status.Ok, "Succesfully registered");
         } else{
-            reply = new Reply(Status.NotFound, "Player doesn't exist");
+            return new Reply(Status.Conflict, "Email is already used");
         }
-        return reply;
     }
 
     @Override

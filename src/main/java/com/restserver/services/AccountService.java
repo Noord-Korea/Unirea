@@ -36,13 +36,17 @@ public class AccountService {
     @POST @Consumes("application/json")
     @Path("/register")
     public Response Register(String data) {
+        System.out.println(data);
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
-        String output = "Geslaagd Email: " + register.getEmail() + " Username: " + register.getUsername() + " Password: " + register.getPassword();
+        String output = "Geslaagd Email: " + register.getEmail() + " Password: " + register.getPassword();
+        System.out.println(output);
+        Reply reply = handler.Register(register);
 
-        handler.Register(register);
-
-        return Response.status(200).entity(output).build();
+        System.out.println(reply.getStatus());
+        System.out.println(reply.getMessage());
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
     }
 
     @POST @Consumes("application/json")

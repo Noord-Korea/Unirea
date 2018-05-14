@@ -1,6 +1,6 @@
 package com.restserver.json.request.account;
 
-public class Login implements Result {
+public class Login {
     private String email;
     private String password;
 
