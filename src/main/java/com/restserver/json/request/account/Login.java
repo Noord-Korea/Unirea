@@ -1,6 +1,6 @@
 package com.restserver.json.request.account;
 
-public class Login extends BaseRequest{
+public class Login {
     private String email;
     private String password;
 

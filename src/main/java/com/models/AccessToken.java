@@ -51,4 +51,11 @@ public class AccessToken {
         long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
         this.expires = new Date(System.currentTimeMillis() + expirationTime);
     }
+
+    public boolean isExpired(){
+        if (expires.before(new Date())){
+            return true;
+        }
+        return false;
+    }
 }

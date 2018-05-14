@@ -15,10 +15,6 @@ public class PlayerTest {
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-    @Before
-    public void TestInitialize() {
-    }
-
     @Test
     public void TestPlayerConstructorInvalidEmail() {
         exception.expect(IllegalArgumentException.class);
@@ -28,7 +24,7 @@ public class PlayerTest {
     @Test
     public void TestPlayerConstructorValid() {
         player = new Player("test", "test@gmail.com", "test");
-        assertEquals(player.getUsername(), "test");
-        assertEquals(player.getEmail(), "test@gmail.com");
+        assertEquals("test", player.getUsername());
+        assertEquals("test@gmail.com", player.getEmail());
     }
 }

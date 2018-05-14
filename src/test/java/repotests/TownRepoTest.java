@@ -34,28 +34,36 @@ public class TownRepoTest extends AbstractRepoTest {
 
     @Test
     public void testSaveTown() {
-        int sizebefore = repo.findAll().size();
+        int sizeBefore = repo.findAll().size();
+        assertEquals(0, sizeBefore);
+
         insertTown();
-        int sizeafter = repo.findAll().size();
-        assertNotEquals(sizebefore, sizeafter);
+
+        int sizeAfter = repo.findAll().size();
+        assertEquals(1, sizeAfter);
     }
 
     @Test
     public void testFindOneByName() {
         Town result = repo.findOne(TownSpecification.getByName("town"));
-        assertEquals(result, null);
+        assertEquals(null, result);
+
         insertTown();
-        Town findtown = repo.findOne(TownSpecification.getByName("town"));
-        assertEquals(town.getId(), findtown.getId());
+
+        Town findTown = repo.findOne(TownSpecification.getByName("town"));
+        assertEquals(town.getId(), findTown.getId());
     }
 
     @Test
-    public void testDeletetown() {
+    public void testDeleteTown() {
         insertTown();
-        int reposizebefore = repo.findAll().size();
+        int repoSizeBefore = repo.findAll().size();
+        assertEquals(1, repoSizeBefore);
+
         repo.delete(town);
-        int reposizeafter = repo.findAll().size();
-        assertEquals(reposizebefore - 1, reposizeafter);
+
+        int reposizeAfter = repo.findAll().size();
+        assertEquals(0, reposizeAfter);
     }
 
     @Test

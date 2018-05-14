@@ -6,7 +6,8 @@ public class ChangePassword extends BaseRequest{
     private String newPassword;
     private String verifyPassword;
 
-    public ChangePassword(String username, String email, String newPassword, String verifyPassword) {
+    public ChangePassword(String token, String username, String email, String newPassword, String verifyPassword) {
+        super(token);
         this.username = username;
         this.email = email;
         this.newPassword = newPassword;
