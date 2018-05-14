@@ -35,7 +35,7 @@ public class ResourceRepoTest extends AbstractRepoTest {
         assertEquals(0, sizeBefore);
 
         insertResource();
-        
+
         int sizeAfter = repo.findAll().size();
         assertEquals(1, sizeAfter);
     }
