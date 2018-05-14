@@ -28,9 +28,10 @@ public class AccountService {
         Login login = gson.fromJson(data, Login.class);
         String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
-        Reply response = handler.login(login);
+        Reply reply = handler.login(login);
 
-        return Response.status(response.getStatus().getCode()).entity(output).build();
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
     }
 
     @POST @Consumes("application/json")

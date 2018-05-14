@@ -1,6 +1,8 @@
 package com.restserver.handler;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.IRepository;
+import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.PlayerSpecification;
 import com.models.Player;
 import com.models.AccessToken;
@@ -9,10 +11,12 @@ import com.restserver.accesstoken.IAccessTokenFactory;
 import com.restserver.json.request.account.*;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
+import com.restserver.utils.accesstoken.AccessTokenUtil;
 
 public class AccountHandler implements IAccountHandler {
     private IRepository repository;
-    private IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
+    private AccessTokenUtil accessTokenUtil = new AccessTokenUtil();
+    private AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
 
     public AccountHandler(IRepository repository) {
         this.repository = repository;
@@ -26,7 +30,9 @@ public class AccountHandler implements IAccountHandler {
         } else if (!player.getEmail().equals(data.getEmail()) || !(player.checkPassword(data.getPassword()))){
             return new Reply(Status.NoAccess, "Your login credentials were incorrect");
         }
-        return new Reply(Status.Ok,"Success");
+        AccessToken token = generateAccessToken(player);
+        accessTokenRepository.save(token);
+        return new Reply(Status.Ok,token.getAccessToken());
 
     }
 
@@ -73,6 +79,6 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public AccessToken generateAccessToken(Player player){
-        return accessTokenFactory.newToken(player);
+        return AccessTokenUtil.newToken(player);
     }
 }
