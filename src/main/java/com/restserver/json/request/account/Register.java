@@ -2,13 +2,12 @@ package com.restserver.json.request.account;
 
 import com.restserver.json.request.IResult;
 
-public class Register extends BaseRequest implements IResult{
+public class Register implements IResult{
     private String email;
     private String username;
     private String password;
 
-    public Register(String token, String email, String password, String username) {
-        super(token);
+    public Register(String email, String password, String username) {
         this.email = email;
         this.password = password;
         this.username = username;
