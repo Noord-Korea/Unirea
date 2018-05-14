@@ -1,10 +1,10 @@
 package com.restserver.json.response;
 
-public class Response {
+public class Reply {
     private int status;
     private String message;
 
-    public Response(int status, String message) {
+    public Reply(int status, String message) {
         this.status = status;
         this.message = message;
     }
