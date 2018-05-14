@@ -7,7 +7,8 @@ public class Register extends BaseRequest implements IResult{
     private String username;
     private String password;
 
-    public Register(String email, String password, String username) {
+    public Register(String token, String email, String password, String username) {
+        super(token);
         this.email = email;
         this.password = password;
         this.username = username;
