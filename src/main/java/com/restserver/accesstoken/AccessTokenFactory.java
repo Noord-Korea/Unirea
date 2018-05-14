@@ -6,17 +6,17 @@ import java.util.concurrent.TimeUnit;
 
 public class AccessTokenFactory implements IAccessTokenFactory {
     @Override
-    public AccessToken NewToken(String username) {
-        return new AccessToken(GenerateUUID(),20,username, new Date(System.currentTimeMillis()), GenerateExpirationDate());
+    public AccessToken newToken(String username) {
+        return new AccessToken(generateUUID(),20,username, new Date(System.currentTimeMillis()), generateExpirationDate());
     }
 
-    private String GenerateUUID(){
+    private String generateUUID(){
         final String uuid = UUID.randomUUID().toString().replace("-", "");
         System.out.println("uuid = " + uuid);
         return uuid;
     }
 
-    private Date GenerateExpirationDate(){
+    private Date generateExpirationDate(){
         long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
         Date expiry = new Date(System.currentTimeMillis() + expirationTime);
         return expiry;

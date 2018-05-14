@@ -73,7 +73,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public AccessToken GenerateAccessToken(String username){
-        AccessToken accessToken=accessTokenFactory.NewToken(username);
+        AccessToken accessToken=accessTokenFactory.newToken(username);
         return accessToken;
     }
 }
