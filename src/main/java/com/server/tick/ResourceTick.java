@@ -29,14 +29,5 @@ public class ResourceTick implements Runnable{
         }else {
             System.out.println(town.getName());
         }
-        /*
-        for (Town town : towns) {
-            System.out.println(town.getName());
-            /*for (TownResources townResources : town.getTownResources()) {
-                //townResources.setValue(townResources.getValue()+1);
-                //System.out.println(townResources.getValue());
-            }*/
-            //townRepository.save(town);
-
     }
 }

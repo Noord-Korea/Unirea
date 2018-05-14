@@ -11,9 +11,9 @@ import com.restserver.accesstoken.IAccessTokenFactory;
 public class AccessTokenUtil {
 
     private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
+    private static AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
 
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
-        AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
         if(accessToken == null){
