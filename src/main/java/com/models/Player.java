@@ -28,12 +28,12 @@ public class Player {
     public Player() {
     }
 
-    public Player(String username, String email, String passHash) {
+    public Player(String username, String email, String password) {
         this.username = username;
-       if(!setEmail(email)) {
+        if(!setEmail(email)) {
            throw new IllegalArgumentException("Email is invalid");
-       }
-        this.passHash = passHash;
+        }
+        this.passHash = hashPassword(password);
     }
 
 
