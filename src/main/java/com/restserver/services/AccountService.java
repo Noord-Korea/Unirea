@@ -23,25 +23,25 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/login")
-    public Response Login(String data) {
+    public Response login(String data) {
         Gson gson = new Gson();
         Login login = gson.fromJson(data, Login.class);
         String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
-        Reply response = handler.Login(login);
+        Reply response = handler.login(login);
 
         return Response.status(response.getStatus().getCode()).entity(output).build();
     }
 
     @POST @Consumes("application/json")
     @Path("/register")
-    public Response Register(String data) {
+    public Response register(String data) {
         System.out.println(data);
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
         String output = "Geslaagd Email: " + register.getEmail() + " Password: " + register.getPassword();
         System.out.println(output);
-        Reply reply = handler.Register(register);
+        Reply reply = handler.register(register);
 
         System.out.println(reply.getStatus());
         System.out.println(reply.getMessage());
@@ -51,12 +51,12 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/changepassword")
-    public Response ChangePassword(String data) {
+    public Response changePassword(String data) {
         Gson gson = new Gson();
         ChangePassword changePassword = gson.fromJson(data, ChangePassword.class);
         String output = "Geslaagd Email: " + changePassword.getEmail() + " Username: " + changePassword.getUsername() + " New Password: " + changePassword.getNewPassword() + " Verify Password: " + changePassword.getVerifyPassword();
 
-        handler.ChangePassword(changePassword);
+        handler.changePassword(changePassword);
 
         return Response.status(200).entity(output).build();
     }

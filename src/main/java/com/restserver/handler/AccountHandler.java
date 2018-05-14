@@ -12,7 +12,7 @@ import com.restserver.json.response.Status;
 
 public class AccountHandler implements IAccountHandler {
     private IRepository repository;
-    private IAccessTokenFactory accessTokenFactory=new AccessTokenFactory();
+    private IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
 
     public AccountHandler(IRepository repository) {
         this.repository = repository;
@@ -72,8 +72,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccessToken GenerateAccessToken(String username){
-        AccessToken accessToken=accessTokenFactory.newToken(username);
-        return accessToken;
+    public AccessToken generateAccessToken(String username){
+        return accessTokenFactory.NewToken(username);
     }
 }
