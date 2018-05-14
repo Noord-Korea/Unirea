@@ -5,6 +5,7 @@ import com.restserver.handler.IAccountHandler;
 import com.restserver.json.request.account.ChangePassword;
 import com.restserver.json.request.account.Login;
 import com.restserver.json.request.account.Register;
+import com.restserver.json.response.Reply;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -27,7 +28,7 @@ public class AccountService {
         Login login = gson.fromJson(data, Login.class);
         String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
 
-        com.restserver.json.response.Response response = handler.Login(login);
+        Reply response = handler.Login(login);
 
         return Response.status(200).entity(output).build();
     }

@@ -1,42 +1,41 @@
 package com.restserver.handler;
 
 import com.restserver.json.request.account.*;
-import com.restserver.json.response.Response;
+import com.restserver.json.response.Reply;
 
 public class AccountHandler implements IAccountHandler {
     @Override
-    public Response Login(Login data) {
-
+    public Reply Login(Login data) {
         return null;
     }
 
     @Override
-    public void Logout(Logout data) {
-
+    public Reply Logout(Logout data) {
+        return null;
     }
 
     @Override
-    public void Register(Register data) {
-
+    public Reply Register(Register data) {
+        return null;
     }
 
     @Override
-    public void ChangePassword(ChangePassword data) {
-
+    public Reply ChangePassword(ChangePassword data) {
+        return null;
     }
 
     @Override
-    public void Update(UpdateAccount data) {
-
+    public Reply Update(UpdateAccount data) {
+        return null;
     }
 
     @Override
-    public void HolidayReplacement(HolidayReplacement data) {
-
+    public Reply HolidayReplacement(HolidayReplacement data) {
+        return null;
     }
 
     @Override
-    public void Delete(Delete data) {
-
+    public Reply Delete(Delete data) {
+        return null;
     }
 }
