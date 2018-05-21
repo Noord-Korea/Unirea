@@ -2,9 +2,7 @@ package com.restserver.services;
 
 import com.google.gson.Gson;
 import com.restserver.handler.IAccountHandler;
-import com.restserver.json.request.account.ChangePassword;
-import com.restserver.json.request.account.Login;
-import com.restserver.json.request.account.Register;
+import com.restserver.json.request.account.*;
 import com.restserver.json.response.Reply;
 
 import javax.ws.rs.Consumes;
@@ -26,8 +24,6 @@ public class AccountService {
     public Response login(String data) {
         Gson gson = new Gson();
         Login login = gson.fromJson(data, Login.class);
-        String output = "Geslaagd Email: " + login.getEmail() + " Password: " + login.getPassword();
-
         Reply reply = handler.login(login);
 
         return Response.status(reply.getStatus().getCode())
@@ -37,15 +33,21 @@ public class AccountService {
     @POST @Consumes("application/json")
     @Path("/register")
     public Response register(String data) {
-        System.out.println(data);
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
-        String output = "Geslaagd Email: " + register.getEmail() + " Password: " + register.getPassword();
-        System.out.println(output);
         Reply reply = handler.register(register);
 
-        System.out.println(reply.getStatus());
-        System.out.println(reply.getMessage());
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
+
+    @POST @Consumes("application/json")
+    @Path("/logout")
+    public Response Logout(String data) {
+        Gson gson = new Gson();
+        Logout logout = gson.fromJson(data, Logout.class);
+        Reply reply = handler.logout(logout);
+
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
     }
@@ -55,10 +57,42 @@ public class AccountService {
     public Response changePassword(String data) {
         Gson gson = new Gson();
         ChangePassword changePassword = gson.fromJson(data, ChangePassword.class);
-        String output = "Geslaagd Email: " + changePassword.getEmail() + " Username: " + changePassword.getUsername() + " New Password: " + changePassword.getNewPassword() + " Verify Password: " + changePassword.getVerifyPassword();
+        Reply reply = handler.changePassword(changePassword);
 
-        handler.changePassword(changePassword);
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
 
-        return Response.status(200).entity(output).build();
+    @POST @Consumes("application/json")
+    @Path("/delete")
+    public Response delete(String data) {
+        Gson gson = new Gson();
+        Delete delete = gson.fromJson(data, Delete.class);
+        Reply reply = handler.delete(delete);
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
+
+    @POST @Consumes("application/json")
+    @Path("/updateaccount")
+    public Response update(String data) {
+        Gson gson = new Gson();
+        UpdateAccount updateAccount = gson.fromJson(data, UpdateAccount.class);
+        Reply reply = handler.update(updateAccount);
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
+
+    @POST @Consumes("application/json")
+    @Path("/holidayreplacement")
+    public Response holidayReplacement(String data) {
+        Gson gson = new Gson();
+        HolidayReplacement holidayReplacement = gson.fromJson(data, HolidayReplacement.class);
+        Reply reply = handler.holidayReplacement(holidayReplacement);
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
     }
 }

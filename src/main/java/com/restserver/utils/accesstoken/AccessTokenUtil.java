@@ -27,7 +27,7 @@ public class AccessTokenUtil {
         return true;
     }
 
-    public static AccessToken newToken(Player player){
-        return accessTokenFactory.newToken(player);
+    public static AccessToken newToken(Player player, AccessTokenLevel tokenLevel){
+        return accessTokenFactory.newToken(player, tokenLevel);
     }
 }

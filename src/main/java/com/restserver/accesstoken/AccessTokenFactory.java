@@ -2,6 +2,7 @@ package com.restserver.accesstoken;
 
 import com.models.AccessToken;
 import com.models.Player;
+import com.restserver.utils.accesstoken.AccessTokenLevel;
 
 import java.util.Date;
 import java.util.UUID;
@@ -10,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class AccessTokenFactory implements IAccessTokenFactory {
     //TODO: set expires time in resources
     @Override
-    public AccessToken newToken(Player player) {
-        return new AccessToken(generateUUID(), player, new Date(System.currentTimeMillis()), generateExpirationDate());
+    public AccessToken newToken(Player player, AccessTokenLevel tokenLevel) {
+        return new AccessToken(generateUUID(), player, tokenLevel, new Date(System.currentTimeMillis()), generateExpirationDate());
     }
 
     private String generateUUID(){

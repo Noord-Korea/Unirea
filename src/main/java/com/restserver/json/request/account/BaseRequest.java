@@ -1,13 +1,15 @@
 package com.restserver.json.request.account;
 
-public class BaseRequest {
-    private String token;
+import com.models.AccessToken;
 
-    public BaseRequest(String token) {
+public class BaseRequest {
+    private AccessToken token;
+
+    public BaseRequest(AccessToken token) {
         this.token = token;
     }
 
-    public String getToken() {
+    public AccessToken getToken() {
         return token;
     }
 }
