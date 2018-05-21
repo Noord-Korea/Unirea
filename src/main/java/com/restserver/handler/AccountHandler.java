@@ -36,8 +36,7 @@ public class AccountHandler implements IAccountHandler {
         return new Reply(Status.Ok,token.getAccessToken());
 
     }
-
-    //Todo: Still need to add check if accesstoken exists in database
+    
     @Override
     public Reply logout(Logout data) {
         if (data.getToken() == null){
