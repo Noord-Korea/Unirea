@@ -1,3 +1,5 @@
+package repotests;
+
 import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.PlayerSpecification;
 import com.models.Player;
@@ -5,6 +7,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import repotests.AbstractRepoTest;
 
 import java.util.logging.Level;
 

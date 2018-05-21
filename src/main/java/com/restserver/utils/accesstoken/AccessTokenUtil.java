@@ -11,9 +11,9 @@ import com.restserver.accesstoken.IAccessTokenFactory;
 public class AccessTokenUtil {
 
     private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
+    private static AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
 
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
-        AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
         if(accessToken == null){
@@ -27,7 +27,7 @@ public class AccessTokenUtil {
         return true;
     }
 
-    public static AccessToken newToken(Player player){
-        return accessTokenFactory.newToken(player);
+    public static AccessToken newToken(Player player, AccessTokenLevel tokenLevel){
+        return accessTokenFactory.newToken(player, tokenLevel);
     }
 }

@@ -1,3 +1,5 @@
+package repotests;
+
 import com.dbal.repository.ClanRepository;
 import com.dbal.specification.ClanSpecification;
 import com.models.Clan;
@@ -5,6 +7,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import repotests.AbstractRepoTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

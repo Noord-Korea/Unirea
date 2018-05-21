@@ -1,3 +1,5 @@
+package repotests;
+
 import com.dbal.repository.TownRepository;
 import com.dbal.specification.TownSpecification;
 import com.models.Town;
@@ -5,13 +7,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import repotests.AbstractRepoTest;
 
 import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-public class TownRepoTest extends AbstractRepoTest{
+public class TownRepoTest extends AbstractRepoTest {
     private TownRepository repo;
     private Town town;
 

@@ -1,3 +1,5 @@
+package modeltests;
+
 import com.models.Player;
 import org.junit.Before;
 import org.junit.Rule;

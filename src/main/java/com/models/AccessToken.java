@@ -1,5 +1,7 @@
 package com.models;
 
+import com.restserver.utils.accesstoken.AccessTokenLevel;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -20,13 +22,16 @@ public class AccessToken {
     private Date issued;
     @NotNull
     private Date expires;
+    @NotNull
+    private AccessTokenLevel accessTokenLevel;
 
     public AccessToken() {
     }
 
-    public AccessToken(String accessToken, Player player, Date issued, Date expires) {
+    public AccessToken(String accessToken, Player player, AccessTokenLevel tokenLevel, Date issued, Date expires) {
         this.accessToken = accessToken;
         this.player = player;
+        this.accessTokenLevel = tokenLevel;
         this.issued = issued;
         this.expires = expires;
     }
@@ -45,6 +50,10 @@ public class AccessToken {
 
     public Date getExpires() {
         return expires;
+    }
+
+    public AccessTokenLevel getAccessTokenLevel() {
+        return accessTokenLevel;
     }
 
     public void refresh(){
