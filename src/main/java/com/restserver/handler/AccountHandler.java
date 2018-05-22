@@ -36,7 +36,7 @@ public class AccountHandler implements IAccountHandler {
         return new Reply(Status.Ok,token.getAccessToken());
 
     }
-    
+
     @Override
     public Reply logout(Logout data) {
         if (data.getToken() == null){

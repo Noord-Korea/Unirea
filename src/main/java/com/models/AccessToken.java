@@ -1,5 +1,6 @@
 package com.models;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
 
 import javax.persistence.*;
