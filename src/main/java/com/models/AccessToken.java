@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class AccessToken {
 
     @Id
+    @Column(length = 64)
     private String accessToken;
 
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
