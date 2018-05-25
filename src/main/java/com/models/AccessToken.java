@@ -1,5 +1,6 @@
 package com.models;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class AccessToken {
 
     @Id
+    @Column(length = 64)
     private String accessToken;
 
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
