@@ -111,9 +111,11 @@ public class Town {
     }
 
     public Town(Player player, String name){
+        Random r = new Random();
+
         this.player = player;
         this.name = name;
-        this.x = (int) (Math.random()*1000);
-        this.y = (int) (Math.random()*1000);
+        this.x = r.nextInt()*1000;
+        this.y = r.nextInt()*1000;
     }
 }
