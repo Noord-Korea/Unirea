@@ -48,6 +48,9 @@ public class Player {
     }
 
     public Set<Town> getTowns() {
+        if(towns == null){
+            return new HashSet<Town>();
+        }
         return towns;
     }
 
