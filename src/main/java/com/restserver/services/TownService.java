@@ -24,7 +24,7 @@ public class TownService {
 
     @GET @Consumes("application/json")
     @Path("/login")
-    public Response GetAccount(String data) {
+    public Response GetTown(String data) {
         Gson gson = new Gson();
         Town town = gson.fromJson(data, Town.class);
         Reply reply = handler.getTown();
