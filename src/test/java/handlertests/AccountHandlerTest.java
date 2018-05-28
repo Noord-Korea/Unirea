@@ -90,5 +90,4 @@ public class AccountHandlerTest {
         Reply reply2 = handler.register(registerUsernameNull);
         assertEquals(Status.Error, reply.getStatus());
     }
-
 }

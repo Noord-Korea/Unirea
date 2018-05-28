@@ -71,7 +71,7 @@ public class AccountHandler implements IAccountHandler {
     public Reply changePassword(ChangePassword data) {
         if (!(data.getNewPassword().equals(data.getVerifyPassword()))){
             return new Reply(Status.Conflict, "Passwords don't match");
-        } else if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
+        } else if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
             return new Reply(Status.NoAccess, "Not logged in");
         } else {
             AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
@@ -86,7 +86,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply update(UpdateAccount data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -101,7 +101,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply getAccount(Account data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -117,7 +117,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply holidayReplacement(HolidayReplacement data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -132,7 +132,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply delete(Delete data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -147,6 +147,6 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public AccessToken generateAccessToken(Player player){
-        return AccessTokenUtil.newToken(player, AccessTokenLevel.LoggedIn);
+        return AccessTokenUtil.newToken(player, AccessTokenLevel.LOGGEDIN);
     }
 }
