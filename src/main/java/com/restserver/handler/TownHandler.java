@@ -6,6 +6,9 @@ import com.dbal.repository.IRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.models.AccessToken;
 import com.models.Player;
+import com.models.Town;
+import com.restserver.exception.PlayerHasTownException;
+import com.restserver.factory.TownFactory;
 import com.restserver.json.request.town.BaseTownRequest;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
@@ -30,6 +33,11 @@ public class TownHandler implements ITownHandler {
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(baseTownRequest.getToken()));
         if(!AccessTokenUtil.checkAccess(accessToken, AccessTokenLevel.LOGGEDIN)){
             return new Reply(Status.NOAUTH, "Accesstoken not valid");
+        }
+        try {
+            Town town = TownFactory.createTown(accessToken.getPlayer());
+        } catch (PlayerHasTownException e) {
+            return new Reply(Status.ERROR, e.getMessage());
         }
         return null;
     }
