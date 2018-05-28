@@ -22,7 +22,7 @@ public class TownService {
         handler = townHandler;
     }
 
-    @GET @Consumes("application/json")
+    @POST @Consumes("application/json")
     @Path("/gettown")
     public Response GetTown(String data) {
         Gson gson = new Gson();
