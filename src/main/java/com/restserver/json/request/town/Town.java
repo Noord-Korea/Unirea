@@ -1,14 +1,12 @@
 package com.restserver.json.request.town;
 
-import com.models.BuildingQueue;
-import com.models.TownArmy;
-import com.models.TownBuildings;
-import com.models.TownResources;
+import com.models.*;
+import com.restserver.json.request.account.BaseRequest;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Town {
+public class Town extends BaseTownRequest {
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
     private Set<TownBuildings> townBuildings = new HashSet<>(0);
 
@@ -16,7 +14,8 @@ public class Town {
 
     private Set<TownArmy> townArmies = new HashSet<>(0);
 
-    public Town(Set<TownResources> townResources, Set<TownBuildings> townBuildings, Set<BuildingQueue> buildingQueues, Set<TownArmy> townArmies) {
+    public Town(String accessToken ,Set<TownResources> townResources, Set<TownBuildings> townBuildings, Set<BuildingQueue> buildingQueues, Set<TownArmy> townArmies) {
+       super(accessToken);
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.buildingQueues = buildingQueues;

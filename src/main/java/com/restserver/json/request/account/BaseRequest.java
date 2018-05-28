@@ -3,13 +3,13 @@ package com.restserver.json.request.account;
 import com.models.AccessToken;
 
 public class BaseRequest {
-    private AccessToken token;
+    private String token;
 
-    public BaseRequest(AccessToken token) {
+    public BaseRequest(String token) {
         this.token = token;
     }
 
-    public AccessToken getToken() {
+    public String getToken() {
         return token;
     }
 }

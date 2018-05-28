@@ -6,7 +6,7 @@ public class HolidayReplacement extends BaseRequest{
     private String username;
     private String usernameHolidayReplacement;
 
-    public HolidayReplacement(AccessToken token, String username, String usernameHolidayReplacement) {
+    public HolidayReplacement(String token, String username, String usernameHolidayReplacement) {
         super(token);
         this.username = username;
         this.usernameHolidayReplacement = usernameHolidayReplacement;
