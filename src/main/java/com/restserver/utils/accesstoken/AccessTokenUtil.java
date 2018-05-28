@@ -1,12 +1,11 @@
 package com.restserver.utils.accesstoken;
 
 import com.dbal.repository.AccessTokenRepository;
-import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.models.AccessToken;
 import com.models.Player;
-import com.restserver.accesstoken.AccessTokenFactory;
-import com.restserver.accesstoken.IAccessTokenFactory;
+import com.restserver.factory.accesstoken.AccessTokenFactory;
+import com.restserver.factory.accesstoken.IAccessTokenFactory;
 
 public abstract class AccessTokenUtil {
 
