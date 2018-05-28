@@ -29,7 +29,7 @@ public class AccountHandler implements IAccountHandler {
         Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null){
             return new Reply(Status.NotFound, "Player doesn't exist");
-        } else if (!player.getEmail().equals(data.getEmail()) || player.checkPassword(data.getPassword())){
+        } else if (!player.getEmail().equals(data.getEmail()) || !player.checkPassword(data.getPassword())){
             return new Reply(Status.NoAccess, "Your login credentials were incorrect");
         }
         AccessToken token = generateAccessToken(player);
@@ -76,7 +76,8 @@ public class AccountHandler implements IAccountHandler {
         } else if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
             return new Reply(Status.NoAccess, "Not logged in");
         } else {
-            Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
+            AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken().getAccessToken()));
+            Player player = accessToken.getPlayer();
             if (player == null){
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }
@@ -106,7 +107,7 @@ public class AccountHandler implements IAccountHandler {
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
-            Player player = (Player) repository.findOne(PlayerSpecification.getByUsername(data.getUsername()));
+            Player player = (Player) repository.findOne(data.getId());
             if (player == null) {
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }

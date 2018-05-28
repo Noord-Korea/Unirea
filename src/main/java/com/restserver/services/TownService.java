@@ -13,7 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Path("/account")
+@Path("/town")
 public class TownService {
 
     private static ITownHandler handler;
@@ -23,8 +23,8 @@ public class TownService {
     }
 
     @GET @Consumes("application/json")
-    @Path("/login")
-    public Response GetAccount(String data) {
+    @Path("/gettown")
+    public Response GetTown(String data) {
         Gson gson = new Gson();
         Town town = gson.fromJson(data, Town.class);
         Reply reply = handler.getTown();
