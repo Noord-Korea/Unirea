@@ -7,7 +7,7 @@ public class Account extends BaseRequest{
     private String email;
     private int id;
 
-    public Account(AccessToken token, String username, String email, String password, int id) {
+    public Account(String token, String username, String email, String password, int id) {
         super(token);
         this.username = username;
         this.email = email;

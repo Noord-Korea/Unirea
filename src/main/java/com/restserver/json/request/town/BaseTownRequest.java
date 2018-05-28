@@ -3,13 +3,13 @@ package com.restserver.json.request.town;
 import com.models.AccessToken;
 
 public class BaseTownRequest {
-    private AccessToken token;
+    private String token;
 
-    public BaseTownRequest(AccessToken token) {
+    public BaseTownRequest(String token) {
         this.token = token;
     }
 
-    public AccessToken getToken() {
+    public String getToken() {
         return token;
     }
 }

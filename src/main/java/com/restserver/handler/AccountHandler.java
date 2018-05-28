@@ -41,7 +41,7 @@ public class AccountHandler implements IAccountHandler {
         if (data.getToken() == null){
             return new Reply(Status.NoAuth, "Player already logged out");
         } else {
-            AccessToken token = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken().getAccessToken()));
+            AccessToken token = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
             if (token == null){
                 return new Reply (Status.NotFound, "Token doesn't exist");
             }
@@ -71,10 +71,10 @@ public class AccountHandler implements IAccountHandler {
     public Reply changePassword(ChangePassword data) {
         if (!(data.getNewPassword().equals(data.getVerifyPassword()))){
             return new Reply(Status.Conflict, "Passwords don't match");
-        } else if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+        } else if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
             return new Reply(Status.NoAccess, "Not logged in");
         } else {
-            AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken().getAccessToken()));
+            AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
             Player player = accessToken.getPlayer();
             if (player == null){
                 return new Reply(Status.NotFound, "Player doesnt exist");
@@ -86,7 +86,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply update(UpdateAccount data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -101,7 +101,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply getAccount(Account data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -117,7 +117,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply holidayReplacement(HolidayReplacement data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
@@ -132,7 +132,7 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply delete(Delete data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LoggedIn)){
             return new Reply(Status.NoAccess, "Not logged in");
         }
         else {
