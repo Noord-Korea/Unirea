@@ -18,6 +18,10 @@ public class TownFactory implements ITownFactory {
 
         Town town = new Town(player, "My first town");
 
+        //TODO: add basic buildings
+
+        //TODO: add resources
+
         townRepository.save(town);
         return town;
     }
