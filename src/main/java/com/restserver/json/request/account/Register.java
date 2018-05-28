@@ -8,7 +8,7 @@ public class Register implements IResult{
     private String password;
 
     public Register(String email, String password, String username) {
-        this.email = email;
+        this.email = email.toLowerCase();
         this.password = password;
         this.username = username;
     }
