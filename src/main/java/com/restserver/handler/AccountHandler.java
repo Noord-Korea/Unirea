@@ -5,6 +5,7 @@ import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.dbal.specification.PlayerSpecification;
+import com.google.gson.Gson;
 import com.models.Player;
 import com.models.AccessToken;
 import com.restserver.accesstoken.AccessTokenFactory;
@@ -96,6 +97,22 @@ public class AccountHandler implements IAccountHandler {
             }
             repository.save(player);
             return new Reply(Status.Ok, "Account successfully updated");
+        }
+    }
+
+    @Override
+    public Reply getAccount(Account data) {
+        if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+            return new Reply(Status.NoAccess, "Not logged in");
+        }
+        else {
+            Player player = (Player) repository.findOne(PlayerSpecification.getByUsername(data.getUsername()));
+            if (player == null) {
+                return new Reply(Status.NotFound, "Player doesnt exist");
+            }
+            Gson gson = new Gson();
+            String account = gson.toJson(player);
+            return new Reply(Status.Ok, account);
         }
     }
 

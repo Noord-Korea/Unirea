@@ -86,6 +86,17 @@ public class AccountService {
     }
 
     @POST @Consumes("application/json")
+    @Path("/getaccount")
+    public Response getAccount(String data) {
+        Gson gson = new Gson();
+        Account getAccount = gson.fromJson(data, Account.class);
+        Reply reply = handler.getAccount(getAccount);
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
+
+    @POST @Consumes("application/json")
     @Path("/holidayreplacement")
     public Response holidayReplacement(String data) {
         Gson gson = new Gson();
