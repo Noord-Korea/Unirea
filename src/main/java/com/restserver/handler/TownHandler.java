@@ -29,7 +29,7 @@ public class TownHandler implements ITownHandler {
     public Reply createTown(BaseTownRequest baseTownRequest) {
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(baseTownRequest.getToken()));
         if(!AccessTokenUtil.checkAccess(accessToken, AccessTokenLevel.LOGGEDIN)){
-            return new Reply(Status.NoAuth, "Accesstoken not valid");
+            return new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
         return null;
     }
