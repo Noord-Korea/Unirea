@@ -29,13 +29,18 @@ public class Player {
     }
 
     public Player(String username, String email, String password) {
-        this.username = username;
-        if(!setEmail(email)) {
-           throw new IllegalArgumentException("Email is invalid");
-        }
-        this.passHash = hashPassword(password);
-    }
+        if (username == null || email == null || password == null) {
+            throw new IllegalArgumentException("Not all values are filled in");
+        } else {
 
+            this.username = username;
+            if (!setEmail(email)) {
+                throw new IllegalArgumentException("Email is invalid");
+            }
+            this.passHash = hashPassword(password);
+        }
+
+    }
 
     public int getId() {
         return playerid;
@@ -69,15 +74,15 @@ public class Player {
         return false;
     }
 
-    public boolean checkPassword(String password){
+    public boolean checkPassword(String password) {
         return BCrypt.checkpw(password, this.passHash);
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.passHash = hashPassword(password);
     }
 
-    private String hashPassword(String password){
+    private String hashPassword(String password) {
         String salt = BCrypt.gensalt(11);
         return BCrypt.hashpw(password, salt);
     }
