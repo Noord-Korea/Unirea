@@ -13,7 +13,7 @@ public abstract class PlayerSpecification {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("email", email);
+                return Restrictions.eq("email", email.toLowerCase());
             }
         };
     }

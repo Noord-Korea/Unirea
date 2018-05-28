@@ -5,7 +5,7 @@ public class Login {
     private String password;
 
     public Login(String email, String password) {
-        this.email = email;
+        this.email = email.toLowerCase();
         this.password = password;
     }
 
