@@ -3,9 +3,6 @@ package com.server.tick;
 import com.dbal.repository.ResourceRepository;
 import com.dbal.repository.TownRepository;
 import com.models.Town;
-import com.models.TownResources;
-
-import java.util.List;
 
 public class ResourceTick implements Runnable{
     private ResourceRepository resourceRepository;
@@ -18,7 +15,6 @@ public class ResourceTick implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("ResourceTick Running");
 
         TownRepository tmp = new TownRepository();
 
