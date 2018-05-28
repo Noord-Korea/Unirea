@@ -25,7 +25,6 @@ public class AccountService {
         Gson gson = new Gson();
         Login login = gson.fromJson(data, Login.class);
         Reply reply = handler.login(login);
-        System.out.println(data);
 
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
@@ -36,10 +35,6 @@ public class AccountService {
     public Response register(String data) {
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
-        System.out.println(data);
-        System.out.println(register.getEmail());
-        System.out.println(register.getPassword());
-        System.out.println(register.getUsername());
         Reply reply = handler.register(register);
 
 
@@ -49,7 +44,7 @@ public class AccountService {
 
     @POST @Consumes("application/json")
     @Path("/logout")
-    public Response Logout(String data) {
+    public Response logout(String data) {
         Gson gson = new Gson();
         Logout logout = gson.fromJson(data, Logout.class);
         Reply reply = handler.logout(logout);
