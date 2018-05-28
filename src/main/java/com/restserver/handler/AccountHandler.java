@@ -28,7 +28,7 @@ public class AccountHandler implements IAccountHandler {
         Player player = (Player) repository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null){
             return new Reply(Status.NotFound, "Player doesn't exist");
-        } else if (!player.getEmail().equals(data.getEmail()) || player.checkPassword(data.getPassword())){
+        } else if (!player.getEmail().equals(data.getEmail()) || !player.checkPassword(data.getPassword())){
             return new Reply(Status.NoAccess, "Your login credentials were incorrect");
         }
         AccessToken token = generateAccessToken(player);

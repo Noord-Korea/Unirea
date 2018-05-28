@@ -1,8 +1,11 @@
+package handlertests;
+
 import com.dbal.repository.PlayerRepository;
 import com.models.Player;
 import com.restserver.handler.AccountHandler;
 import com.restserver.handler.IAccountHandler;
 import com.restserver.json.request.account.Login;
+import com.restserver.json.request.account.Register;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 import org.junit.Before;
@@ -27,26 +30,25 @@ public class AccountHandlerTest {
     public void TestInitialize() {
         AbstractRepoTest.emptyTable("Player");
         repo = new PlayerRepository();
+        handler = new AccountHandler(repo);
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 
-    private void savePlayerCreateHandler() {
+    private void savePlayer() {
         repo.save(new Player("Bas", "bas@gmail.com", "passwd"));
-        handler = new AccountHandler(repo);
     }
 
     @Test
     public void testLogin() {
-        savePlayerCreateHandler();
+        savePlayer();
         Login login = new Login("bas@gmail.com", "passwd");
         Reply reply = handler.login(login);
         assertEquals(Status.Ok, reply.getStatus());
     }
 
-
     @Test
     public void testLoginIncorrect() {
-        savePlayerCreateHandler();
+        savePlayer();
         Login loginIncorrectPasswd = new Login("bas@gmail.com", "wrong");
         Reply reply = handler.login(loginIncorrectPasswd);
         assertEquals(Status.NoAccess, reply.getStatus());
@@ -54,4 +56,36 @@ public class AccountHandlerTest {
         reply = handler.login(loginNonExistent);
         assertEquals(Status.NotFound, reply.getStatus());
     }
+
+    @Test
+    public void testLoginNullValues() {
+        savePlayer();
+        Login loginEmailEmpty = new Login(null, "test");
+        Reply reply = handler.login(loginEmailEmpty);
+        assertEquals(Status.NotFound, reply.getStatus());
+        Login loginPasswordEmpty = new Login("bas@gmail.com", null);
+        Reply reply1 = handler.login(loginPasswordEmpty);
+        assertEquals(Status.NoAccess, reply1.getStatus());
+    }
+
+    @Test
+    public void testRegister() {
+        Register register = new Register("bas@gmail.com", "testpass", "bas");
+        Reply reply = handler.register(register);
+        assertEquals(Status.Ok, reply.getStatus());
+    }
+
+    @Test
+    public void testRegisterNullValues() {
+        Register registerEmailNull = new Register(null, "testpass", "bas");
+        Reply reply = handler.register(registerEmailNull);
+        assertEquals(Status.Error, reply.getStatus());
+        Register registerPasswordNull = new Register("bas@gmail.com", null, "bas");
+        Reply reply1 = handler.register(registerPasswordNull);
+        assertEquals(Status.Error, reply1.getStatus());
+        Register registerUsernameNull = new Register("bas@gmail.com", "password", null);
+        Reply reply2 = handler.register(registerUsernameNull);
+        assertEquals(Status.Error, reply.getStatus());
+    }
+
 }
