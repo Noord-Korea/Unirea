@@ -1,13 +1,18 @@
 package com.server.tick;
 
+import com.logging.LogLevel;
+import com.logging.Logger;
+
 public class TroopMovement implements Runnable {
 
+
     public void update() {
-        System.out.println("Troopmovement Running");
+        Logger.getInstance().log("Troopmovement Running", LogLevel.INFORMATION);
     }
 
     @Override
     public void run() {
-        System.out.println("Troopmovement Running");
+        Logger.getInstance().log("Troopmovement Running", LogLevel.INFORMATION);
+
     }
 }

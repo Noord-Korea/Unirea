@@ -1,12 +1,16 @@
 package com.server.tick;
 
-public class BuildingTick implements Runnable{
+import com.logging.LogLevel;
+import com.logging.Logger;
+
+public class BuildingTick implements Runnable {
     public void update() {
-        System.out.println("BuildingTick Running");
+        Logger.getInstance().log("BuildingTick Running", LogLevel.INFORMATION);
     }
 
     @Override
     public void run() {
-        System.out.println("BuildingTick Running");
+        Logger.getInstance().log("BuildingTick Running", LogLevel.INFORMATION);
+
     }
 }

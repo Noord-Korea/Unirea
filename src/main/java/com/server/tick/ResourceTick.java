@@ -2,6 +2,8 @@ package com.server.tick;
 
 import com.dbal.repository.ResourceRepository;
 import com.dbal.repository.TownRepository;
+import com.logging.LogLevel;
+import com.logging.Logger;
 import com.models.Town;
 import com.models.TownResources;
 
@@ -18,16 +20,17 @@ public class ResourceTick implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("ResourceTick Running");
+        Logger.getInstance().log("RecruitingTick Running", LogLevel.INFORMATION);
+
 
         TownRepository tmp = new TownRepository();
 
         Town town = tmp.findOne(1);
-        System.out.println("Got Town");
+        Logger.getInstance().log("Got Town", LogLevel.DEBUG);
         if(town == null){
-            System.out.println("Town is null");
+            Logger.getInstance().log("Town is null", LogLevel.DEBUG);
         }else {
-            System.out.println(town.getName());
+            Logger.getInstance().log(town.getName(), LogLevel.DEBUG);
         }
     }
 }

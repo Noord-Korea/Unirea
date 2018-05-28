@@ -15,31 +15,29 @@ public class AccountService {
 
     private static IAccountHandler handler;
 
-    public static void setHandler(IAccountHandler accountHandler){
+    public static void setHandler(IAccountHandler accountHandler) {
         handler = accountHandler;
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/login")
     public Response login(String data) {
         Gson gson = new Gson();
         Login login = gson.fromJson(data, Login.class);
         Reply reply = handler.login(login);
-        System.out.println(data);
+
 
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/register")
     public Response register(String data) {
         Gson gson = new Gson();
         Register register = gson.fromJson(data, Register.class);
-        System.out.println(data);
-        System.out.println(register.getEmail());
-        System.out.println(register.getPassword());
-        System.out.println(register.getUsername());
         Reply reply = handler.register(register);
 
 
@@ -47,7 +45,8 @@ public class AccountService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/logout")
     public Response Logout(String data) {
         Gson gson = new Gson();
@@ -58,7 +57,8 @@ public class AccountService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/changepassword")
     public Response changePassword(String data) {
         Gson gson = new Gson();
@@ -69,7 +69,8 @@ public class AccountService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/delete")
     public Response delete(String data) {
         Gson gson = new Gson();
@@ -80,7 +81,8 @@ public class AccountService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/updateaccount")
     public Response update(String data) {
         Gson gson = new Gson();
@@ -91,7 +93,8 @@ public class AccountService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/getaccount")
     public Response getAccount(String data) {
         Gson gson = new Gson();
@@ -102,7 +105,8 @@ public class AccountService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/holidayreplacement")
     public Response holidayReplacement(String data) {
         Gson gson = new Gson();

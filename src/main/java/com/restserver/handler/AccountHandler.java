@@ -25,9 +25,9 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public Reply login(Login data) {
         Player player = (Player) playerRepository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
-        if (player == null){
+        if (player == null) {
             return new Reply(Status.NOTFOUND, "Player doesn't exist");
-        } else if (!player.getEmail().equals(data.getEmail()) || !player.checkPassword(data.getPassword())){
+        } else if (!player.getEmail().equals(data.getEmail()) || !player.checkPassword(data.getPassword())) {
             return new Reply(Status.NOACCESS, "Your login credentials were incorrect");
         }
         AccessToken token = generateAccessToken(player);
@@ -38,12 +38,12 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply logout(Logout data) {
-        if (data.getToken() == null){
+        if (data.getToken() == null) {
             return new Reply(Status.NOAUTH, "Player already logged out");
         } else {
             AccessToken token = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
-            if (token == null){
-                return new Reply (Status.NOTFOUND, "Token doesn't exist");
+            if (token == null) {
+                return new Reply(Status.NOTFOUND, "Token doesn't exist");
             }
             accessTokenRepository.delete(token);
             return new Reply(Status.OK, "Player successfully logged out");
@@ -53,15 +53,15 @@ public class AccountHandler implements IAccountHandler {
     @Override
     public Reply register(Register data) {
         Player player = (Player) playerRepository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
-        if (player == null){
+        if (player == null) {
             try {
                 player = new Player(data.getUsername(), data.getEmail(), data.getPassword());
-            } catch (IllegalArgumentException e){
-                return new Reply(Status.ERROR,e.getMessage());
+            } catch (IllegalArgumentException e) {
+                return new Reply(Status.ERROR, e.getMessage());
             }
             playerRepository.save(player);
             return new Reply(Status.OK, "Successfully registered");
-        } else{
+        } else {
             return new Reply(Status.CONFLICT, "Email is already used");
         }
     }
@@ -69,14 +69,14 @@ public class AccountHandler implements IAccountHandler {
     //Todo: Maybe make an player update function as deleting and creating a player is somewhat brutal
     @Override
     public Reply changePassword(ChangePassword data) {
-        if (!(data.getNewPassword().equals(data.getVerifyPassword()))){
+        if (!(data.getNewPassword().equals(data.getVerifyPassword()))) {
             return new Reply(Status.CONFLICT, "Passwords don't match");
-        } else if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
+        } else if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
         } else {
             AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
             Player player = accessToken.getPlayer();
-            if (player == null){
+            if (player == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
             }
             playerRepository.save(player);
@@ -86,10 +86,9 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply update(UpdateAccount data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
-        }
-        else {
+        } else {
             Player player = (Player) playerRepository.findOne(PlayerSpecification.getByUsername(data.getUsername()));
             if (player == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
@@ -101,10 +100,9 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply getAccount(Account data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
-        }
-        else {
+        } else {
             Player player = (Player) playerRepository.findOne(data.getId());
             if (player == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
@@ -117,10 +115,9 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply holidayReplacement(HolidayReplacement data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
-        }
-        else {
+        } else {
             Player player = (Player) playerRepository.findOne(PlayerSpecification.getByUsername(data.getUsername()));
             if (player == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
@@ -132,12 +129,11 @@ public class AccountHandler implements IAccountHandler {
 
     @Override
     public Reply delete(Delete data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
-        }
-        else {
+        } else {
             Player player = (Player) playerRepository.findOne(PlayerSpecification.getByUsername(data.getUsername()));
-            if (player == null){
+            if (player == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
             }
             playerRepository.delete(PlayerSpecification.getByUsername(data.getUsername()));
@@ -146,7 +142,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public AccessToken generateAccessToken(Player player){
+    public AccessToken generateAccessToken(Player player) {
         return AccessTokenUtil.newToken(player, AccessTokenLevel.LOGGEDIN);
     }
 }

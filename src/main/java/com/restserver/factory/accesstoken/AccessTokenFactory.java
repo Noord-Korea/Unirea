@@ -1,5 +1,7 @@
 package com.restserver.factory.accesstoken;
 
+import com.logging.LogLevel;
+import com.logging.Logger;
 import com.models.AccessToken;
 import com.models.Player;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
@@ -15,13 +17,13 @@ public class AccessTokenFactory implements IAccessTokenFactory {
         return new AccessToken(generateUUID(), player, tokenLevel, new Date(System.currentTimeMillis()), generateExpirationDate());
     }
 
-    private String generateUUID(){
+    private String generateUUID() {
         final String uuid = UUID.randomUUID().toString().replace("-", "");
-        System.out.println("uuid = " + uuid);
+        Logger.getInstance().log("uuid = " + uuid, LogLevel.DEBUG);
         return uuid;
     }
 
-    private Date generateExpirationDate(){
+    private Date generateExpirationDate() {
         long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
         return new Date(System.currentTimeMillis() + expirationTime);
     }
