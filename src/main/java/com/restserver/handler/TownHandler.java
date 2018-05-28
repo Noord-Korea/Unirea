@@ -16,7 +16,7 @@ public class TownHandler implements ITownHandler {
     }
 
     public Reply getTown(){
-        return new Reply(Status.NotFound, "Not yet implemented");
+        return new Reply(Status.NOTFOUND, "Not yet implemented");
     }
 
     @Override

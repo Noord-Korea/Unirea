@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Status {
-    Ok(200),
-    Error(400),
-    NoAuth(401),
-    NoAccess(403),
-    NotFound(404),
-    Conflict(409);
+    OK(200),
+    ERROR(400),
+    NOAUTH(401),
+    NOACCESS(403),
+    NOTFOUND(404),
+    CONFLICT(409);
 
     private static final Map<Integer,Status> lookup
             = new HashMap<Integer,Status>();
