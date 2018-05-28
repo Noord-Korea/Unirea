@@ -1,21 +1,16 @@
 package com.restserver.utils.accesstoken;
 
 import com.dbal.repository.AccessTokenRepository;
-import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.models.AccessToken;
 import com.models.Player;
-import com.restserver.accesstoken.AccessTokenFactory;
-import com.restserver.accesstoken.IAccessTokenFactory;
+import com.restserver.factory.accesstoken.AccessTokenFactory;
+import com.restserver.factory.accesstoken.IAccessTokenFactory;
 
-public class AccessTokenUtil {
+public abstract class AccessTokenUtil {
 
     private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
     private static AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
-
-    private AccessTokenUtil() {
-
-    }
 
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
         if(accessLevel == null || accessTokenString.isEmpty()){
@@ -24,10 +19,21 @@ public class AccessTokenUtil {
 
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
-        if(accessToken == null || accessToken.isExpired()) {
+        return checkAccess(accessToken, accessLevel);
+    }
+
+    public static boolean checkAccess(AccessToken accessToken, AccessTokenLevel accessLevel){
+        if(accessLevel == null){
+            throw new IllegalArgumentException("AccessToken is null or AccessTokenLevel is null");
+        }
+
+        if(accessToken == null){
             return accessLevel == AccessTokenLevel.NOLOGIN;
         }
 
+        if(accessToken.isExpired()){
+            return accessLevel == AccessTokenLevel.NOLOGIN;
+        }
         accessToken.refresh();
         return true;
     }
