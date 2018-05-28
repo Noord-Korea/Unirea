@@ -21,7 +21,7 @@ public class TownHandler implements ITownHandler {
 
     @Override
     public Reply createTown(BaseTownRequest baseTownRequest) {
-        AccessToken accessToken = baseTownRequest.getToken();
+        String accessToken = baseTownRequest.getToken();
         return null;
     }
 }
