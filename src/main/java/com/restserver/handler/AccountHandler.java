@@ -79,8 +79,6 @@ public class AccountHandler implements IAccountHandler {
             if (player == null){
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }
-            repository.delete(PlayerSpecification.getByEmail(data.getEmail()));
-            player.setPassword(data.getNewPassword());
             repository.save(player);
             return new Reply(Status.Ok, "Password succesfully changed");
         }
@@ -96,10 +94,6 @@ public class AccountHandler implements IAccountHandler {
             if (player == null) {
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }
-            repository.delete(PlayerSpecification.getByUsername(data.getUsername()));
-            player.setPassword(data.getPassword());
-            player.setEmail(data.getEmail());
-            player.setUsername(data.getUsername());
             repository.save(player);
             return new Reply(Status.Ok, "Account successfully updated");
         }

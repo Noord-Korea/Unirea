@@ -64,9 +64,6 @@ public class AccessToken {
     }
 
     public boolean isExpired(){
-        if (expires.before(new Date())){
-            return true;
-        }
-        return false;
+        return expires.before(new Date());
     }
 }
