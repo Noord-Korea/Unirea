@@ -1,5 +1,6 @@
 package com.restserver;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.PlayerRepository;
 import com.restserver.handler.AccountHandler;
 import com.restserver.services.AccountService;
@@ -35,7 +36,7 @@ public class RestServer {
                 context.addServlet(ServletContainer.class, "/*");
         jerseyServlet.setInitOrder(0);
 
-        AccountHandler accountHandler = new AccountHandler(new PlayerRepository());
+        AccountHandler accountHandler = new AccountHandler(new PlayerRepository(), new AccessTokenRepository());
         AccountService.setHandler(accountHandler);
 
         // Tells the Jersey Servlet which REST service/class to load.
