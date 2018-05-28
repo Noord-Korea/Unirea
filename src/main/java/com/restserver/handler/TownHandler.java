@@ -16,9 +16,9 @@ public class TownHandler implements ITownHandler {
     private IRepository townRepository;
     private AccessTokenRepository accessTokenRepository;
 
-    public TownHandler(IRepository townRepository, IRepository accessTokenSpecification) {
+    public TownHandler(IRepository townRepository, IRepository accessTokenRepository) {
         this.townRepository = townRepository;
-        this.accessTokenRepository = (AccessTokenRepository) accessTokenSpecification;
+        this.accessTokenRepository = (AccessTokenRepository) accessTokenRepository;
     }
 
     public Reply getTown(){

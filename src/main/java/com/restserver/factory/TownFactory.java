@@ -8,7 +8,8 @@ public class TownFactory implements ITownFactory {
         if(player == null){
             throw new IllegalArgumentException("Player is null");
         }
-        
+
+
         return null;
     }
 }
