@@ -87,6 +87,10 @@ public class Player {
         return false;
     }
 
+    public void addTown(Town town) {
+        this.towns.add(town);
+    }
+
     public boolean checkPassword(String password) {
         return BCrypt.checkpw(password, this.passHash);
     }

@@ -1,5 +1,6 @@
 package handlertests;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.TownRepository;
 import com.restserver.handler.IAccountHandler;
 import com.restserver.handler.ITownHandler;
@@ -18,7 +19,7 @@ public class TownHandlerTest {
     public void testInitialize() {
         AbstractRepoTest.emptyTable("Town");
         townRepository = new TownRepository();
-        handler = new TownHandler(townRepository);
+        handler = new TownHandler(townRepository, new AccessTokenRepository());
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 }
