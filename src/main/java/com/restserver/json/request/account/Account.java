@@ -5,13 +5,13 @@ import com.models.AccessToken;
 public class Account extends BaseRequest{
     private String username;
     private String email;
-    private String password;
+    private int id;
 
-    public Account(AccessToken token, String username, String email, String password) {
+    public Account(AccessToken token, String username, String email, String password, int id) {
         super(token);
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -22,7 +22,7 @@ public class Account extends BaseRequest{
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public int getId() {
+        return id;
     }
 }
