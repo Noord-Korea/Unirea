@@ -61,11 +61,15 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void testLoginNullValues() {
+    public void testLoginEmailNull() {
         savePlayer();
         Login loginEmailEmpty = new Login(null, "test");
         Reply reply = handler.login(loginEmailEmpty);
         assertEquals(Status.NOTFOUND, reply.getStatus());
+    }
+
+    @Test
+    public void testLoginPasswordNull() {
         Login loginPasswordEmpty = new Login("bas@gmail.com", null);
         Reply reply1 = handler.login(loginPasswordEmpty);
         assertEquals(Status.NOACCESS, reply1.getStatus());
