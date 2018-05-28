@@ -1,15 +1,13 @@
 package com.restserver.utils.accesstoken;
 
-import com.restserver.json.response.Status;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum AccessTokenLevel {
 
-    NoLogin(0),
-    LoggedIn(1);
+    NOLOGIN(0),
+    LOGGEDIN(1);
 
     private static final Map<Integer,AccessTokenLevel> lookup
             = new HashMap<Integer,AccessTokenLevel>();

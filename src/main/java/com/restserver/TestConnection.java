@@ -3,6 +3,7 @@ package com.restserver;
 import com.google.gson.Gson;
 import com.models.Player;
 import com.restserver.json.request.account.Login;
+import com.restserver.json.request.account.Register;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -14,13 +15,13 @@ public class TestConnection {
 
         public static void main(String[] args) throws Exception {
             Gson gson = new Gson();
-            Player player = new Player("Henk","Henk@gmail.com","Henk123");
+            Register register = new Register("Henk@gmail.com","Henk123","Henk");
             String temp = "data={" +
                     "\"username\": \"admin\", " +
                     "\"first_name\": \"System\", " +
                     "\"last_name\": \"Administrator\"" +
                     "}";
-            String payload = gson.toJson(player);
+            String payload = gson.toJson(register);
             StringEntity entity = new StringEntity(payload,
                     ContentType.APPLICATION_JSON);
 
