@@ -46,7 +46,7 @@ public class AccountHandlerTest {
         savePlayer();
         Login login = new Login("bas@gmail.com", "passwd");
         Reply reply = handler.login(login);
-        assertEquals(Status.Ok, reply.getStatus());
+        assertEquals(Status.OK, reply.getStatus());
     }
 
     @Test
@@ -54,10 +54,10 @@ public class AccountHandlerTest {
         savePlayer();
         Login loginIncorrectPasswd = new Login("bas@gmail.com", "wrong");
         Reply reply = handler.login(loginIncorrectPasswd);
-        assertEquals(Status.NoAccess, reply.getStatus());
+        assertEquals(Status.NOACCESS, reply.getStatus());
         Login loginNonExistent = new Login("test@gmail.com", "test");
         reply = handler.login(loginNonExistent);
-        assertEquals(Status.NotFound, reply.getStatus());
+        assertEquals(Status.NOTFOUND, reply.getStatus());
     }
 
     @Test
@@ -65,29 +65,29 @@ public class AccountHandlerTest {
         savePlayer();
         Login loginEmailEmpty = new Login(null, "test");
         Reply reply = handler.login(loginEmailEmpty);
-        assertEquals(Status.NotFound, reply.getStatus());
+        assertEquals(Status.NOTFOUND, reply.getStatus());
         Login loginPasswordEmpty = new Login("bas@gmail.com", null);
         Reply reply1 = handler.login(loginPasswordEmpty);
-        assertEquals(Status.NoAccess, reply1.getStatus());
+        assertEquals(Status.NOACCESS, reply1.getStatus());
     }
 
     @Test
     public void testRegister() {
         Register register = new Register("bas@gmail.com", "testpass", "bas");
         Reply reply = handler.register(register);
-        assertEquals(Status.Ok, reply.getStatus());
+        assertEquals(Status.OK, reply.getStatus());
     }
 
     @Test
     public void testRegisterNullValues() {
         Register registerEmailNull = new Register(null, "testpass", "bas");
         Reply reply = handler.register(registerEmailNull);
-        assertEquals(Status.Error, reply.getStatus());
+        assertEquals(Status.ERROR, reply.getStatus());
         Register registerPasswordNull = new Register("bas@gmail.com", null, "bas");
         Reply reply1 = handler.register(registerPasswordNull);
-        assertEquals(Status.Error, reply1.getStatus());
+        assertEquals(Status.ERROR, reply1.getStatus());
         Register registerUsernameNull = new Register("bas@gmail.com", "password", null);
         Reply reply2 = handler.register(registerUsernameNull);
-        assertEquals(Status.Error, reply.getStatus());
+        assertEquals(Status.ERROR, reply.getStatus());
     }
 }
