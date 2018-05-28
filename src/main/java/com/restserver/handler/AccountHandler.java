@@ -76,7 +76,8 @@ public class AccountHandler implements IAccountHandler {
         } else if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
             return new Reply(Status.NoAccess, "Not logged in");
         } else {
-            Player player = (Player) repository.findOne(data.getId());
+            AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken().getAccessToken()));
+            Player player = accessToken.getPlayer();
             if (player == null){
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }
