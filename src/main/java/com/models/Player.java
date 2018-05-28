@@ -5,6 +5,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,9 @@ public class Player {
     @JoinColumn(name = "clan_id")
     private Clan clan;
 
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "player", fetch = FetchType.EAGER)
+    private Set<Town> towns = new HashSet<>();
+
     public Player() {
     }
 
@@ -40,6 +45,14 @@ public class Player {
             this.passHash = hashPassword(password);
         }
 
+    }
+
+    public Set<Town> getTowns() {
+        return towns;
+    }
+
+    public void setTowns(Set<Town> towns) {
+        this.towns = towns;
     }
 
     public int getId() {
