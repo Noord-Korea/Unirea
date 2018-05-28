@@ -1,5 +1,6 @@
 package handlertests;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.PlayerRepository;
 import com.models.Player;
 import com.restserver.handler.AccountHandler;
@@ -22,6 +23,7 @@ import java.util.logging.Level;
 public class AccountHandlerTest {
 
     private PlayerRepository repo;
+    private AccessTokenRepository repoToken;
     private IAccountHandler handler;
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -30,7 +32,8 @@ public class AccountHandlerTest {
     public void TestInitialize() {
         AbstractRepoTest.emptyTable("Player");
         repo = new PlayerRepository();
-        handler = new AccountHandler(repo);
+        repoToken = new AccessTokenRepository();
+        handler = new AccountHandler(repo, repoToken);
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 
