@@ -1,4 +1,4 @@
-package com.Logging;
+package com.logging;
 
 public enum LogLevel {
     DEBUG,

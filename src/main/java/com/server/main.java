@@ -1,6 +1,6 @@
 package com.server;
 
-import com.Logging.Logger;
+import com.logging.Logger;
 import com.dbal.repository.*;
 import com.models.Resource;
 import com.models.Town;
