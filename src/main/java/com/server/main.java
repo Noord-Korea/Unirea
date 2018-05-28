@@ -1,5 +1,6 @@
 package com.server;
 
+import com.Logging.Logger;
 import com.dbal.repository.*;
 import com.models.Resource;
 import com.models.Town;
@@ -16,6 +17,7 @@ import java.util.logging.Level;
 
 public class main {
     public static void main(String[] args) {
+        Logger logger = new Logger();
         //Stop the very annoying "spam" from hibernate
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         IRepository playerRepository = new PlayerRepository();
@@ -78,7 +80,7 @@ public class main {
             try {
                 TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.log(e);
             }
         }
     }
