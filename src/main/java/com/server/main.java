@@ -1,5 +1,6 @@
 package com.server;
 
+import com.logging.LogLevel;
 import com.logging.Logger;
 import com.dbal.repository.*;
 import com.models.Resource;
@@ -54,7 +55,7 @@ public class main {
         boolean running = true;
         int i = 0;
         while (running) {
-            System.out.println("Main thread");
+            logger.log("Main thread", LogLevel.DEBUG);
             running = i != 100;
 
             Town town1 = new Town();
