@@ -15,9 +15,9 @@ public class AccessTokenUtil {
 
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
         if(accessLevel == null || accessTokenString.isEmpty()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("AccessTokenString is empty or AccessTokenLevel is null");
         }
-        
+
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
         if(accessToken == null){
