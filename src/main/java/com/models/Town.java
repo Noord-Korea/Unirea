@@ -17,6 +17,10 @@ public class Town {
 
     @NotNull
     private String name;
+    @NotNull
+    private int x;
+    @NotNull
+    private int y;
 
     @OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town", fetch = FetchType.EAGER)
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
@@ -40,6 +44,22 @@ public class Town {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public Set<TownArmy> getTownArmies() {
