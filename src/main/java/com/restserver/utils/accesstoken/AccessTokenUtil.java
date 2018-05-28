@@ -20,6 +20,14 @@ public class AccessTokenUtil {
 
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
+        return checkAccess(accessToken, accessLevel);
+    }
+
+    public static boolean checkAccess(AccessToken accessToken, AccessTokenLevel accessLevel){
+        if(accessLevel == null){
+            throw new IllegalArgumentException("AccessToken is null or AccessTokenLevel is null");
+        }
+
         if(accessToken == null){
             return accessLevel == AccessTokenLevel.NoLogin;
         }
