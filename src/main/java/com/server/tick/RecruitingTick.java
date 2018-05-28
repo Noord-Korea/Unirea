@@ -1,12 +1,16 @@
 package com.server.tick;
 
+import com.logging.LogLevel;
+import com.logging.Logger;
+
 public class RecruitingTick implements Runnable{
     public void update() {
-        System.out.println("RecruitingTick Running");
+        Logger.getInstance().log("RecruitingTick Running", LogLevel.INFORMATION);
     }
 
     @Override
     public void run() {
-        System.out.println("RecruitingTick Running");
+        Logger.getInstance().log("RecruitingTick Running", LogLevel.INFORMATION);
+
     }
 }

@@ -4,8 +4,6 @@ package com.models;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
