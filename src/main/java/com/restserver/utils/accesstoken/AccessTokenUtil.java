@@ -8,7 +8,7 @@ import com.models.Player;
 import com.restserver.accesstoken.AccessTokenFactory;
 import com.restserver.accesstoken.IAccessTokenFactory;
 
-public class AccessTokenUtil {
+public abstract class AccessTokenUtil {
 
     private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
     private static AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
@@ -29,11 +29,11 @@ public class AccessTokenUtil {
         }
 
         if(accessToken == null){
-            return accessLevel == AccessTokenLevel.NoLogin;
+            return accessLevel == AccessTokenLevel.NOLOGIN;
         }
 
         if(accessToken.isExpired()){
-            return accessLevel == AccessTokenLevel.NoLogin;
+            return accessLevel == AccessTokenLevel.NOLOGIN;
         }
         accessToken.refresh();
         return true;
