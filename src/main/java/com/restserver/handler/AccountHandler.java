@@ -5,6 +5,7 @@ import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.dbal.specification.PlayerSpecification;
+import com.google.gson.Gson;
 import com.models.Player;
 import com.models.AccessToken;
 import com.restserver.accesstoken.AccessTokenFactory;
@@ -79,8 +80,6 @@ public class AccountHandler implements IAccountHandler {
             if (player == null){
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }
-            repository.delete(PlayerSpecification.getByEmail(data.getEmail()));
-            player.setPassword(data.getNewPassword());
             repository.save(player);
             return new Reply(Status.Ok, "Password succesfully changed");
         }
@@ -96,12 +95,24 @@ public class AccountHandler implements IAccountHandler {
             if (player == null) {
                 return new Reply(Status.NotFound, "Player doesnt exist");
             }
-            repository.delete(PlayerSpecification.getByUsername(data.getUsername()));
-            player.setPassword(data.getPassword());
-            player.setEmail(data.getEmail());
-            player.setUsername(data.getUsername());
             repository.save(player);
             return new Reply(Status.Ok, "Account successfully updated");
+        }
+    }
+
+    @Override
+    public Reply getAccount(Account data) {
+        if (!AccessTokenUtil.checkAccess(data.getToken().getAccessToken(),data.getToken().getAccessTokenLevel())){
+            return new Reply(Status.NoAccess, "Not logged in");
+        }
+        else {
+            Player player = (Player) repository.findOne(PlayerSpecification.getByUsername(data.getUsername()));
+            if (player == null) {
+                return new Reply(Status.NotFound, "Player doesnt exist");
+            }
+            Gson gson = new Gson();
+            String account = gson.toJson(player);
+            return new Reply(Status.Ok, account);
         }
     }
 
