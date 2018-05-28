@@ -106,10 +106,6 @@ public class Town {
     public Town() {
     }
 
-    public Town(String name) {
-        this.name = name;
-    }
-
     public Town(Player player, String name){
         Random r = new Random();
 
