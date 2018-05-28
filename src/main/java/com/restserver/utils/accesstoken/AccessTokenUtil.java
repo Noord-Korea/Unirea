@@ -13,6 +13,10 @@ public class AccessTokenUtil {
     private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
     private static AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
 
+    private AccessTokenUtil() {
+
+    }
+
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
         if(accessLevel == null || accessTokenString.isEmpty()){
             throw new IllegalArgumentException("AccessTokenString is empty or AccessTokenLevel is null");
@@ -20,13 +24,10 @@ public class AccessTokenUtil {
 
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
 
-        if(accessToken == null){
-            return accessLevel == AccessTokenLevel.NoLogin;
+        if(accessToken == null || accessToken.isExpired()) {
+            return accessLevel == AccessTokenLevel.NOLOGIN;
         }
 
-        if(accessToken.isExpired()){
-            return accessLevel == AccessTokenLevel.NoLogin;
-        }
         accessToken.refresh();
         return true;
     }
