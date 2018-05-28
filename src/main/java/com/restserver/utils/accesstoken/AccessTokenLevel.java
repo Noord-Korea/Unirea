@@ -1,6 +1,5 @@
 package com.restserver.utils.accesstoken;
 
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
