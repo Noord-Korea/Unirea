@@ -1,14 +1,11 @@
 package com.restserver.services;
 
 import com.google.gson.Gson;
-import com.restserver.handler.IAccountHandler;
 import com.restserver.handler.ITownHandler;
-import com.restserver.json.request.account.Login;
 import com.restserver.json.request.town.Town;
 import com.restserver.json.response.Reply;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;

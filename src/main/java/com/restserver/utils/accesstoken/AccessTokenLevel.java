@@ -10,7 +10,7 @@ public enum AccessTokenLevel {
     LOGGEDIN(1);
 
     private static final Map<Integer,AccessTokenLevel> lookup
-            = new HashMap<Integer,AccessTokenLevel>();
+            = new HashMap<>();
 
     static {
         for(AccessTokenLevel w : EnumSet.allOf(AccessTokenLevel.class))
@@ -19,7 +19,7 @@ public enum AccessTokenLevel {
 
     private int code;
 
-    private AccessTokenLevel(int code) {
+    AccessTokenLevel(int code) {
         this.code = code;
     }
 

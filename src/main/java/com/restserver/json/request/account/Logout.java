@@ -1,7 +1,5 @@
 package com.restserver.json.request.account;
 
-import com.models.AccessToken;
-
 public class Logout extends BaseRequest{
     private String username;
 
