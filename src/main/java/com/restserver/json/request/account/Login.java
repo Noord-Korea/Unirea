@@ -5,6 +5,9 @@ public class Login {
     private String password;
 
     public Login(String email, String password) {
+        if (email == null || password == null) {
+           throw new IllegalArgumentException();
+        }
         this.email = email.toLowerCase();
         this.password = password;
     }
