@@ -48,6 +48,9 @@ public class Player {
     }
 
     public Set<Town> getTowns() {
+        if(towns == null){
+            return new HashSet<Town>();
+        }
         return towns;
     }
 
@@ -82,6 +85,7 @@ public class Player {
     public boolean setEmail(String email) {
         if (validate(email)) {
             this.email = email;
+            email.toLowerCase();
             return true;
         }
         return false;

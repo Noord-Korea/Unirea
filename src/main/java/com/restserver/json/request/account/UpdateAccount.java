@@ -8,7 +8,7 @@ public class UpdateAccount extends BaseRequest{
     public UpdateAccount(String token, String username, String email, String password) {
         super(token);
         this.username = username;
-        this.email = email;
+        this.email = email.toLowerCase();
         this.password = password;
     }
 

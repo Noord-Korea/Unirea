@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 @Entity
@@ -50,16 +51,8 @@ public class Town {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public Set<TownArmy> getTownArmies() {
@@ -115,5 +108,12 @@ public class Town {
 
     public Town(String name) {
         this.name = name;
+    }
+
+    public Town(Player player, String name){
+        this.player = player;
+        this.name = name;
+        this.x = (int) (Math.random()*1000);
+        this.y = (int) (Math.random()*1000);
     }
 }
