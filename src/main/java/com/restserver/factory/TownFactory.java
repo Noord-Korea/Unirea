@@ -1,9 +1,14 @@
 package com.restserver.factory;
 
 import com.dbal.repository.TownRepository;
+import com.models.Building;
 import com.models.Player;
 import com.models.Town;
+import com.models.TownBuildings;
 import com.restserver.exception.PlayerHasTownException;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class TownFactory implements ITownFactory {
     private static TownRepository townRepository = new TownRepository();

@@ -2,7 +2,7 @@ package com.restserver.buildings.resource.models;
 
 import com.restserver.buildings.resource.ResourceType;
 
-public abstract class BaseResourceBuilding {
+public abstract class BaseResourceBuilding implements IResourceBuilding{
     private String name;
     private ResourceType resourceType;
     private int level;
