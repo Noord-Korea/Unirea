@@ -51,7 +51,7 @@
         <mapping class="com.models.TownResourceId"/>
         <mapping class="com.models.TownResources"/>
         <mapping class="com.models.TownBuildingId"/>
-        <mapping class="com.models.TownBuildings"/>
+        <mapping class="com.models.TownBuilding"/>
         <mapping class="com.models.BuildingQueue"/>
         <mapping class="com.models.TownArmyId"/>
         <mapping class="com.models.TownArmy"/>

@@ -27,7 +27,7 @@ public class Town {
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
-    private Set<TownBuildings> townBuildings = new HashSet<>(0);
+    private Set<TownBuilding> townBuildings = new HashSet<>(0);
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pk.town")
     private Set<BuildingQueue> buildingQueues = new HashSet<>(0);
@@ -83,13 +83,20 @@ public class Town {
         return id;
     }
 
-    public Set<TownBuildings> getTownBuildings() {
+    public Set<TownBuilding> getTownBuildings() {
         return townBuildings;
     }
 
-    public void setTownBuildings(Set<TownBuildings> townBuildings) {
+    public void setTownBuildings(Set<TownBuilding> townBuildings) {
         this.townBuildings = townBuildings;
     }
+
+    public void addTownBuilding(TownBuilding townBuilding){
+        townBuilding.setLevel(1);
+        this.townBuildings.add(townBuilding);
+    }
+
+
 
     public Set<BuildingQueue> getBuildingQueues() {
         return buildingQueues;

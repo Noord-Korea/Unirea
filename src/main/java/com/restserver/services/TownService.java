@@ -2,7 +2,7 @@ package com.restserver.services;
 
 import com.google.gson.Gson;
 import com.restserver.handler.ITownHandler;
-import com.restserver.json.request.town.Town;
+import com.restserver.json.response.town.Town;
 import com.restserver.json.response.Reply;
 
 import javax.ws.rs.Consumes;

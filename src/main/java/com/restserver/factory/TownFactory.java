@@ -4,8 +4,6 @@ import com.dbal.repository.TownRepository;
 import com.models.*;
 import com.restserver.buildings.resource.factory.IResourceBuildingFactory;
 import com.restserver.buildings.resource.factory.ResourceBuildingFactory;
-import com.restserver.buildings.resource.models.IResourceBuilding;
-import com.restserver.buildings.resource.models.IronBuilding;
 import com.restserver.exception.PlayerHasTownException;
 
 import java.util.HashSet;
@@ -25,18 +23,18 @@ public class TownFactory implements ITownFactory {
 
         Town town = new Town(player, "My first town");
 
-        Set<TownBuildings> townBuildings = new HashSet<>();
-        TownBuildings ironBuilding = new TownBuildings();
+        TownBuilding ironBuilding = new TownBuilding();
         ironBuilding.setBuilding(resourceBuildingFactory.createIronBuilding());
-        TownBuildings oilBuilding = new TownBuildings();
-        ironBuilding.setBuilding(resourceBuildingFactory.createOilBuilding());
-        TownBuildings woodBuilding = new TownBuildings();
-        ironBuilding.setBuilding(resourceBuildingFactory.createWoodBuilding());
-        townBuildings.add(ironBuilding);
-        townBuildings.add(oilBuilding);
-        townBuildings.add(woodBuilding);
+        town.addTownBuilding(ironBuilding);
 
-        town.setTownBuildings(townBuildings);
+        TownBuilding oilBuilding = new TownBuilding();
+        oilBuilding.setBuilding(resourceBuildingFactory.createOilBuilding());
+        town.addTownBuilding(oilBuilding);
+
+        TownBuilding woodBuilding = new TownBuilding();
+        woodBuilding.setBuilding(resourceBuildingFactory.createWoodBuilding());
+        town.addTownBuilding(woodBuilding);
+
         //TODO: add basic buildings
         //TODO: add resources
 
