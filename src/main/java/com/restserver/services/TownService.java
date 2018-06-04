@@ -1,10 +1,14 @@
 package com.restserver.services;
 
 import com.google.gson.Gson;
+import com.models.Player;
 import com.restserver.handler.ITownHandler;
 import com.restserver.json.request.town.BaseTownRequest;
+import com.restserver.json.response.Status;
 import com.restserver.json.response.town.Town;
 import com.restserver.json.response.Reply;
+import com.restserver.utils.accesstoken.AccessTokenLevel;
+import com.restserver.utils.accesstoken.AccessTokenUtil;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -34,9 +38,21 @@ public class TownService {
     @POST @Consumes("application/json")
     @Path("/create")
     public Response createTown(String data) {
+        Reply reply = null;
         Gson gson = new Gson();
-        BaseTownRequest town = gson.fromJson(data, BaseTownRequest.class);
-        Reply reply = handler.getTown();
+        BaseTownRequest baseTownRequest = gson.fromJson(data, BaseTownRequest.class);
+
+        if(!AccessTokenUtil.checkAccess(baseTownRequest.getToken(), AccessTokenLevel.LOGGEDIN)){
+            reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
+        }
+        if(reply == null){
+            Player player = AccessTokenUtil.getPlayerFromToken(baseTownRequest.getToken());
+            reply = handler.createTown(player);
+        }
+
+        if(reply == null){
+            reply = new Reply(Status.ERROR, "Something went wrong");
+        }
 
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();

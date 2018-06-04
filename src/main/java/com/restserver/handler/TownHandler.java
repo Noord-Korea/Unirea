@@ -29,13 +29,14 @@ public class TownHandler implements ITownHandler {
     }
 
     @Override
-    public Reply createTown(BaseTownRequest baseTownRequest) {
-        AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(baseTownRequest.getToken()));
-        if(!AccessTokenUtil.checkAccess(accessToken, AccessTokenLevel.LOGGEDIN)){
-            return new Reply(Status.NOAUTH, "Accesstoken not valid");
+    public Reply createTown(Player player) {
+        if(player == null){
+            return null;
         }
+
         try {
-            Town town = TownFactory.createTown(accessToken.getPlayer());
+            Town town = TownFactory.createTown(player);
+            //return new Reply(Status.OK, )
         } catch (PlayerHasTownException e) {
             return new Reply(Status.ERROR, e.getMessage());
         }
