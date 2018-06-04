@@ -6,7 +6,6 @@ import com.restserver.json.response.Status;
 import com.restserver.json.response.town.MapResponse;
 import com.restserver.json.response.town.TownPosition;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -21,7 +20,7 @@ public class MapService {
         handler = mapHandler;
     }
 
-    @GET @Consumes("application/json")
+    @GET
     @Path("/all")
     public Response getTowns() {
         List<TownPosition> towns = handler.getAllTowns();

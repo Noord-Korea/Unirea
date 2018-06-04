@@ -1,6 +1,5 @@
 package com.restserver.handler;
 
-import com.restserver.json.response.town.Map;
 import com.restserver.json.response.town.TownPosition;
 
 import java.util.List;
