@@ -12,7 +12,7 @@ public abstract class BaseResourceBuilding extends Building implements IResource
         this.resourceType = resourceType;
     }
 
-
+    @Override
     public String getName() {
         return name;
     }
