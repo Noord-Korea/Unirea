@@ -3,7 +3,9 @@ package com.restserver;
 import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.PlayerRepository;
 import com.restserver.handler.AccountHandler;
+import com.restserver.handler.MapHandler;
 import com.restserver.services.AccountService;
+import com.restserver.services.MapService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -39,9 +41,13 @@ public class RestServer {
         AccountHandler accountHandler = new AccountHandler(new PlayerRepository(), new AccessTokenRepository());
         AccountService.setHandler(accountHandler);
 
+        MapHandler mapHandler = new MapHandler();
+        MapService.setHandler(mapHandler);
+
         // Tells the Jersey Servlet which REST service/class to load.
-        jerseyServlet.setInitParameter("jersey.config.server.provider.classnames",
-                AccountService.class.getCanonicalName());
+        jerseyServlet.setInitParameter("jersey.config.server.provider.packages",
+                "com.restserver.services");
+
 
         try {
             jettyServer.start();
