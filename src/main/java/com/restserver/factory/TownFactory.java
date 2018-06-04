@@ -35,6 +35,7 @@ public class TownFactory implements ITownFactory {
 
         town.addTownBuilding(ironBuilding);
         ironBuilding.setTown(town);
+        ironBuilding.setLevel(1);
 
         TownBuildingId townBuildingId = new TownBuildingId();
         townBuildingId.setTown(town);
