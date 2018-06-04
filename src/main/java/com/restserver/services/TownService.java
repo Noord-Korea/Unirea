@@ -21,8 +21,19 @@ public class TownService {
     }
 
     @POST @Consumes("application/json")
-    @Path("/gettown")
+    @Path("/get")
     public Response getTown(String data) {
+        Gson gson = new Gson();
+        BaseTownRequest town = gson.fromJson(data, BaseTownRequest.class);
+        Reply reply = handler.getTown();
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
+
+    @POST @Consumes("application/json")
+    @Path("/create")
+    public Response createTown(String data) {
         Gson gson = new Gson();
         BaseTownRequest town = gson.fromJson(data, BaseTownRequest.class);
         Reply reply = handler.getTown();
