@@ -110,7 +110,7 @@ public class AccountHandler implements IAccountHandler {
             }
             Gson gson = new Gson();
             Player player = accessToken.getPlayer();
-            Info info = new Info(player.getId(),player.getUsername(),player.getEmail());
+            Info info = new Info(player.getId(), accessToken.getAccessToken(), player.getUsername(), player.getEmail());
             String account = gson.toJson(info);
             return new Reply(Status.OK, account);
         }
