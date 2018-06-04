@@ -13,14 +13,14 @@ public class ResourceBuildingFactory implements IResourceBuildingFactory {
     }
 
     public IronBuilding createIronBuilding(){
-        return new IronBuilding("Iron Mine", ResourceType.IRON, 1, 50);
+        return new IronBuilding("Iron Mine", ResourceType.IRON, 1, 30);
     }
 
     public OilBuilding createOilBuilding(){
-        return new OilBuilding("Oil Refinery", ResourceType.OIL, 1, 50);
+        return new OilBuilding("Oil Refinery", ResourceType.OIL, 1, 30);
     }
 
     public WoodBuilding createWoodBuilding(){
-        return new WoodBuilding("Wood Camp", ResourceType.WOOD, 1, 50);
+        return new WoodBuilding("Wood Camp", ResourceType.WOOD, 1, 30);
     }
 }

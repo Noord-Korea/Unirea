@@ -5,11 +5,18 @@ import com.models.AccessToken;
 public class BaseTownRequest {
     private String token;
 
-    public BaseTownRequest(String token) {
+    private int townId;
+
+    public BaseTownRequest(String token, int townId) {
+        this.townId = townId;
         this.token = token;
     }
 
     public String getToken() {
         return token;
+    }
+
+    public int getTownId() {
+        return townId;
     }
 }
