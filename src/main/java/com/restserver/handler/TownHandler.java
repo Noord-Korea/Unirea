@@ -33,7 +33,8 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            return new Reply(Status.OK, gson.toJson(town));
+            TownResponse townResponse = new TownResponse(town.getTownResources(),town.getTownBuildings(),town.getX(),town.getY());
+            return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
 
