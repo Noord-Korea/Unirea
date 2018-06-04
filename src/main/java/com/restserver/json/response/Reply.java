@@ -12,6 +12,7 @@ public class Reply {
     }
 
     public Reply(Status status, Object obj){
+        this.status = status;
         Gson gson = new Gson();
         message = gson.toJson(obj);
     }
