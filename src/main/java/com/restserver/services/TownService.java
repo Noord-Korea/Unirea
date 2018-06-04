@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.models.Player;
 import com.restserver.handler.ITownHandler;
 import com.restserver.json.request.town.BaseTownRequest;
+import com.restserver.json.request.town.PlayerId;
 import com.restserver.json.request.town.TownId;
 import com.restserver.json.response.Status;
 import com.restserver.json.response.town.Town;
@@ -36,6 +37,27 @@ public class TownService {
         }
         if(reply == null){
             reply = handler.getTown(town.getTownId());
+        }
+
+        if(reply == null){
+            reply = new Reply(Status.ERROR, "Something went wrong");
+        }
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
+    }
+
+    @POST @Consumes("application/json")
+    @Path("/all")
+    public Response getAllTownsFromPlayer(String data) {
+        Reply reply = null;
+        Gson gson = new Gson();
+        PlayerId playerId = gson.fromJson(data, PlayerId.class);
+        if(!AccessTokenUtil.checkAccess(playerId.getToken(), AccessTokenLevel.LOGGEDIN)){
+            reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
+        }
+        if(reply == null){
+            reply = handler.getTown(playerId.getPlayerId());
         }
 
         if(reply == null){
