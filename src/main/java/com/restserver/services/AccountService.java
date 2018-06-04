@@ -27,7 +27,6 @@ public class AccountService {
         Login login = gson.fromJson(data, Login.class);
         Reply reply = handler.login(login);
 
-
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
     }
@@ -98,7 +97,7 @@ public class AccountService {
     @Path("/getaccount")
     public Response getAccount(String data) {
         Gson gson = new Gson();
-        BaseRequest getAccount = gson.fromJson(data, BaseRequest.class);
+        Account getAccount = gson.fromJson(data, Account.class);
         Reply reply = handler.getAccount(getAccount);
 
         return Response.status(reply.getStatus().getCode())

@@ -100,7 +100,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public Reply getAccount(BaseRequest data) {
+    public Reply getAccount(Account data) {
         if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
         } else {

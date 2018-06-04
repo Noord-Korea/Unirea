@@ -13,7 +13,7 @@ public interface IAccountHandler {
     Reply changePassword(ChangePassword data);
 
     Reply update(UpdateAccount data);
-    Reply getAccount(BaseRequest data);
+    Reply getAccount(Account data);
 
     Reply holidayReplacement(HolidayReplacement data);
     Reply delete(Delete data);
