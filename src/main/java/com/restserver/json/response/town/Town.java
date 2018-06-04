@@ -6,7 +6,7 @@ import com.restserver.json.request.town.BaseTownRequest;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Town extends BaseTownRequest {
+public class Town {
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
     private Set<TownBuilding> townBuildings = new HashSet<>(0);
 
@@ -14,8 +14,7 @@ public class Town extends BaseTownRequest {
 
     private Set<TownArmy> townArmies = new HashSet<>(0);
 
-    public Town(String accessToken , Set<TownResources> townResources, Set<TownBuilding> townBuildings, Set<BuildingQueue> buildingQueues, Set<TownArmy> townArmies) {
-       super(accessToken);
+    public Town(Set<TownResources> townResources, Set<TownBuilding> townBuildings, Set<BuildingQueue> buildingQueues, Set<TownArmy> townArmies) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.buildingQueues = buildingQueues;
