@@ -28,11 +28,11 @@ public class TownFactory implements ITownFactory {
         town.addTownBuilding(ironBuilding);
 
         TownBuilding oilBuilding = new TownBuilding();
-        ironBuilding.setBuilding(resourceBuildingFactory.createOilBuilding());
+        oilBuilding.setBuilding(resourceBuildingFactory.createOilBuilding());
         town.addTownBuilding(oilBuilding);
 
         TownBuilding woodBuilding = new TownBuilding();
-        ironBuilding.setBuilding(resourceBuildingFactory.createWoodBuilding());
+        woodBuilding.setBuilding(resourceBuildingFactory.createWoodBuilding());
         town.addTownBuilding(woodBuilding);
 
         //TODO: add basic buildings
