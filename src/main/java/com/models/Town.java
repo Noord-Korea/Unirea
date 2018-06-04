@@ -122,7 +122,7 @@ public class Town {
 
         this.player = player;
         this.name = name;
-        this.x = r.nextInt()*1000;
-        this.y = r.nextInt()*1000;
+        this.x = r.nextInt(1000);
+        this.y = r.nextInt(1000);
     }
 }
