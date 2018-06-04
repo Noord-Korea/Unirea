@@ -76,9 +76,9 @@ public class PlayerRepoTest extends AbstractRepoTest {
 
     @Test
     public void testFindOneEmailNull() {
+        exception.expect(IllegalArgumentException.class);
         insertOneValidPlayer();
         Player player = repo.findOne(PlayerSpecification.getByEmail(null));
-        assertEquals(null, player);
     }
 
     @Test

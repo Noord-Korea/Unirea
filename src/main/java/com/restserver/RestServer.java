@@ -17,7 +17,7 @@ import java.util.logging.Level;
 
 public class RestServer {
     public static void main(String[] args) throws Exception {
-        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.ALL);
         ServletContextHandler context = new
                 ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");

@@ -62,17 +62,17 @@ public class AccountHandlerTest {
 
     @Test
     public void testLoginEmailNull() {
+        exception.expect(IllegalArgumentException.class);
         savePlayer();
         Login loginEmailEmpty = new Login(null, "test");
         Reply reply = handler.login(loginEmailEmpty);
-        assertEquals(Status.NOTFOUND, reply.getStatus());
     }
 
     @Test
     public void testLoginPasswordNull() {
+        exception.expect(IllegalArgumentException.class);
         Login loginPasswordEmpty = new Login("bas@gmail.com", null);
         Reply reply1 = handler.login(loginPasswordEmpty);
-        assertEquals(Status.NOACCESS, reply1.getStatus());
     }
 
     @Test
@@ -83,15 +83,21 @@ public class AccountHandlerTest {
     }
 
     @Test
-    public void testRegisterNullValues() {
+    public void testRegisterEmailNull() {
+        exception.expect(IllegalArgumentException.class);
         Register registerEmailNull = new Register(null, "testpass", "bas");
         Reply reply = handler.register(registerEmailNull);
-        assertEquals(Status.ERROR, reply.getStatus());
-        Register registerPasswordNull = new Register("bas@gmail.com", null, "bas");
-        Reply reply1 = handler.register(registerPasswordNull);
-        assertEquals(Status.ERROR, reply1.getStatus());
+    }
+@Test
+    public void testRegisterPasswordNull() {
+        exception.expect(IllegalArgumentException.class);
         Register registerUsernameNull = new Register("bas@gmail.com", "password", null);
         Reply reply2 = handler.register(registerUsernameNull);
-        assertEquals(Status.ERROR, reply.getStatus());
+    }
+@Test
+    public void testRegisterUsernameNull() {
+        exception.expect(IllegalArgumentException.class);
+        Register registerPasswordNull = new Register("bas@gmail.com", null, "bas");
+        Reply reply1 = handler.register(registerPasswordNull);
     }
 }

@@ -37,7 +37,7 @@
 
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">false</property>
+        <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property> <!--create or update-->
@@ -51,7 +51,7 @@
         <mapping class="com.models.TownResourceId"/>
         <mapping class="com.models.TownResources"/>
         <mapping class="com.models.TownBuildingId"/>
-        <mapping class="com.models.TownBuildings"/>
+        <mapping class="com.models.TownBuilding"/>
         <mapping class="com.models.BuildingQueue"/>
         <mapping class="com.models.TownArmyId"/>
         <mapping class="com.models.TownArmy"/>

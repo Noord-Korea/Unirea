@@ -38,6 +38,11 @@ public abstract class AccessTokenUtil {
         return true;
     }
 
+    public static Player getPlayerFromToken(String accessTokenString){
+        AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
+        return accessToken != null ? accessToken.getPlayer() : null;
+    }
+
     public static AccessToken newToken(Player player, AccessTokenLevel tokenLevel){
         return accessTokenFactory.newToken(player, tokenLevel);
     }

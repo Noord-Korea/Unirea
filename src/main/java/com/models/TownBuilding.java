@@ -12,12 +12,13 @@ import javax.persistence.*;
         @AssociationOverride(name = "pk.building",
                 joinColumns = @JoinColumn(name = "BUILDING_ID"))
 })
-public class TownBuildings {
+public class TownBuilding {
 
     private TownBuildingId pk = new TownBuildingId();
     private int level;
 
-    public TownBuildings() {
+    public TownBuilding() {
+        this.level = 1;
     }
 
     @EmbeddedId
@@ -36,6 +37,10 @@ public class TownBuildings {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void addLevel(){
+        this.level++;
     }
 
     @Transient
