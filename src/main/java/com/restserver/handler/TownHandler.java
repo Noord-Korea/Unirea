@@ -47,10 +47,9 @@ public class TownHandler implements ITownHandler {
 
         try {
             Town town = TownFactory.createTown(player);
-            //return new Reply(Status.OK, )
+            return getTown(town.getId());
         } catch (PlayerHasTownException e) {
             return new Reply(Status.ERROR, e.getMessage());
         }
-        return null;
     }
 }
