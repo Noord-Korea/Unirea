@@ -16,7 +16,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         Logger logger = new Logger();
         //Stop the very annoying "spam" from hibernate

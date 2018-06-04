@@ -7,12 +7,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import repotests.AbstractRepoTest;
-
 import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class TownRepoTest extends AbstractRepoTest {
     private TownRepository repo;
@@ -29,7 +26,9 @@ public class TownRepoTest extends AbstractRepoTest {
     }
 
     private void insertTown() {
-        town = repo.save(new Town("town"));
+        town = new Town();
+        town.setName("town");
+        town = repo.save(town);
     }
 
     @Test
