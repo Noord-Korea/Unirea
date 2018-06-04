@@ -17,9 +17,11 @@ import com.restserver.json.request.town.BaseTownRequest;
 import com.restserver.json.request.town.TownId;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
+import com.restserver.json.response.town.TownResponse;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
 import com.restserver.utils.accesstoken.AccessTokenUtil;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class TownHandler implements ITownHandler {
@@ -50,7 +52,11 @@ public class TownHandler implements ITownHandler {
         if(towns.isEmpty()){
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            return new Reply(Status.OK, gson.toJson(towns));
+            Set<TownResponse> townResponseSet = new HashSet();
+            for (Town town : towns){
+                townResponseSet.add(new TownResponse(town.getTownResources(),town.getTownBuildings(),town.getX(),town.getY()));
+            }
+            return new Reply(Status.OK, gson.toJson(townResponseSet));
         }
 
     }
