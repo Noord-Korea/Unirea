@@ -27,7 +27,6 @@ public class AccountService {
         Login login = gson.fromJson(data, Login.class);
         Reply reply = handler.login(login);
 
-
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
     }
@@ -116,4 +115,6 @@ public class AccountService {
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
     }
+
+
 }

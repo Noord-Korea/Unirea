@@ -30,61 +30,19 @@ public class TownFactory implements ITownFactory {
         }
 
         Town town = new Town(player, "My first town");
+        townRepository.save(town);
 
         //region iron
-        TownBuilding ironBuilding = new TownBuilding();
-        ironBuilding.setBuilding(resourceBuildingFactory.createIronBuilding());
-
-        town.addTownBuilding(ironBuilding);
-        ironBuilding.setTown(town);
-        ironBuilding.setLevel(1);
-
-        TownBuildingId townBuildingId = new TownBuildingId();
-        townBuildingId.setTown(town);
-        townBuildingId.setBuilding(ironBuilding.getBuilding());
-
-        buildingRepository.save(ironBuilding.getBuilding());
-        townBuildingIdRepository.save(townBuildingId);
-        townBuildingRepository.save(ironBuilding);
-
         //endregion
 
         /*
         //region oil
-        TownBuilding oilBuilding = new TownBuilding();
-        oilBuilding.setBuilding(resourceBuildingFactory.createOilBuilding());
-        town.addTownBuilding(oilBuilding);
 
-        oilBuilding.setTown(town);
-        townBuildingId = new TownBuildingId();
-        townBuildingId.setTown(town);
-        townBuildingId.setBuilding(oilBuilding.getBuilding());
-
-        buildingRepository.save(oilBuilding.getBuilding());
-        townBuildingIdRepository.save(townBuildingId);
-        townBuildingRepository.save(oilBuilding);
-        //endregion
-
-        //region wood
-        TownBuilding woodBuilding = new TownBuilding();
-        woodBuilding.setBuilding(resourceBuildingFactory.createWoodBuilding());
-        town.addTownBuilding(woodBuilding);
-
-        woodBuilding.setTown(town);
-
-        townBuildingId = new TownBuildingId();
-        townBuildingId.setTown(town);
-        townBuildingId.setBuilding(woodBuilding.getBuilding());
-
-        buildingRepository.save(woodBuilding.getBuilding());
-        townBuildingIdRepository.save(townBuildingId);
-        townBuildingRepository.save(woodBuilding);
         //endregion
         */
         //TODO: add basic buildings
         //TODO: add resources
 
-        townRepository.save(town);
         return town;
     }
 }

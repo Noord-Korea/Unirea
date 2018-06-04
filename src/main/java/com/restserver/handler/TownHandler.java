@@ -4,22 +4,14 @@ package com.restserver.handler;
 import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
-import com.dbal.specification.AccessTokenSpecification;
-import com.dbal.specification.PlayerSpecification;
-import com.dbal.specification.TownSpecification;
 import com.google.gson.Gson;
-import com.models.AccessToken;
 import com.models.Player;
 import com.models.Town;
 import com.restserver.exception.PlayerHasTownException;
 import com.restserver.factory.TownFactory;
-import com.restserver.json.request.town.BaseTownRequest;
-import com.restserver.json.request.town.TownId;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 import com.restserver.json.response.town.TownResponse;
-import com.restserver.utils.accesstoken.AccessTokenLevel;
-import com.restserver.utils.accesstoken.AccessTokenUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +33,8 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            return new Reply(Status.OK, gson.toJson(town));
+            TownResponse townResponse = new TownResponse(town.getTownResources(),town.getTownBuildings(),town.getX(),town.getY());
+            return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
 
@@ -62,7 +55,7 @@ public class TownHandler implements ITownHandler {
 
     @Override
     public Reply getTownsByPlayerId(int playerId) {
-        Player player = (Player) playerRepository.findOne(playerId);
+        Player player = playerRepository.findOne(playerId);
         return getTownsByPlayer(player);
     }
 

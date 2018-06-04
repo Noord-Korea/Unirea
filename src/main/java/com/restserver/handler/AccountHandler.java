@@ -10,6 +10,7 @@ import com.models.AccessToken;
 import com.restserver.json.request.account.*;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
+import com.restserver.json.response.account.Info;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
 import com.restserver.utils.accesstoken.AccessTokenUtil;
 
@@ -103,12 +104,14 @@ public class AccountHandler implements IAccountHandler {
         if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
         } else {
-            Player player = (Player) playerRepository.findOne(data.getId());
-            if (player == null) {
+            AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
+            if (accessToken == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
             }
             Gson gson = new Gson();
-            String account = gson.toJson(player);
+            Player player = accessToken.getPlayer();
+            Info info = new Info(player.getId(), accessToken.getAccessToken(), player.getUsername(), player.getEmail());
+            String account = gson.toJson(info);
             return new Reply(Status.OK, account);
         }
     }
