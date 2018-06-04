@@ -1,62 +1,88 @@
 package com.server;
 
-import com.dbal.repository.PlayerRepository;
-import com.dbal.specification.PlayerSpecification;
-import com.models.Player;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import com.logging.LogLevel;
+import com.logging.Logger;
+import com.dbal.repository.*;
+import com.models.Resource;
+import com.models.Town;
+import com.models.TownResources;
+import com.server.tick.BuildingTick;
+import com.server.tick.RecruitingTick;
+import com.server.tick.ResourceTick;
+import com.server.tick.TroopMovement;
 
-import java.text.MessageFormat;
-import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class main {
     public static void main(String[] args) {
+        Logger logger = new Logger();
         //Stop the very annoying "spam" from hibernate
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+        IRepository playerRepository = new PlayerRepository();
+        IRepository clanRepository = new ClanRepository();
 
-        /*final Configuration configuration = new Configuration().configure();
-        final StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-        final SessionFactory factory = configuration.buildSessionFactory(builder.build());
-        final Session session = factory.openSession();
+        IRepository townRepository = new TownRepository();
+        IRepository resourceRepository = new ResourceRepository();
 
+        Runnable building = new BuildingTick();
+        Runnable recruiting = new RecruitingTick();
+        Runnable resourceTick = new ResourceTick();
+        Runnable troopMovement = new TroopMovement();
 
-        //region addPlayer
-        final Player player = new Player("Azho", "bramkempen@gmail.com", "test123");
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);
 
-        session.beginTransaction();
-        session.save(player);
-        session.getTransaction().commit();
-        //endregion
-
-        //region list of players
-        final List<Player> playerList = session.createCriteria(Player.class).list();
-        System.out.println("\n----\n");
-        System.out.println(MessageFormat.format("Storing {0} players in the database", playerList.size()));
-        for (final Player p : playerList) {
-            System.out.println(p);
-        }
-        System.out.println("\n----\n");
-        //endregion
-
-        //Close session
-        session.close();
-        factory.close();*/
+        exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
 
 
-        Player player = new Player("Azho", "bramkempen@gmail.com", "test123");
-        PlayerRepository playerRepository = new PlayerRepository();
-        playerRepository.save(player);
+        Resource resource1 = new Resource();
+        resource1.setName("Hout");
+        resourceRepository.save(resource1);
 
-        player = playerRepository.findOne(10);
-        player.setUsername("Wauw");
-        playerRepository.save(player);
+        Resource resource2 = new Resource();
+        resource2.setName("Banaan");
+        resourceRepository.save(resource2);
 
-        List<Player> players = playerRepository.findAll(PlayerSpecification.getByEmail("bramkempen@gmail.com"));
-        for (Player row: players) {
-            System.out.println(row.getId() + " " + row.getUsername());
+        Town town10 = new Town();
+        town10.setName("Town");
+        townRepository.save(town10);
+
+        boolean running = true;
+        int i = 0;
+        while (running) {
+            logger.log("Main thread", LogLevel.DEBUG);
+            running = i != 100;
+
+            Town town1 = new Town();
+            town1.setName("Bram");
+            townRepository.save(town1);
+
+            TownResources townResources1 = new TownResources();
+            townResources1.setTown(town1);
+            townResources1.setResource(resource1);
+            townResources1.setValue(10);
+
+            TownResources townResources2 = new TownResources();
+            townResources2.setTown(town1);
+            townResources2.setResource(resource2);
+            townResources2.setValue(12);
+
+            town1.addTownResource(townResources1);
+            town1.addTownResource(townResources2);
+            townRepository.save(town1);
+
+
+            i++;
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                logger.log(e);
+            }
         }
     }
 }

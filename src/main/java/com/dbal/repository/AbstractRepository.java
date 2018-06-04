@@ -7,7 +7,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.annotations.Sort;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
@@ -15,28 +14,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class AbstractRepository<T, ID extends Serializable> {
+public abstract class AbstractRepository<T, Id extends Serializable> implements IRepository<T, Id> {
 
-    public abstract Class<T> getDomainClass();
+    private static String entityNull = "Entity can't be null";
 
+    @Override
     public Session openSession(){
         return HibernateUtil.getSessionFactory().openSession();
+        //return threadSafeSession.get();
     }
 
-    public void delete(ID id) throws RuntimeException {
+    private static ThreadLocal<Session> threadSafeSession = new ThreadLocal<Session>() {
+        @Override
+        protected Session initialValue(){
+            return HibernateUtil.getSessionFactory().openSession();
+        }
+    };
+
+
+
+    @Override
+    public void delete(Id id) {
 
         T entity = findOne(id);
 
         if(entity == null){
-            return;
+            throw new IllegalArgumentException(entityNull);
         }
 
         delete(entity);
     }
 
+    @Override
     public void delete(T entity) {
         if(entity == null){
-            return;
+            throw new IllegalArgumentException(entityNull);
         }
 
         Session session = openSession();
@@ -48,17 +60,19 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
-            tx.rollback();
+            if(tx != null)
+                tx.rollback();
         } finally {
             session.close();
         }
 
     }
 
+    @Override
     public void delete(Iterable<? extends T> entities) {
 
         if(entities == null){
-            return;
+            throw new IllegalArgumentException("Entities can't be null");
         }
 
         Session session = openSession();
@@ -66,12 +80,13 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
 
         try {
             tx = session.beginTransaction();
-            entities.forEach(entity -> session.delete(entity));
+            entities.forEach(session::delete);
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
             try {
-                tx.rollback();
+                if(tx != null)
+                    tx.rollback();
             } catch (HibernateException he) {
                 Util.logException(he);
             }
@@ -80,8 +95,9 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         }
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public T findOne(ID id) {
+    public T findOne(Id id) {
 
         Class<T> classType = getDomainClass();
         T entity = null;
@@ -95,7 +111,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
-            tx.rollback();
+            if(tx != null)
+                tx.rollback();
         } finally {
             session.close();
         }
@@ -103,6 +120,7 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         return entity;
     }
 
+    @Override
     public T findOne(Specifiable spec) {
 
         Session session = openSession();
@@ -126,18 +144,20 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         return null;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
         return findAll(null);
     }
 
+    @Override
     public List<T> findAll(Specifiable spec) {
         Session session = openSession();
 
         Class<T> classType = getDomainClass();
         Criteria criteria = session.createCriteria(classType);
         if(spec != null) {
-            criteria = buildCriteria(criteria, spec);
+            //criteria = buildCriteria(criteria, spec);
         }
 
         List<T> entities;
@@ -151,13 +171,14 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             session.close();
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
+    @Override
     public <S extends T> S save(S entity) {
 
         if(entity == null){
-            return null;
+            throw new IllegalArgumentException(entityNull);
         }
 
         Session session = openSession();
@@ -170,7 +191,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
             return entity;
         } catch (RuntimeException e) {
             Util.logException(e);
-            tx.rollback();
+            if(tx != null)
+                tx.rollback();
         } finally {
             session.close();
         }
@@ -178,11 +200,12 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         return null;
     }
 
+    @Override
     @Transactional
     public <S extends T> List<S> save(Iterable<S> entities) {
 
         if(entities == null){
-            return null;
+            throw new IllegalArgumentException("Entities can't be null");
         }
 
         List<S> result = new ArrayList<S>();
@@ -201,7 +224,8 @@ public abstract class AbstractRepository<T, ID extends Serializable> {
         } catch (RuntimeException e) {
             Util.logException(e);
             try {
-                tx.rollback();
+                if(tx != null)
+                    tx.rollback();
             } catch (HibernateException he) {
                 Util.logException(he);
             }
