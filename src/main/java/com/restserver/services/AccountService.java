@@ -98,7 +98,7 @@ public class AccountService {
     @Path("/getaccount")
     public Response getAccount(String data) {
         Gson gson = new Gson();
-        Account getAccount = gson.fromJson(data, Account.class);
+        BaseRequest getAccount = gson.fromJson(data, BaseRequest.class);
         Reply reply = handler.getAccount(getAccount);
 
         return Response.status(reply.getStatus().getCode())
@@ -116,4 +116,6 @@ public class AccountService {
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();
     }
+
+
 }
