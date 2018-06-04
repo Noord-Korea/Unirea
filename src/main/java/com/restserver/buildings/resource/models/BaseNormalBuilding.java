@@ -6,10 +6,6 @@ public abstract class BaseNormalBuilding extends Building {
     private String name;
     private int level;
 
-    public BaseNormalBuilding(){
-
-    }
-
     public int getLevel() {
         return level;
     }
