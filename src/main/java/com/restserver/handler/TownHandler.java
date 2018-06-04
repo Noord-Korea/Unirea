@@ -34,35 +34,35 @@ public class TownHandler implements ITownHandler {
     }
 
     @Override
-    public Reply getTown(int townId){
+    public Reply getTown(int townId) {
         Town town = (Town) townRepository.findOne(townId);
-        if(town == null){
+        if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
             return new Reply(Status.OK, gson.toJson(town));
         }
-        
     }
 
     @Override
-    public Reply getTownsByPlayer(Player player){
+    public Reply getTownsByPlayer(Player player) {
         Set<Town> towns = player.getTowns();
-        if(towns.isEmpty()){
+        if (towns.isEmpty()) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
             return new Reply(Status.OK, gson.toJson(towns));
         }
 
     }
+
     @Override
-    public Reply getTownsByPlayerId(int playerId){
+    public Reply getTownsByPlayerId(int playerId) {
         Player player = (Player) playerRepository.findOne(playerId);
         return getTownsByPlayer(player);
     }
 
     @Override
     public Reply createTown(Player player) {
-        if(player == null){
+        if (player == null) {
             return null;
         }
 
@@ -72,5 +72,6 @@ public class TownHandler implements ITownHandler {
         } catch (PlayerHasTownException e) {
             return new Reply(Status.ERROR, e.getMessage());
         }
+
     }
 }
