@@ -49,7 +49,7 @@ public class Player {
 
     public Set<Town> getTowns() {
         if(towns == null){
-            return new HashSet<Town>();
+            return new HashSet<>();
         }
         return towns;
     }
@@ -84,8 +84,8 @@ public class Player {
 
     public boolean setEmail(String email) {
         if (validate(email)) {
+            email = email.toLowerCase();
             this.email = email;
-            email.toLowerCase();
             return true;
         }
         return false;
