@@ -1,19 +1,18 @@
 package com.restserver.json.response.town;
 
 import com.models.*;
-import com.restserver.json.request.town.BaseTownRequest;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Town {
+public class TownResponse {
     private int x;
     private int y;
 
     private Set<TownResources> townResources = new HashSet<TownResources>(0);
     private Set<TownBuilding> townBuildings = new HashSet<>(0);
 
-    public Town(Set<TownResources> townResources, Set<TownBuilding> townBuildings, int x, int y) {
+    public TownResponse(Set<TownResources> townResources, Set<TownBuilding> townBuildings, int x, int y) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.x = x;
