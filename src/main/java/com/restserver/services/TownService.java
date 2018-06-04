@@ -28,9 +28,19 @@ public class TownService {
     @POST @Consumes("application/json")
     @Path("/get")
     public Response getTown(String data) {
+        Reply reply = null;
         Gson gson = new Gson();
         TownId town = gson.fromJson(data, TownId.class);
-        Reply reply = handler.getTown(town);
+        if(!AccessTokenUtil.checkAccess(town.getToken(), AccessTokenLevel.LOGGEDIN)){
+            reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
+        }
+        if(reply == null){
+            reply = handler.getTown(town.getTownId());
+        }
+
+        if(reply == null){
+            reply = new Reply(Status.ERROR, "Something went wrong");
+        }
 
         return Response.status(reply.getStatus().getCode())
                 .entity(reply.getMessage()).build();

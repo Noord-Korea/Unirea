@@ -6,6 +6,6 @@ import com.restserver.json.request.town.TownId;
 import com.restserver.json.response.Reply;
 
 public interface ITownHandler {
-    Reply getTown(TownId data);
+    Reply getTown(int townId);
     Reply createTown(Player player);
 }

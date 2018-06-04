@@ -29,12 +29,8 @@ public class TownHandler implements ITownHandler {
     }
 
     @Override
-    public Reply getTown(TownId data){
-        AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
-        if(!AccessTokenUtil.checkAccess(accessToken, AccessTokenLevel.LOGGEDIN)){
-            return new Reply(Status.NOAUTH, "Accesstoken not valid");
-        }
-        Town town = (Town) townRepository.findOne(data.getTownId());
+    public Reply getTown(int townId){
+        Town town = (Town) townRepository.findOne(townId);
         if(town == null){
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
