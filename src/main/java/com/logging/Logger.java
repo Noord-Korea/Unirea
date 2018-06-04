@@ -1,6 +1,7 @@
 package com.logging;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Logger implements ILogger {
 
@@ -27,13 +28,13 @@ public class Logger implements ILogger {
 
     public LogMessage getLastLog()
     {
-        if(messages.size() > 0)
+        if(messages.isEmpty())
             return messages.get(messages.size() -1);
         else
             return new LogMessage("", LogLevel.DEBUG);
     }
 
-    public ArrayList<LogMessage> getMessages()
+    public List<LogMessage> getMessages()
     {
         return messages;
     }
