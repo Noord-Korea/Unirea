@@ -1,12 +1,12 @@
 package com.logging;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ILogger {
 
     void log(String message, LogLevel logLevel);
     void log(Exception ex);
     LogMessage getLastLog();
-    ArrayList<LogMessage> getMessages();
+    List<LogMessage> getMessages();
 
 }
