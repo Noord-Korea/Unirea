@@ -9,21 +9,23 @@ import com.restserver.buildings.resource.factory.IResourceBuildingFactory;
 import com.restserver.buildings.resource.factory.ResourceBuildingFactory;
 import com.restserver.exception.PlayerHasTownException;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class TownFactory implements ITownFactory {
+
     private static TownRepository townRepository = new TownRepository();
     private static TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
     private static BuildingRepository buildingRepository = new BuildingRepository();
     private static TownBuildingIdRepository townBuildingIdRepository = new TownBuildingIdRepository();
     private static IResourceBuildingFactory resourceBuildingFactory = new ResourceBuildingFactory();
 
+    private TownFactory() {
+
+    }
+
     public static Town createTown(Player player) throws PlayerHasTownException {
         if(player == null){
             throw new IllegalArgumentException("Player is null");
         }
-        if(player.getTowns().size() != 0){
+        if(!player.getTowns().isEmpty()){
             throw new PlayerHasTownException();
         }
 
@@ -35,6 +37,7 @@ public class TownFactory implements ITownFactory {
 
         town.addTownBuilding(ironBuilding);
         ironBuilding.setTown(town);
+        ironBuilding.setLevel(1);
 
         TownBuildingId townBuildingId = new TownBuildingId();
         townBuildingId.setTown(town);

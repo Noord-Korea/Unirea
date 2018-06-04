@@ -12,6 +12,10 @@ public abstract class AccessTokenUtil {
     private static IAccessTokenFactory accessTokenFactory = new AccessTokenFactory();
     private static AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
 
+    private AccessTokenUtil() {
+
+    }
+
     public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
         if(accessLevel == null || accessTokenString.isEmpty()){
             throw new IllegalArgumentException("AccessTokenString is empty or AccessTokenLevel is null");
