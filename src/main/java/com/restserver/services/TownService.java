@@ -2,6 +2,7 @@ package com.restserver.services;
 
 import com.google.gson.Gson;
 import com.restserver.handler.ITownHandler;
+import com.restserver.json.request.town.BaseTownRequest;
 import com.restserver.json.response.town.Town;
 import com.restserver.json.response.Reply;
 
@@ -23,7 +24,7 @@ public class TownService {
     @Path("/gettown")
     public Response getTown(String data) {
         Gson gson = new Gson();
-        Town town = gson.fromJson(data, Town.class);
+        BaseTownRequest town = gson.fromJson(data, BaseTownRequest.class);
         Reply reply = handler.getTown();
 
         return Response.status(reply.getStatus().getCode())
