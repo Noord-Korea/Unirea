@@ -55,7 +55,7 @@ public class TownHandler implements ITownHandler {
 
     @Override
     public Reply getTownsByPlayerId(int playerId) {
-        Player player = (Player) playerRepository.findOne(playerId);
+        Player player = playerRepository.findOne(playerId);
         return getTownsByPlayer(player);
     }
 
