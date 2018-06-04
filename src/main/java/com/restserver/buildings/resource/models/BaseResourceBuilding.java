@@ -16,7 +16,7 @@ public abstract class BaseResourceBuilding extends Building implements IResource
         this.resourceProduction = resourceProduction;
     }
 
-
+    @Override
     public String getName() {
         return name;
     }
