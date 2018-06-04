@@ -57,7 +57,7 @@ public class TownService {
             reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
         if(reply == null){
-            reply = handler.getTown(playerId.getPlayerId());
+            reply = handler.getTownsByPlayerId(playerId.getPlayerId());
         }
 
         if(reply == null){
