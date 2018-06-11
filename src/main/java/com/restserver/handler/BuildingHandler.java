@@ -77,10 +77,16 @@ public class BuildingHandler {
             if(townBuilding.getBuilding().getId() == buildingId){
                 building.setName(townBuilding.getBuilding().getName());
                 building.setBuildingLevel(townBuilding.getLevel());
+                building.setResourceProduction(calculateResourceProduction(townBuilding.getLevel()));
                 building.setResourceType(resourceType);
             }
         }
         return building;
+    }
+
+    private int calculateResourceProduction(int buildingLevel){
+        int production = 30 * buildingLevel;
+        return (int) Math.pow(production, 1.5);
     }
 
 
