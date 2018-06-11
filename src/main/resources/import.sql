@@ -8,3 +8,6 @@ INSERT into Building (BUILDING_ID, name) VALUES (7, 'Training grounds') ON DUPLI
 INSERT into Building (BUILDING_ID, name) VALUES (8, 'Foundry') ON DUPLICATE KEY UPDATE name = 'Foundry';
 INSERT into Building (BUILDING_ID, name) VALUES (9, 'Ammunition Depot') ON DUPLICATE KEY UPDATE name = 'Ammunition Depot';
 INSERT into Building (BUILDING_ID, name) VALUES (10, 'Wall') ON DUPLICATE KEY UPDATE name =  'Wall';
+INSERT into Resource (RESOURCE_ID, name) VALUES (1, 'Oil') ON DUPLICATE KEY UPDATE name = 'Oil';
+INSERT into Resource (RESOURCE_ID, name) VALUES (2, 'Iron') ON DUPLICATE KEY UPDATE name = 'Iron';
+INSERT into Resource (RESOURCE_ID, name) VALUES (3, 'Wood') ON DUPLICATE KEY UPDATE name = 'Wood';
