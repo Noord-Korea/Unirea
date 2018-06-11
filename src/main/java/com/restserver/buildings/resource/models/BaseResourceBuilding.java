@@ -6,6 +6,7 @@ import com.restserver.buildings.resource.ResourceType;
 public abstract class BaseResourceBuilding extends Building implements IResourceBuilding{
     private String name;
     private ResourceType resourceType;
+    private int buildingLevel;
 
     public BaseResourceBuilding(String name, ResourceType resourceType) {
         this.name = name;
@@ -19,5 +20,17 @@ public abstract class BaseResourceBuilding extends Building implements IResource
 
     public ResourceType getResourceType() {
         return resourceType;
+    }
+
+    public int getBuildingLevel() {
+        return buildingLevel;
+    }
+
+    public void setBuildingLevel(int buildingLevel) {
+        this.buildingLevel = buildingLevel;
+    }
+
+    public void setResourceType(ResourceType resourceType) {
+        this.resourceType = resourceType;
     }
 }
