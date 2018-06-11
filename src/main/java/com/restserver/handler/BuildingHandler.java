@@ -59,25 +59,25 @@ public class BuildingHandler {
             //OIL
             case 1:
                 OilBuilding oilBuilding = new OilBuilding();
-                return constructResourceBuilding(townBuildings, oilBuilding);
+                return constructResourceBuilding(townBuildings, oilBuilding, buildingId, ResourceType.OIL);
             //IRON
             case 2:
                 IronBuilding ironBuilding = new IronBuilding();
-                return constructResourceBuilding(townBuildings, ironBuilding);
+                return constructResourceBuilding(townBuildings, ironBuilding, buildingId, ResourceType.IRON);
             //WOOD
             case 3:
                 WoodBuilding woodBuilding = new WoodBuilding();
-                return constructResourceBuilding(townBuildings, woodBuilding);
+                return constructResourceBuilding(townBuildings, woodBuilding, buildingId, ResourceType.WOOD);
         }
         return null;
     }
 
-    private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building) {
+    private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, ResourceType resourceType) {
         for (TownBuilding townBuilding : townBuildings){
-            if(townBuilding.getBuilding().getId() == 3){
+            if(townBuilding.getBuilding().getId() == buildingId){
                 building.setName(townBuilding.getBuilding().getName());
                 building.setBuildingLevel(townBuilding.getLevel());
-                building.setResourceType(ResourceType.WOOD);
+                building.setResourceType(resourceType);
             }
         }
         return building;
