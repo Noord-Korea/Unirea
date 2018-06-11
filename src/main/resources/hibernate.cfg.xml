@@ -28,7 +28,7 @@
         </property>
 
         <property name = "hibernate.connection.username">
-            bram
+            Unirea
         </property>
 
         <property name = "hibernate.connection.password">
