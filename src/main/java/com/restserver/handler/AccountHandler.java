@@ -31,6 +31,10 @@ public class AccountHandler implements IAccountHandler {
         } else if (!player.getEmail().equals(data.getEmail()) || !player.checkPassword(data.getPassword())) {
             return new Reply(Status.NOACCESS, "Your login credentials were incorrect");
         }
+        AccessToken temp = accessTokenRepository.findOne(AccessTokenSpecification.getByPlayerId(player.getId()));
+        if(!(temp == null)){
+            return new Reply(Status.CONFLICT, "Accesstoken already exists");
+        }
         AccessToken token = generateAccessToken(player);
         accessTokenRepository.save(token);
         return new Reply(Status.OK, token.getAccessToken());
