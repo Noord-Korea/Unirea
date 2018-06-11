@@ -10,6 +10,10 @@ public abstract class Util {
 
     private static final Logger LOGGER = Logger.getLogger(Util.class.getName());
 
+    private Util() {
+
+    }
+
     public static void logInfo(final Object obj) {
         lazyPrint(obj);
     }

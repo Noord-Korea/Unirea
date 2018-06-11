@@ -1,7 +1,5 @@
 package com.restserver.json.request.town;
 
-import com.models.AccessToken;
-
 public class BaseTownRequest {
     private String token;
 

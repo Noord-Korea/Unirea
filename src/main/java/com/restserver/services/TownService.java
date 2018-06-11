@@ -7,7 +7,6 @@ import com.restserver.json.request.town.BaseTownRequest;
 import com.restserver.json.request.town.PlayerId;
 import com.restserver.json.request.town.TownId;
 import com.restserver.json.response.Status;
-import com.restserver.json.response.town.TownResponse;
 import com.restserver.json.response.Reply;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
 import com.restserver.utils.accesstoken.AccessTokenUtil;

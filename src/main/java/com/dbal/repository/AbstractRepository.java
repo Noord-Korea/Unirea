@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -21,7 +22,6 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
     @Override
     public Session openSession(){
         return HibernateUtil.getSessionFactory().openSession();
-        //return threadSafeSession.get();
     }
 
     private static ThreadLocal<Session> threadSafeSession = new ThreadLocal<Session>() {
@@ -208,7 +208,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
             throw new IllegalArgumentException("Entities can't be null");
         }
 
-        List<S> result = new ArrayList<S>();
+        List<S> result = new ArrayList<>();
 
         Session session = openSession();
         Transaction tx = null;
@@ -233,7 +233,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
             session.close();
         }
 
-        return null;
+        return Collections.emptyList();
     }
 
     private Criteria buildCriteria(Criteria criteria, Specifiable spec) {

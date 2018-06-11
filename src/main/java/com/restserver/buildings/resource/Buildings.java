@@ -10,7 +10,7 @@ public enum Buildings {
     WOOD(3);
 
     private static final Map<Integer,Buildings> lookup
-            = new HashMap<Integer,Buildings>();
+            = new HashMap<>();
 
     static {
         for(Buildings w : EnumSet.allOf(Buildings.class))

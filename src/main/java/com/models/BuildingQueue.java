@@ -17,9 +17,6 @@ public class BuildingQueue {
     private int value;
     private Date date;
 
-    public BuildingQueue() {
-    }
-
     @EmbeddedId
     public TownBuildingId getPk() {
         return pk;
