@@ -1,15 +1,15 @@
 package com.models;
 
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Embeddable
 public class TownBuildingId implements Serializable {
-    private Town town;
-    private Building building;
+    private transient Town town;
+    private transient Building building;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "town_id")
     public Town getTown() {
         return town;
     }
@@ -18,7 +18,8 @@ public class TownBuildingId implements Serializable {
         this.town = town;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_id")
     public Building getBuilding() {
         return building;
     }
