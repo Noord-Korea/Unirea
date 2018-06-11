@@ -24,11 +24,11 @@
         <!-- Assume test is the database name -->
 
         <property name = "hibernate.connection.url">
-            jdbc:mysql://77.164.24.110:3306/Unirea
+            jdbc:mysql://77.164.24.110:3306/Snake
         </property>
 
         <property name = "hibernate.connection.username">
-            Unirea
+            bram
         </property>
 
         <property name = "hibernate.connection.password">
@@ -37,27 +37,12 @@
 
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
+        <property name="show_sql">false</property>
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property> <!--create or update-->
 
         <!-- The mapping information of entities -->
-        <mapping class="com.models.Player"/>
-        <mapping class="com.models.Clan"/>
-        <mapping class="com.models.Resource"/>
-        <mapping class="com.models.Town"/>
-        <mapping class="com.models.Building"/>
-        <mapping class="com.models.TownResourceId"/>
-        <mapping class="com.models.TownResources"/>
-        <mapping class="com.models.TownBuildingId"/>
-        <mapping class="com.models.TownBuilding"/>
-        <mapping class="com.models.BuildingQueue"/>
-        <mapping class="com.models.TownArmyId"/>
-        <mapping class="com.models.TownArmy"/>
-        <mapping class="com.models.Army"/>
-        <mapping class="com.models.ArmyCategory"/>
-        <mapping class="com.models.AccessToken"/>
 
 
 

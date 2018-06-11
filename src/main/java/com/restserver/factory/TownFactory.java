@@ -32,6 +32,8 @@ public class TownFactory implements ITownFactory {
         Town town = new Town(player, "My first town");
         townRepository.save(town);
 
+
+
         //region iron
         //endregion
 
