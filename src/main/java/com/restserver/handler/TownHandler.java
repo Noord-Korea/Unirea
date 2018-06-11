@@ -1,11 +1,8 @@
 package com.restserver.handler;
 
-
-import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.repository.TownRepository;
-import com.dbal.specification.TownSpecification;
 import com.google.gson.Gson;
 import com.models.Player;
 import com.models.Town;
@@ -20,19 +17,16 @@ import java.util.Set;
 
 public class TownHandler implements ITownHandler {
     private TownRepository townRepository;
-    private AccessTokenRepository accessTokenRepository;
     private PlayerRepository playerRepository = new PlayerRepository();
     private Gson gson = new Gson();
 
-    public TownHandler(IRepository townRepository, IRepository accessTokenRepository) {
+    public TownHandler(IRepository townRepository) {
         this.townRepository = (TownRepository) townRepository;
-        this.accessTokenRepository = (AccessTokenRepository) accessTokenRepository;
     }
 
     @Override
     public Reply getTown(int townId) {
         Town town = townRepository.findOne(townId);
-        System.out.println("FOUND ONE");
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {

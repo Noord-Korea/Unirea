@@ -13,7 +13,7 @@ public enum Status {
     CONFLICT(409);
 
     private static final Map<Integer,Status> lookup
-            = new HashMap<Integer,Status>();
+            = new HashMap<>();
 
     static {
         for(Status w : EnumSet.allOf(Status.class))

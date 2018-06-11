@@ -2,14 +2,14 @@ package com.restserver.json.request.town;
 
 public class TownId extends BaseTownRequest {
 
-    private int townId;
+    private int id;
 
-    public TownId(String token, int townId) {
+    public TownId(String token, int id) {
         super(token);
-        this.townId = townId;
+        this.id = id;
     }
 
     public int getTownId() {
-        return townId;
+        return id;
     }
 }

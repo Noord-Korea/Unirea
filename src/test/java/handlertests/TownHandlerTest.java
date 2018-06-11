@@ -28,7 +28,7 @@ public class TownHandlerTest {
     public void testInitialize() {
         AbstractRepoTest.emptyTable("Town");
         townRepository = new TownRepository();
-        handler = new TownHandler(townRepository, new AccessTokenRepository());
+        handler = new TownHandler(townRepository);
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 

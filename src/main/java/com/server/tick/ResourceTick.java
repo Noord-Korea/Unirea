@@ -4,11 +4,8 @@ import com.dbal.repository.ResourceRepository;
 import com.dbal.repository.TownRepository;
 import com.logging.LogLevel;
 import com.logging.Logger;
-import com.models.Building;
 import com.models.Town;
-import com.models.TownResources;
 import com.restserver.buildings.resource.Buildings;
-import com.restserver.buildings.resource.models.IResourceBuilding;
 import com.restserver.buildings.resource.models.OilBuilding;
 import com.restserver.handler.BuildingHandler;
 
@@ -28,7 +25,7 @@ public class ResourceTick implements Runnable{
         Logger.getInstance().log("RecruitingTick Running", LogLevel.INFORMATION);
 
         BuildingHandler buildingHandler = new BuildingHandler();
-        TownRepository townRepository = new TownRepository();
+        townRepository = new TownRepository();
 
         List<Town> towns = townRepository.findAll();
 

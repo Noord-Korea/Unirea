@@ -1,6 +1,5 @@
 package com.dbal.specification;
 
-import com.models.Player;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 

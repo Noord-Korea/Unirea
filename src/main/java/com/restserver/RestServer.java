@@ -47,7 +47,7 @@ public class RestServer {
         MapHandler mapHandler = new MapHandler();
         MapService.setHandler(mapHandler);
 
-        TownHandler townHandler = new TownHandler(new TownRepository(),new AccessTokenRepository());
+        TownHandler townHandler = new TownHandler(new TownRepository());
         TownService.setHandler(townHandler);
 
         // Tells the Jersey Servlet which REST service/class to load.

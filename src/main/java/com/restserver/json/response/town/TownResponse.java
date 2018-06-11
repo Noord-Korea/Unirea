@@ -9,7 +9,7 @@ public class TownResponse {
     private int x;
     private int y;
 
-    private Set<TownResources> townResources = new HashSet<TownResources>(0);
+    private Set<TownResources> townResources = new HashSet<>(0);
     private Set<TownBuilding> townBuildings = new HashSet<>(0);
 
     public TownResponse(Set<TownResources> townResources, Set<TownBuilding> townBuildings, int x, int y) {

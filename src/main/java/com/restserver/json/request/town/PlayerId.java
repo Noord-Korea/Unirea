@@ -2,14 +2,14 @@ package com.restserver.json.request.town;
 
 public class PlayerId extends BaseTownRequest {
 
-    private int playerId;
+    private int id;
 
-    public PlayerId(String token, int playerId) {
+    public PlayerId(String token, int id) {
         super(token);
-        this.playerId = playerId;
+        this.id = id;
     }
 
     public int getPlayerId() {
-        return playerId;
+        return id;
     }
 }
