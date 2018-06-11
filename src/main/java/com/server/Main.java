@@ -39,44 +39,11 @@ public class Main {
         exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
 
-
-        Resource resource1 = new Resource();
-        resource1.setName("Hout");
-        resourceRepository.save(resource1);
-
-        Resource resource2 = new Resource();
-        resource2.setName("Banaan");
-        resourceRepository.save(resource2);
-
-        Town town10 = new Town();
-        town10.setName("Town");
-        townRepository.save(town10);
-
         boolean running = true;
         int i = 0;
         while (running) {
             logger.log("Main thread", LogLevel.DEBUG);
             running = i != 100;
-
-            Town town1 = new Town();
-            town1.setName("Bram");
-            townRepository.save(town1);
-
-            TownResources townResources1 = new TownResources();
-            townResources1.setTown(town1);
-            townResources1.setResource(resource1);
-            townResources1.setValue(10);
-
-            TownResources townResources2 = new TownResources();
-            townResources2.setTown(town1);
-            townResources2.setResource(resource2);
-            townResources2.setValue(12);
-
-            town1.addTownResource(townResources1);
-            town1.addTownResource(townResources2);
-            townRepository.save(town1);
-
-
             i++;
             try {
                 TimeUnit.SECONDS.sleep(2);
