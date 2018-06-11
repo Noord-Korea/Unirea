@@ -7,6 +7,7 @@ import com.dbal.repository.TownRepository;
 import com.models.*;
 import com.restserver.buildings.resource.factory.IResourceBuildingFactory;
 import com.restserver.buildings.resource.factory.ResourceBuildingFactory;
+import com.restserver.buildings.resource.models.IronBuilding;
 import com.restserver.exception.PlayerHasTownException;
 
 public class TownFactory implements ITownFactory {
@@ -31,6 +32,10 @@ public class TownFactory implements ITownFactory {
 
         Town town = new Town(player, "My first town");
         townRepository.save(town);
+        //TownBuilding ironBuilding = new TownBuilding();
+        //ironBuilding.setBuilding(resourceBuildingFactory.createIronBuilding());
+        //ironBuilding.setLevel(1);
+        //town.addTownBuilding(ironBuilding);
 
 
 
