@@ -65,14 +65,14 @@ public class AccountHandlerTest {
         exception.expect(IllegalArgumentException.class);
         savePlayer();
         Login loginEmailEmpty = new Login(null, "test");
-        Reply reply = handler.login(loginEmailEmpty);
+        handler.login(loginEmailEmpty);
     }
 
     @Test
     public void testLoginPasswordNull() {
         exception.expect(IllegalArgumentException.class);
         Login loginPasswordEmpty = new Login("bas@gmail.com", null);
-        Reply reply1 = handler.login(loginPasswordEmpty);
+        handler.login(loginPasswordEmpty);
     }
 
     @Test
@@ -83,21 +83,35 @@ public class AccountHandlerTest {
     }
 
     @Test
+    public void testRegisterEmailDuplicate() {
+        Register register = new Register("test@gmail.com", "testpass", "bas");
+        Reply reply = handler.register(register);
+        assertEquals(Status.OK, reply.getStatus());
+        register = new Register("test@gmail.com", "testpass", "test");
+        reply = handler.register(register);
+        assertEquals(Status.CONFLICT, reply.getStatus());
+
+    }
+
+
+    @Test
     public void testRegisterEmailNull() {
         exception.expect(IllegalArgumentException.class);
         Register registerEmailNull = new Register(null, "testpass", "bas");
-        Reply reply = handler.register(registerEmailNull);
+        handler.register(registerEmailNull);
     }
-@Test
+
+    @Test
     public void testRegisterPasswordNull() {
         exception.expect(IllegalArgumentException.class);
         Register registerUsernameNull = new Register("bas@gmail.com", "password", null);
-        Reply reply2 = handler.register(registerUsernameNull);
+        handler.register(registerUsernameNull);
     }
-@Test
+
+    @Test
     public void testRegisterUsernameNull() {
         exception.expect(IllegalArgumentException.class);
         Register registerPasswordNull = new Register("bas@gmail.com", null, "bas");
-        Reply reply1 = handler.register(registerPasswordNull);
+        handler.register(registerPasswordNull);
     }
 }
