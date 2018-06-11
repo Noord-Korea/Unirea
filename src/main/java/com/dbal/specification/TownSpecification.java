@@ -18,4 +18,14 @@ public abstract class TownSpecification {
             }
         };
     }
+
+    public static Specifiable getById(int id) {
+
+        return new AbstractSpecification() {
+            @Override
+            public Criterion toCriterion() {
+                return Restrictions.eq("id", id);
+            }
+        };
+    }
 }
