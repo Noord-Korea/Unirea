@@ -4,13 +4,11 @@ import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.dbal.specification.PlayerSpecification;
-import com.dbal.specification.Specifiable;
 import com.models.AccessToken;
 import com.models.Player;
 import com.restserver.handler.AccountHandler;
 import com.restserver.handler.IAccountHandler;
 import com.restserver.json.request.account.Login;
-import com.restserver.json.request.account.Logout;
 import com.restserver.json.request.account.Register;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
@@ -19,9 +17,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import repotests.AbstractRepoTest;
-import sun.text.normalizer.ReplaceableUCharacterIterator;
 
-import javax.swing.table.AbstractTableModel;
 import java.util.logging.Level;
 
 import static org.junit.Assert.*;
