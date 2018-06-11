@@ -60,7 +60,7 @@ public class AccountHandler implements IAccountHandler {
         Player player = (Player) playerRepository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null) {
             try {
-                player = new Player(data.getUsername(), data.getEmail(), data.getPassword());
+                player = new Player(data.getUsername(), data.getEmail().toLowerCase(), data.getPassword());
             } catch (IllegalArgumentException e) {
                 return new Reply(Status.ERROR, e.getMessage());
             }
