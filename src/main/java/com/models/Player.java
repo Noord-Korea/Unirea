@@ -19,6 +19,7 @@ public class Player {
     @NotNull
     private String username;
     @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     private String passHash;
