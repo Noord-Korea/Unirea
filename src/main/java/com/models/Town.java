@@ -2,8 +2,9 @@ package com.models;
 
 import com.restserver.buildings.resource.ResourceType;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -23,16 +24,16 @@ public class Town {
     @NotNull
     private int y;
 
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town")
     private Set<TownResources> townResources = new HashSet<>(0);
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town")
     private Set<TownBuilding> townBuildings = new HashSet<>(0);
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town")
     private Set<BuildingQueue> buildingQueues = new HashSet<>(0);
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
+    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town")
     private Set<TownArmy> townArmies = new HashSet<>(0);
 
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
@@ -91,23 +92,23 @@ public class Town {
         this.townBuildings = townBuildings;
     }
 
-    public void addTownBuilding(TownBuilding townBuilding) {
+    public void addTownBuilding(TownBuilding townBuilding){
         townBuilding.setLevel(1);
         this.townBuildings.add(townBuilding);
     }
 
-    public void addResource(Resource resource, int amount) {
+    public void addResource(Resource resource, int amount){
         for (TownResources townResource : townResources) {
-            if (townResource.getResource().getId() == resource.getId()) {
+            if(townResource.getResource().getId() == resource.getId()){
                 townResource.addResource(amount);
             }
         }
     }
 
-    public void addResource(ResourceType resourceType, int amount) {
+    public void addResource(ResourceType resourceType, int amount){
         Resource resource = null;
         for (TownResources townResource : townResources) {
-            if (townResource.getResource().getName().equalsIgnoreCase(String.valueOf(resourceType))) {
+            if(townResource.getResource().getName().equalsIgnoreCase(String.valueOf(resourceType))){
                 addResource(townResource.getResource(), amount);
             }
         }
@@ -128,7 +129,7 @@ public class Town {
     public Town() {
     }
 
-    public Town(Player player, String name) {
+    public Town(Player player, String name){
         Random r = new Random();
 
         this.player = player;
