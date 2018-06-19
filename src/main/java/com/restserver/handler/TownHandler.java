@@ -30,7 +30,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(town.getTownResources(),town.getTownBuildings(),town.getX(),town.getY());
+            TownResponse townResponse = new TownResponse(town.getTownResources(), town.getTownBuildings(), town.getX(), town.getY());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -42,8 +42,8 @@ public class TownHandler implements ITownHandler {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
             Set<TownResponse> townResponseSet = new HashSet();
-            for (Town town : towns){
-                townResponseSet.add(new TownResponse(town.getTownResources(),town.getTownBuildings(),town.getX(),town.getY()));
+            for (Town town : towns) {
+                townResponseSet.add(new TownResponse(town.getTownResources(), town.getTownBuildings(), town.getX(), town.getY()));
             }
             return new Reply(Status.OK, gson.toJson(townResponseSet));
         }

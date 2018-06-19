@@ -4,7 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class Util {
 
@@ -22,7 +23,7 @@ public abstract class Util {
         lazyPrint(obj);
     }
 
-    private static void lazyPrint(final Object obj){
+    private static void lazyPrint(final Object obj) {
         LOGGER.log(Level.SEVERE, () -> String.format("%s", obj));
     }
 

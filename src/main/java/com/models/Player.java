@@ -49,7 +49,7 @@ public class Player {
     }
 
     public Set<Town> getTowns() {
-        if(towns == null){
+        if (towns == null) {
             return new HashSet<>();
         }
         return towns;

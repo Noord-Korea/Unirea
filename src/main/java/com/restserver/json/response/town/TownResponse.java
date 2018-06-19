@@ -1,6 +1,7 @@
 package com.restserver.json.response.town;
 
-import com.models.*;
+import com.models.TownBuilding;
+import com.models.TownResources;
 
 import java.util.HashSet;
 import java.util.Set;

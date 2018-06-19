@@ -12,11 +12,11 @@ public enum Status {
     NOTFOUND(404),
     CONFLICT(409);
 
-    private static final Map<Integer,Status> lookup
+    private static final Map<Integer, Status> lookup
             = new HashMap<>();
 
     static {
-        for(Status w : EnumSet.allOf(Status.class))
+        for (Status w : EnumSet.allOf(Status.class))
             lookup.put(w.getCode(), w);
     }
 
@@ -26,7 +26,9 @@ public enum Status {
         this.code = code;
     }
 
-    public int getCode() { return code; }
+    public int getCode() {
+        return code;
+    }
 
     public static Status get(int code) {
         return lookup.get(code);

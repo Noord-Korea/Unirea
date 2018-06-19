@@ -16,7 +16,7 @@ public class MapService {
 
     private static IMapHandler handler;
 
-    public static void setHandler(IMapHandler mapHandler){
+    public static void setHandler(IMapHandler mapHandler) {
         handler = mapHandler;
     }
 

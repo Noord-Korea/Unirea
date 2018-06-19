@@ -1,6 +1,7 @@
 package com.models;
 
 import com.restserver.utils.accesstoken.AccessTokenLevel;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -56,12 +57,12 @@ public class AccessToken {
         return accessTokenLevel;
     }
 
-    public void refresh(){
+    public void refresh() {
         long expirationTime = TimeUnit.MILLISECONDS.convert(20, TimeUnit.MINUTES);
         this.expires = new Date(System.currentTimeMillis() + expirationTime);
     }
 
-    public boolean isExpired(){
+    public boolean isExpired() {
         return expires.before(new Date());
     }
 }

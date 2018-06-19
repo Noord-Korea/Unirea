@@ -6,6 +6,7 @@ import com.dbal.repository.TownRepository;
 import com.models.Building;
 import com.models.Town;
 import com.models.TownBuilding;
+import com.restserver.buildings.resource.Buildings;
 import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.models.*;
 
@@ -17,14 +18,14 @@ public class BuildingHandler {
     private BuildingRepository buildingRepository = new BuildingRepository();
     private TownRepository townRepository = new TownRepository();
 
-    public Building getNormalTownBuildings(int townId, int buildingId){
+    public Building getNormalTownBuildings(int townId, int buildingId) {
         Town town = townRepository.findOne(townId);
-        if (town == null){
+        if (town == null) {
             return null;
         }
         Set<TownBuilding> townBuildings = town.getTownBuildings();
 
-        switch (buildingId){
+        switch (buildingId) {
             case 4:
                 HeadquartersBuilding headquartersBuilding = new HeadquartersBuilding("Headquarters");
                 return constructNormalTownBuilding(townBuildings, headquartersBuilding, buildingId);
@@ -56,34 +57,34 @@ public class BuildingHandler {
                 return null;
         }
     }
-    
-    public Building getResourceBuilding(int townId, int buildingId){
-        
+
+    public Building getResourceBuilding(int townId, int buildingId) {
+
         Town town = townRepository.findOne(townId);
-        if (town == null){
+        if (town == null) {
             return null;
         }
         Set<TownBuilding> townBuildings = town.getTownBuildings();
-        
-        switch (buildingId){
+
+        switch (buildingId) {
             //OIL
             case 1:
                 OilBuilding oilBuilding = new OilBuilding();
-                return constructResourceBuilding(townBuildings, oilBuilding, buildingId, ResourceType.OIL);
+                return constructResourceBuilding(townBuildings, oilBuilding, buildingId, Buildings.OIL.getCode());
             //IRON
             case 2:
                 IronBuilding ironBuilding = new IronBuilding();
-                return constructResourceBuilding(townBuildings, ironBuilding, buildingId, ResourceType.IRON);
+                return constructResourceBuilding(townBuildings, ironBuilding, buildingId, Buildings.IRON.getCode());
             //WOOD
             case 3:
                 WoodBuilding woodBuilding = new WoodBuilding();
-                return constructResourceBuilding(townBuildings, woodBuilding, buildingId, ResourceType.WOOD);
+                return constructResourceBuilding(townBuildings, woodBuilding, buildingId, Buildings.WOOD.getCode());
             default:
                 return null;
         }
     }
 
-    private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, ResourceType resourceType) {
+    private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, int resourceType) {
         for (TownBuilding townBuilding : townBuildings){
             if(townBuilding.getBuilding().getId() == buildingId){
                 building.setName(townBuilding.getBuilding().getName());
@@ -96,8 +97,8 @@ public class BuildingHandler {
     }
 
     private Building constructNormalTownBuilding(Set<TownBuilding> townBuildings, BaseNormalBuilding building, int buildingId) {
-        for (TownBuilding townBuilding : townBuildings){
-            if(townBuilding.getBuilding().getId() == buildingId){
+        for (TownBuilding townBuilding : townBuildings) {
+            if (townBuilding.getBuilding().getId() == buildingId) {
                 building.setName(townBuilding.getBuilding().getName());
                 building.setBuildingLevel(townBuilding.getLevel());
             }
@@ -105,7 +106,7 @@ public class BuildingHandler {
         return building;
     }
 
-    private int calculateResourceProduction(int buildingLevel){
+    private int calculateResourceProduction(int buildingLevel) {
         int production = 30 * buildingLevel;
         return (int) Math.pow(production, 1.5);
     }

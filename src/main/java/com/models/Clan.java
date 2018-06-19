@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="Clan")
+@Table(name = "Clan")
 public class Clan {
 
     @Id
@@ -21,7 +21,7 @@ public class Clan {
         this.name = name;
     }
 
-    @OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "clan", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "clan", fetch = FetchType.EAGER)
     private Set<Player> players = new HashSet<>();
 
     public Set<Player> getPlayers() {
@@ -35,7 +35,7 @@ public class Clan {
         }
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         player.setClan(this);
         this.players.add(player);
     }

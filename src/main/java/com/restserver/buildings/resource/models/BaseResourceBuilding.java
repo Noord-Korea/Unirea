@@ -1,15 +1,17 @@
 package com.restserver.buildings.resource.models;
 
 import com.models.Building;
+import com.restserver.buildings.resource.Buildings;
 import com.restserver.buildings.resource.ResourceType;
 
-public abstract class BaseResourceBuilding extends Building implements IResourceBuilding{
+public abstract class BaseResourceBuilding extends Building implements IResourceBuilding {
     private String name;
-    private ResourceType resourceType;
+    private int resourceType;
     private int buildingLevel;
     private int resourceProduction;
 
-    BaseResourceBuilding(String name, ResourceType resourceType) {
+
+    BaseResourceBuilding(String name, int resourceType) {
         this.name = name;
         this.resourceType = resourceType;
     }
@@ -19,7 +21,7 @@ public abstract class BaseResourceBuilding extends Building implements IResource
         return name;
     }
 
-    public ResourceType getResourceType() {
+    public int getResourceType() {
         return resourceType;
     }
 
@@ -31,7 +33,7 @@ public abstract class BaseResourceBuilding extends Building implements IResource
         this.buildingLevel = buildingLevel;
     }
 
-    public void setResourceType(ResourceType resourceType) {
+    public void setResourceType(int resourceType) {
         this.resourceType = resourceType;
     }
 

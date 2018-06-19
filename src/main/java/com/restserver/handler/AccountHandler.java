@@ -5,8 +5,8 @@ import com.dbal.repository.IRepository;
 import com.dbal.specification.AccessTokenSpecification;
 import com.dbal.specification.PlayerSpecification;
 import com.google.gson.Gson;
-import com.models.Player;
 import com.models.AccessToken;
+import com.models.Player;
 import com.restserver.json.request.account.*;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
@@ -32,7 +32,7 @@ public class AccountHandler implements IAccountHandler {
             return new Reply(Status.NOACCESS, "Your login credentials were incorrect");
         }
         AccessToken temp = accessTokenRepository.findOne(AccessTokenSpecification.getByPlayerId(player.getId()));
-        if(temp != null) {
+        if (temp != null) {
             return new Reply(Status.CONFLICT, "Accesstoken already exists");
         }
         AccessToken token = generateAccessToken(player);

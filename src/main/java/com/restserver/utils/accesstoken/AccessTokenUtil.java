@@ -16,8 +16,8 @@ public abstract class AccessTokenUtil {
 
     }
 
-    public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel){
-        if(accessLevel == null || accessTokenString.isEmpty()){
+    public static boolean checkAccess(String accessTokenString, AccessTokenLevel accessLevel) {
+        if (accessLevel == null || accessTokenString.isEmpty()) {
             throw new IllegalArgumentException("AccessTokenString is empty or AccessTokenLevel is null");
         }
 
@@ -26,28 +26,28 @@ public abstract class AccessTokenUtil {
         return checkAccess(accessToken, accessLevel);
     }
 
-    public static boolean checkAccess(AccessToken accessToken, AccessTokenLevel accessLevel){
-        if(accessLevel == null){
+    public static boolean checkAccess(AccessToken accessToken, AccessTokenLevel accessLevel) {
+        if (accessLevel == null) {
             throw new IllegalArgumentException("AccessToken is null or AccessTokenLevel is null");
         }
 
-        if(accessToken == null){
+        if (accessToken == null) {
             return accessLevel == AccessTokenLevel.NOLOGIN;
         }
 
-        if(accessToken.isExpired()){
+        if (accessToken.isExpired()) {
             return accessLevel == AccessTokenLevel.NOLOGIN;
         }
         accessToken.refresh();
         return true;
     }
 
-    public static Player getPlayerFromToken(String accessTokenString){
+    public static Player getPlayerFromToken(String accessTokenString) {
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(accessTokenString));
         return accessToken != null ? accessToken.getPlayer() : null;
     }
 
-    public static AccessToken newToken(Player player, AccessTokenLevel tokenLevel){
+    public static AccessToken newToken(Player player, AccessTokenLevel tokenLevel) {
         return accessTokenFactory.newToken(player, tokenLevel);
     }
 }
