@@ -5,10 +5,6 @@ import java.io.Serializable;
 
 @Embeddable
 public class TownResourceId implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    
     private Town town;
     private Resource resource;
 
