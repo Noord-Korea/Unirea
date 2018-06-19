@@ -23,9 +23,6 @@ public class Army {
     @JoinColumn(name = "armycategory_id")
     private ArmyCategory armyCategory;
 
-    public Army() {
-    }
-
     public ArmyCategory getArmyCategory() {
         return armyCategory;
     }

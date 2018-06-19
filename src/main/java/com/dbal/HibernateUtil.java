@@ -1,5 +1,6 @@
 package com.dbal;
 
+import com.logging.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,7 +52,7 @@ public class HibernateUtil {
             return configuration.buildSessionFactory(standardServiceRegistry);
         }
         catch (HibernateException ex) {
-            System.err.println("Session factory initialization failed. " + ex.getMessage());
+            Logger.getInstance().log(ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
