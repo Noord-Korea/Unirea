@@ -5,7 +5,7 @@ import com.dbal.repository.TownRepository;
 import com.logging.LogLevel;
 import com.logging.Logger;
 import com.models.Town;
-import com.restserver.buildings.resource.Buildings;
+import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.models.OilBuilding;
 import com.restserver.handler.BuildingHandler;
 
@@ -31,7 +31,7 @@ public class ResourceTick implements Runnable {
 
         for (int i = 0; i < towns.size(); i++) {
             Town town = towns.get(i);
-            OilBuilding building = (OilBuilding) buildingHandler.getResourceBuilding(town.getId(), Buildings.OIL.getCode());
+            OilBuilding building = (OilBuilding) buildingHandler.getResourceBuilding(town.getId(), ResourceType.OIL.getCode());
             int production = building.getResourceProduction();
             //town.addResource(building.);
             //building.getResourceProduction();

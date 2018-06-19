@@ -6,7 +6,6 @@ import com.dbal.repository.TownRepository;
 import com.models.Building;
 import com.models.Town;
 import com.models.TownBuilding;
-import com.restserver.buildings.resource.Buildings;
 import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.models.*;
 
@@ -70,15 +69,15 @@ public class BuildingHandler {
             //OIL
             case 1:
                 OilBuilding oilBuilding = new OilBuilding();
-                return constructResourceBuilding(townBuildings, oilBuilding, buildingId, Buildings.OIL.getCode());
+                return constructResourceBuilding(townBuildings, oilBuilding, buildingId, ResourceType.OIL.getCode());
             //IRON
             case 2:
                 IronBuilding ironBuilding = new IronBuilding();
-                return constructResourceBuilding(townBuildings, ironBuilding, buildingId, Buildings.IRON.getCode());
+                return constructResourceBuilding(townBuildings, ironBuilding, buildingId, ResourceType.IRON.getCode());
             //WOOD
             case 3:
                 WoodBuilding woodBuilding = new WoodBuilding();
-                return constructResourceBuilding(townBuildings, woodBuilding, buildingId, Buildings.WOOD.getCode());
+                return constructResourceBuilding(townBuildings, woodBuilding, buildingId, ResourceType.WOOD.getCode());
             default:
                 return null;
         }

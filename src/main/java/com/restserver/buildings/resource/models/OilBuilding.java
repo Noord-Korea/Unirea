@@ -4,6 +4,6 @@ import com.restserver.buildings.resource.ResourceType;
 
 public class OilBuilding extends BaseResourceBuilding {
     public OilBuilding() {
-        super("Oil Refinery", ResourceType.OIL);
+        super("Oil Refinery", ResourceType.OIL.getCode());
     }
 }
