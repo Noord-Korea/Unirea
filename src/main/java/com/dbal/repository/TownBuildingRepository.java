@@ -1,6 +1,5 @@
 package com.dbal.repository;
 
-import com.models.Town;
 import com.models.TownBuilding;
 
 public class TownBuildingRepository extends AbstractRepository<TownBuilding, Integer> {

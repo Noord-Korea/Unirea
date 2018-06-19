@@ -24,7 +24,7 @@ public class Town {
     private int y;
 
     @OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town", fetch = FetchType.EAGER)
-    private Set<TownResources> townResources = new HashSet<TownResources>(0);
+    private Set<TownResources> townResources = new HashSet<>(0);
 
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "pk.town")
     private Set<TownBuilding> townBuildings = new HashSet<>(0);
@@ -118,7 +118,7 @@ public class Town {
 
         this.player = player;
         this.name = name;
-        this.x = r.nextInt(1000);
-        this.y = r.nextInt(1000);
+        this.x = r.nextInt(50);
+        this.y = r.nextInt(50);
     }
 }

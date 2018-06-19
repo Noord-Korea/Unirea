@@ -32,7 +32,7 @@ public class AccountHandler implements IAccountHandler {
             return new Reply(Status.NOACCESS, "Your login credentials were incorrect");
         }
         AccessToken temp = accessTokenRepository.findOne(AccessTokenSpecification.getByPlayerId(player.getId()));
-        if(!(temp == null)){
+        if(temp != null) {
             return new Reply(Status.CONFLICT, "Accesstoken already exists");
         }
         AccessToken token = generateAccessToken(player);
@@ -60,7 +60,7 @@ public class AccountHandler implements IAccountHandler {
         Player player = (Player) playerRepository.findOne(PlayerSpecification.getByEmail(data.getEmail()));
         if (player == null) {
             try {
-                player = new Player(data.getUsername(), data.getEmail(), data.getPassword());
+                player = new Player(data.getUsername(), data.getEmail().toLowerCase(), data.getPassword());
             } catch (IllegalArgumentException e) {
                 return new Reply(Status.ERROR, e.getMessage());
             }
@@ -79,7 +79,7 @@ public class AccountHandler implements IAccountHandler {
         } else if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
             return new Reply(Status.NOACCESS, "Not logged in");
         } else {
-            AccessToken accessToken = (AccessToken) accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
+            AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
             Player player = accessToken.getPlayer();
             if (player == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
@@ -114,7 +114,7 @@ public class AccountHandler implements IAccountHandler {
             }
             Gson gson = new Gson();
             Player player = accessToken.getPlayer();
-            Info info = new Info(player.getId(), accessToken.getAccessToken(), player.getUsername(), player.getEmail());
+            Info info = new Info(player.getId(), player.getUsername(), player.getEmail());
             String account = gson.toJson(info);
             return new Reply(Status.OK, account);
         }

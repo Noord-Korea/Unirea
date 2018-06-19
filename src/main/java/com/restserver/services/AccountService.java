@@ -47,7 +47,7 @@ public class AccountService {
     @POST
     @Consumes("application/json")
     @Path("/logout")
-    public Response Logout(String data) {
+    public Response logout(String data) {
         Gson gson = new Gson();
         Logout logout = gson.fromJson(data, Logout.class);
         Reply reply = handler.logout(logout);

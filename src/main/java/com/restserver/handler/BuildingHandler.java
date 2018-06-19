@@ -43,8 +43,9 @@ public class BuildingHandler {
             //WALL
             case 10:
                 return null;
+            default:
+                return null;
         }
-        return null;
     }
     
     public Building getResourceBuilding(int townId, int buildingId){
@@ -68,8 +69,9 @@ public class BuildingHandler {
             case 3:
                 WoodBuilding woodBuilding = new WoodBuilding();
                 return constructResourceBuilding(townBuildings, woodBuilding, buildingId, ResourceType.WOOD);
+            default:
+                return null;
         }
-        return null;
     }
 
     private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, ResourceType resourceType) {

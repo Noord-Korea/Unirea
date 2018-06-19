@@ -36,8 +36,9 @@ public class ResourceBuildingFactory implements IResourceBuildingFactory {
             //WOOD
             case 3:
                 return new WoodBuilding();
+            default:
+                return null;
         }
-        return null;
     }
 
     @Override

@@ -2,6 +2,9 @@ package handlertests;
 
 import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.PlayerRepository;
+import com.dbal.specification.AccessTokenSpecification;
+import com.dbal.specification.PlayerSpecification;
+import com.models.AccessToken;
 import com.models.Player;
 import com.restserver.handler.AccountHandler;
 import com.restserver.handler.IAccountHandler;
@@ -15,10 +18,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import repotests.AbstractRepoTest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 import java.util.logging.Level;
+
+import static org.junit.Assert.*;
 
 public class AccountHandlerTest {
 
@@ -31,6 +33,7 @@ public class AccountHandlerTest {
     @Before
     public void TestInitialize() {
         AbstractRepoTest.emptyTable("Player");
+        AbstractRepoTest.emptyTable("AccessToken");
         repo = new PlayerRepository();
         repoToken = new AccessTokenRepository();
         handler = new AccountHandler(repo, repoToken);
@@ -84,14 +87,37 @@ public class AccountHandlerTest {
 
     @Test
     public void testRegisterEmailDuplicate() {
-        Register register = new Register("test@gmail.com", "testpass", "bas");
+        Register register = new Register("stan-martens12@hotmail.com", "testpass", "bas");
         Reply reply = handler.register(register);
         assertEquals(Status.OK, reply.getStatus());
-        register = new Register("test@gmail.com", "testpass", "test");
+        register = new Register("stan-martens12@hotmail.com", "testpass", "test");
         reply = handler.register(register);
         assertEquals(Status.CONFLICT, reply.getStatus());
-
     }
+
+    @Test
+    public void testAccessToken() {
+        Register register = new Register("test@gmail.com", "testpass", "test");
+        Reply reply = handler.register(register);
+        assertEquals(Status.OK, reply.getStatus());
+        Login login = new Login("test@gmail.com", "testpass");
+        reply = handler.login(login);
+        assertEquals(Status.OK, reply.getStatus());
+        AccessToken token = repoToken.findOne(AccessTokenSpecification.getByAccessToken(reply.getMessage()));
+        assertNotNull(token);
+    }
+    @Test
+    public void testAccessTokenByPlayer(){
+        Register register = new Register("test@gmail.com", "testpass", "test");
+        Reply reply = handler.register(register);
+        assertEquals(Status.OK, reply.getStatus());
+        Login login = new Login("test@gmail.com", "testpass");
+        reply = handler.login(login);
+        assertEquals(Status.OK, reply.getStatus());
+        AccessToken token = repoToken.findOne(AccessTokenSpecification.getByPlayerId(repo.findOne(PlayerSpecification.getByEmail("test@gmail.com")).getId()));
+        assertNotNull(token);
+    }
+
 
 
     @Test

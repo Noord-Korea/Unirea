@@ -1,6 +1,5 @@
 package com.dbal.specification;
 
-import com.models.Player;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
@@ -22,7 +21,7 @@ public abstract class AccessTokenSpecification {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("player_id", playerId);
+                return Restrictions.eq("player", playerId);
             }
         };
     }

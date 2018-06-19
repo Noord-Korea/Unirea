@@ -14,9 +14,6 @@ public class TownResources {
     private TownResourceId pk = new TownResourceId();
     private int value;
 
-    public TownResources() {
-    }
-
     @EmbeddedId
     public TownResourceId getPk() {
         return pk;
