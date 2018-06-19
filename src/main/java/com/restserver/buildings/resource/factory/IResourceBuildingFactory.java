@@ -8,11 +8,15 @@ import com.restserver.buildings.resource.models.WoodBuilding;
 
 public interface IResourceBuildingFactory {
     IResourceBuilding createBuilding();
+
     IronBuilding createIronBuilding();
+
     OilBuilding createOilBuilding();
+
     WoodBuilding createWoodBuilding();
 
     IResourceBuilding getByBuildingId(int id);
+
     IResourceBuilding getByBuilding(Building building);
 
 }

@@ -1,9 +1,8 @@
 package com.models;
 
 
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity

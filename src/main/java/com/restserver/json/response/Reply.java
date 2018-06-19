@@ -11,7 +11,7 @@ public class Reply {
         this.message = message;
     }
 
-    public Reply(Status status, Object obj){
+    public Reply(Status status, Object obj) {
         this.status = status;
         Gson gson = new Gson();
         message = gson.toJson(obj);

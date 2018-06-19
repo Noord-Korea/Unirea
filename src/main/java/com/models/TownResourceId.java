@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
-public class TownResourceId implements Serializable{
+public class TownResourceId implements Serializable {
     private Town town;
     private Resource resource;
 

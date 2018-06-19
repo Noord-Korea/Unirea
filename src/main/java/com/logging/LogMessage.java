@@ -14,8 +14,7 @@ public class LogMessage {
         return messageText;
     }
 
-    public LogMessage(String messageText, LogLevel logLevel)
-    {
+    public LogMessage(String messageText, LogLevel logLevel) {
         this.messageText = messageText;
         this.logLevel = logLevel;
     }

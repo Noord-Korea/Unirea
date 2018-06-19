@@ -50,8 +50,7 @@ public class HibernateUtil {
             StandardServiceRegistryBuilder standardServiceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             StandardServiceRegistry standardServiceRegistry = standardServiceRegistryBuilder.build();
             return configuration.buildSessionFactory(standardServiceRegistry);
-        }
-        catch (HibernateException ex) {
+        } catch (HibernateException ex) {
             Logger.getInstance().log(ex);
             throw new ExceptionInInitializerError(ex);
         }

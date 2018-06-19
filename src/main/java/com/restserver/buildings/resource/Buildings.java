@@ -9,11 +9,11 @@ public enum Buildings {
     IRON(2),
     WOOD(3);
 
-    private static final Map<Integer,Buildings> lookup
+    private static final Map<Integer, Buildings> lookup
             = new HashMap<>();
 
     static {
-        for(Buildings w : EnumSet.allOf(Buildings.class))
+        for (Buildings w : EnumSet.allOf(Buildings.class))
             lookup.put(w.getCode(), w);
     }
 
@@ -23,7 +23,9 @@ public enum Buildings {
         this.code = code;
     }
 
-    public int getCode() { return code; }
+    public int getCode() {
+        return code;
+    }
 
     public static Buildings get(int code) {
         return lookup.get(code);

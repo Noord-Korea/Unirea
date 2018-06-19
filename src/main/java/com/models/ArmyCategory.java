@@ -1,9 +1,8 @@
 package com.models;
 
 
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ public class ArmyCategory {
     @NotNull
     private String name;
 
-    @OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "armyCategory", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "armyCategory", fetch = FetchType.EAGER)
     private Set<Army> armies = new HashSet<>();
 
 }

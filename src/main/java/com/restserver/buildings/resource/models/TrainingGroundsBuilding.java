@@ -1,8 +1,8 @@
 package com.restserver.buildings.resource.models;
 
-public class TrainingGroundsBuilding extends BaseNormalBuilding{
+public class TrainingGroundsBuilding extends BaseNormalBuilding {
 
-    public TrainingGroundsBuilding(String name){
+    public TrainingGroundsBuilding(String name) {
         super(name);
 
     }

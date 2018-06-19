@@ -1,8 +1,8 @@
 package com.server;
 
+import com.dbal.repository.*;
 import com.logging.LogLevel;
 import com.logging.Logger;
-import com.dbal.repository.*;
 import com.server.tick.BuildingTick;
 import com.server.tick.RecruitingTick;
 import com.server.tick.ResourceTick;

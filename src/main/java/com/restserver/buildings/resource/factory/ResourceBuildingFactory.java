@@ -12,21 +12,21 @@ public class ResourceBuildingFactory implements IResourceBuildingFactory {
         return null;
     }
 
-    public IronBuilding createIronBuilding(){
+    public IronBuilding createIronBuilding() {
         return new IronBuilding();
     }
 
-    public OilBuilding createOilBuilding(){
+    public OilBuilding createOilBuilding() {
         return new OilBuilding();
     }
 
-    public WoodBuilding createWoodBuilding(){
+    public WoodBuilding createWoodBuilding() {
         return new WoodBuilding();
     }
 
     @Override
     public IResourceBuilding getByBuildingId(int id) {
-        switch (id){
+        switch (id) {
             //OIL
             case 1:
                 return new OilBuilding();
@@ -43,7 +43,7 @@ public class ResourceBuildingFactory implements IResourceBuildingFactory {
 
     @Override
     public IResourceBuilding getByBuilding(Building building) {
-        if(building == null) return null;
+        if (building == null) return null;
         return getByBuildingId(building.getId());
     }
 }

@@ -4,7 +4,7 @@ import com.models.Building;
 import com.restserver.buildings.resource.Buildings;
 import com.restserver.buildings.resource.ResourceType;
 
-public abstract class BaseResourceBuilding extends Building implements IResourceBuilding{
+public abstract class BaseResourceBuilding extends Building implements IResourceBuilding {
     private String name;
     private int resourceType;
     private int buildingLevel;

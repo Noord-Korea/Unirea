@@ -1,4 +1,5 @@
 package com.models;
+
 import javax.persistence.*;
 
 @Entity
@@ -31,6 +32,7 @@ public class TownResources {
     public void setValue(int value) {
         this.value = value;
     }
+
     @Transient
     public Town getTown() {
         return getPk().getTown();
@@ -47,5 +49,9 @@ public class TownResources {
 
     public void setResource(Resource resource) {
         getPk().setResource(resource);
+    }
+
+    public void addResource(int amount) {
+        this.value += amount;
     }
 }

@@ -1,7 +1,10 @@
 package com.server;
 
 import com.server.exception.GameNotRunningException;
-import com.server.tick.*;
+import com.server.tick.BuildingTick;
+import com.server.tick.RecruitingTick;
+import com.server.tick.ResourceTick;
+import com.server.tick.TroopMovement;
 
 public class Game {
 
@@ -19,17 +22,18 @@ public class Game {
         troopMovement = new TroopMovement();
     }
 
-    public void start(){
+    public void start() {
         run = true;
     }
 
     /**
      * This will execute the game tick.
      * The order is: building, resources, recruiting and troopmovement
+     *
      * @throws GameNotRunningException if the game isn't started
      */
     public void tick() throws GameNotRunningException {
-        if(!run){
+        if (!run) {
             throw new GameNotRunningException();
         }
 
