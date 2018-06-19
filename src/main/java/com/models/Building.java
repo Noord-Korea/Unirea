@@ -27,8 +27,4 @@ public class Building {
     public String getName() {
         return name;
     }
-
-    public Building() {
-
-    }
 }

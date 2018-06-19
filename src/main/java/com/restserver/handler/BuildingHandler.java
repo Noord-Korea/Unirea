@@ -7,42 +7,51 @@ import com.models.Building;
 import com.models.Town;
 import com.models.TownBuilding;
 import com.restserver.buildings.resource.ResourceType;
-import com.restserver.buildings.resource.models.BaseResourceBuilding;
-import com.restserver.buildings.resource.models.IronBuilding;
-import com.restserver.buildings.resource.models.OilBuilding;
-import com.restserver.buildings.resource.models.WoodBuilding;
+import com.restserver.buildings.resource.models.*;
 
 import java.util.Set;
 
 public class BuildingHandler {
 
-    TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
-    BuildingRepository buildingRepository = new BuildingRepository();
-    TownRepository townRepository = new TownRepository();
+    private TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
+    private BuildingRepository buildingRepository = new BuildingRepository();
+    private TownRepository townRepository = new TownRepository();
 
-    public TownBuilding getNormalTownBuildings(int townId, int buildingId){
+    public Building getNormalTownBuildings(int townId, int buildingId){
+        Town town = townRepository.findOne(townId);
+        if (town == null){
+            return null;
+        }
+        Set<TownBuilding> townBuildings = town.getTownBuildings();
+
         switch (buildingId){
-            //HEADQUARTERS
             case 4:
-                return null;
+                HeadquartersBuilding headquartersBuilding = new HeadquartersBuilding("Headquarters");
+                return constructNormalTownBuilding(townBuildings, headquartersBuilding, buildingId);
             //WAREHOUSE
             case 5:
-                return null;
+                WarehouseBuilding warehouseBuilding = new WarehouseBuilding("Warehouse");
+                return constructNormalTownBuilding(townBuildings, warehouseBuilding, buildingId);
             //BARRACKS
             case 6:
-                return null;
+                BarracksBuilding barracksBuilding = new BarracksBuilding("Barracks");
+                return constructNormalTownBuilding(townBuildings, barracksBuilding, buildingId);
             //TRAINING GROUNDS
             case 7:
-                return null;
+                TrainingGroundsBuilding trainingGroundsBuilding = new TrainingGroundsBuilding("Training Grounds");
+                return constructNormalTownBuilding(townBuildings, trainingGroundsBuilding, buildingId);
             //FOUNDRY
             case 8:
-                return null;
+                FoundryBuilding foundryBuilding = new FoundryBuilding("Foundry");
+                return constructNormalTownBuilding(townBuildings, foundryBuilding, buildingId);
             //AMMUNITION DEPOT
             case 9:
-                return null;
+                AmmunitionDepotBuilding ammunitionDepotBuilding = new AmmunitionDepotBuilding("Ammunition Depot");
+                return constructNormalTownBuilding(townBuildings, ammunitionDepotBuilding, buildingId);
             //WALL
             case 10:
-                return null;
+                WallBuilding wallBuilding = new WallBuilding("Wall");
+                return constructNormalTownBuilding(townBuildings, wallBuilding, buildingId);
             default:
                 return null;
         }
@@ -81,6 +90,16 @@ public class BuildingHandler {
                 building.setBuildingLevel(townBuilding.getLevel());
                 building.setResourceProduction(calculateResourceProduction(townBuilding.getLevel()));
                 building.setResourceType(resourceType);
+            }
+        }
+        return building;
+    }
+
+    private Building constructNormalTownBuilding(Set<TownBuilding> townBuildings, BaseNormalBuilding building, int buildingId) {
+        for (TownBuilding townBuilding : townBuildings){
+            if(townBuilding.getBuilding().getId() == buildingId){
+                building.setName(townBuilding.getBuilding().getName());
+                building.setBuildingLevel(townBuilding.getLevel());
             }
         }
         return building;
