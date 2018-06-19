@@ -4,14 +4,18 @@ import com.models.Building;
 
 public abstract class BaseNormalBuilding extends Building {
     private String name;
-    private int level;
+    private int buildingLevel;
 
-    public int getLevel() {
-        return level;
+    public BaseNormalBuilding(String name) {
+        this.name = name;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public int getBuildingLevel() {
+        return buildingLevel;
+    }
+
+    public void setBuildingLevel(int buildingLevel) {
+        this.buildingLevel = buildingLevel;
     }
 
     @Override
