@@ -13,7 +13,7 @@ public class MapHandler implements IMapHandler {
         ArrayList<TownPosition> map = new ArrayList<>();
 
         TownRepository townRepository = new TownRepository();
-        List<Town> towns = townRepository.findAll();
+        List<Town> towns = townRepository.findAllNoDuplicates(null);
         for (Town town : towns) {
             map.add(new TownPosition(town.getId(), town.getX(), town.getY()));
         }
