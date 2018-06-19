@@ -157,7 +157,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
         Class<T> classType = getDomainClass();
         Criteria criteria = session.createCriteria(classType);
         if(spec != null) {
-            //criteria = buildCriteria(criteria, spec);
+            criteria = buildCriteria(criteria, spec);
         }
 
         List<T> entities;

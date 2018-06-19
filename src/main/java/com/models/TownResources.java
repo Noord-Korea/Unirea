@@ -48,4 +48,8 @@ public class TownResources {
     public void setResource(Resource resource) {
         getPk().setResource(resource);
     }
+
+    public void addResource(int amount){
+        this.value += amount;
+    }
 }

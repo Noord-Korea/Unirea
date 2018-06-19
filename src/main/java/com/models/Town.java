@@ -1,5 +1,7 @@
 package com.models;
 
+import com.restserver.buildings.resource.ResourceType;
+
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
@@ -13,7 +15,6 @@ import java.util.Set;
 public class Town {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TOWN_ID", unique = true, nullable = false)
     private int id;
 
     @NotNull
@@ -96,7 +97,22 @@ public class Town {
         this.townBuildings.add(townBuilding);
     }
 
+    public void addResource(Resource resource, int amount){
+        for (TownResources townResource : townResources) {
+            if(townResource.getResource().getId() == resource.getId()){
+                townResource.addResource(amount);
+            }
+        }
+    }
 
+    public void addResource(ResourceType resourceType, int amount){
+        Resource resource = null;
+        for (TownResources townResource : townResources) {
+            if(townResource.getResource().getName().equalsIgnoreCase(String.valueOf(resourceType))){
+                addResource(townResource.getResource(), amount);
+            }
+        }
+    }
 
     public Set<BuildingQueue> getBuildingQueues() {
         return buildingQueues;

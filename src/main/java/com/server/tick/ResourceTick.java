@@ -32,6 +32,8 @@ public class ResourceTick implements Runnable{
         for (int i = 0; i < towns.size(); i++) {
             Town town = towns.get(i);
             OilBuilding building = (OilBuilding) buildingHandler.getResourceBuilding(town.getId(), Buildings.OIL.getCode());
+            int production = building.getResourceProduction();
+            //town.addResource(building.);
             //building.getResourceProduction();
         }
 
