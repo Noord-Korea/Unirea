@@ -6,8 +6,8 @@ import com.restserver.handler.ITownHandler;
 import com.restserver.json.request.town.BaseTownRequest;
 import com.restserver.json.request.town.PlayerId;
 import com.restserver.json.request.town.TownId;
-import com.restserver.json.response.Status;
 import com.restserver.json.response.Reply;
+import com.restserver.json.response.Status;
 import com.restserver.utils.accesstoken.AccessTokenLevel;
 import com.restserver.utils.accesstoken.AccessTokenUtil;
 
@@ -21,24 +21,25 @@ public class TownService {
 
     private static ITownHandler handler;
 
-    public static void setHandler(ITownHandler townHandler){
+    public static void setHandler(ITownHandler townHandler) {
         handler = townHandler;
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/get")
     public Response getTown(String data) {
         Reply reply = null;
         Gson gson = new Gson();
         TownId town = gson.fromJson(data, TownId.class);
-        if(!AccessTokenUtil.checkAccess(town.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(town.getToken(), AccessTokenLevel.LOGGEDIN)) {
             reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
-        if(reply == null){
+        if (reply == null) {
             reply = handler.getTown(town.getTownId());
         }
 
-        if(reply == null){
+        if (reply == null) {
             reply = new Reply(Status.ERROR, "Something went wrong");
         }
 
@@ -46,20 +47,21 @@ public class TownService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/all")
     public Response getAllTownsFromPlayer(String data) {
         Reply reply = null;
         Gson gson = new Gson();
         PlayerId playerId = gson.fromJson(data, PlayerId.class);
-        if(!AccessTokenUtil.checkAccess(playerId.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(playerId.getToken(), AccessTokenLevel.LOGGEDIN)) {
             reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
-        if(reply == null){
+        if (reply == null) {
             reply = handler.getTownsByPlayerId(playerId.getPlayerId());
         }
 
-        if(reply == null){
+        if (reply == null) {
             reply = new Reply(Status.ERROR, "Something went wrong");
         }
 
@@ -67,22 +69,23 @@ public class TownService {
                 .entity(reply.getMessage()).build();
     }
 
-    @POST @Consumes("application/json")
+    @POST
+    @Consumes("application/json")
     @Path("/create")
     public Response createTown(String data) {
         Reply reply = null;
         Gson gson = new Gson();
         BaseTownRequest baseTownRequest = gson.fromJson(data, BaseTownRequest.class);
 
-        if(!AccessTokenUtil.checkAccess(baseTownRequest.getToken(), AccessTokenLevel.LOGGEDIN)){
+        if (!AccessTokenUtil.checkAccess(baseTownRequest.getToken(), AccessTokenLevel.LOGGEDIN)) {
             reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
-        if(reply == null){
+        if (reply == null) {
             Player player = AccessTokenUtil.getPlayerFromToken(baseTownRequest.getToken());
             reply = handler.createTown(player);
         }
 
-        if(reply == null){
+        if (reply == null) {
             reply = new Reply(Status.ERROR, "Something went wrong");
         }
 

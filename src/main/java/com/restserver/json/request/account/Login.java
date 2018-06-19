@@ -6,7 +6,7 @@ public class Login {
 
     public Login(String email, String password) {
         if (email == null || password == null) {
-           throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
         this.email = email.toLowerCase();
         this.password = password;

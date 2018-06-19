@@ -11,7 +11,7 @@ import com.restserver.handler.BuildingHandler;
 
 import java.util.List;
 
-public class ResourceTick implements Runnable{
+public class ResourceTick implements Runnable {
     private ResourceRepository resourceRepository;
     private TownRepository townRepository;
 

@@ -3,7 +3,6 @@ package com.models;
 import javax.persistence.*;
 
 
-
 @Entity
 @Table(name = "Town_Building")
 @AssociationOverrides({
@@ -39,7 +38,7 @@ public class TownBuilding {
         this.level = level;
     }
 
-    public void addLevel(){
+    public void addLevel() {
         this.level++;
     }
 

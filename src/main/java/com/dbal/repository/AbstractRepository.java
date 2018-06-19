@@ -20,17 +20,16 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
     private static String entityNull = "Entity can't be null";
 
     @Override
-    public Session openSession(){
+    public Session openSession() {
         return HibernateUtil.getSessionFactory().openSession();
     }
 
     private static ThreadLocal<Session> threadSafeSession = new ThreadLocal<Session>() {
         @Override
-        protected Session initialValue(){
+        protected Session initialValue() {
             return HibernateUtil.getSessionFactory().openSession();
         }
     };
-
 
 
     @Override
@@ -38,7 +37,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
 
         T entity = findOne(id);
 
-        if(entity == null){
+        if (entity == null) {
             throw new IllegalArgumentException(entityNull);
         }
 
@@ -47,7 +46,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
 
     @Override
     public void delete(T entity) {
-        if(entity == null){
+        if (entity == null) {
             throw new IllegalArgumentException(entityNull);
         }
 
@@ -60,7 +59,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
-            if(tx != null)
+            if (tx != null)
                 tx.rollback();
         } finally {
             session.close();
@@ -71,7 +70,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
     @Override
     public void delete(Iterable<? extends T> entities) {
 
-        if(entities == null){
+        if (entities == null) {
             throw new IllegalArgumentException("Entities can't be null");
         }
 
@@ -85,7 +84,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
         } catch (RuntimeException e) {
             Util.logException(e);
             try {
-                if(tx != null)
+                if (tx != null)
                     tx.rollback();
             } catch (HibernateException he) {
                 Util.logException(he);
@@ -111,7 +110,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
             tx.commit();
         } catch (RuntimeException e) {
             Util.logException(e);
-            if(tx != null)
+            if (tx != null)
                 tx.rollback();
         } finally {
             session.close();
@@ -156,7 +155,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
 
         Class<T> classType = getDomainClass();
         Criteria criteria = session.createCriteria(classType);
-        if(spec != null) {
+        if (spec != null) {
             criteria = buildCriteria(criteria, spec);
         }
 
@@ -177,7 +176,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
     @Override
     public <S extends T> S save(S entity) {
 
-        if(entity == null){
+        if (entity == null) {
             throw new IllegalArgumentException(entityNull);
         }
 
@@ -191,7 +190,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
             return entity;
         } catch (RuntimeException e) {
             Util.logException(e);
-            if(tx != null)
+            if (tx != null)
                 tx.rollback();
         } finally {
             session.close();
@@ -204,7 +203,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
     @Transactional
     public <S extends T> List<S> save(Iterable<S> entities) {
 
-        if(entities == null){
+        if (entities == null) {
             throw new IllegalArgumentException("Entities can't be null");
         }
 
@@ -224,7 +223,7 @@ public abstract class AbstractRepository<T, Id extends Serializable> implements 
         } catch (RuntimeException e) {
             Util.logException(e);
             try {
-                if(tx != null)
+                if (tx != null)
                     tx.rollback();
             } catch (HibernateException he) {
                 Util.logException(he);

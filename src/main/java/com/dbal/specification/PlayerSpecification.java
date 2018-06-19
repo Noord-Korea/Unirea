@@ -9,7 +9,7 @@ public abstract class PlayerSpecification {
     }
 
     public static Specifiable getByEmail(String email) {
-        if(email == null)
+        if (email == null)
             throw new IllegalArgumentException();
 
         return new AbstractSpecification() {
