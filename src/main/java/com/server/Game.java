@@ -1,41 +1,45 @@
 package com.server;
 
 import com.server.exception.GameNotRunningException;
-import com.server.tick.*;
+import com.server.tick.BuildingTick;
+import com.server.tick.RecruitingTick;
+import com.server.tick.ResourceTick;
+import com.server.tick.TroopMovement;
 
 public class Game {
 
     private boolean run;
-    private Tick building;
-    private Tick recruiting;
-    private Tick resource;
-    private Tick troopMovement;
+    private Runnable building;
+    private Runnable recruiting;
+    private Runnable resource;
+    private Runnable troopMovement;
 
     public Game() {
         run = false;
-        building = new Building();
-        recruiting = new Recruiting();
-        resource = new Resource();
+        building = new BuildingTick();
+        recruiting = new RecruitingTick();
+        resource = new ResourceTick();
         troopMovement = new TroopMovement();
     }
 
-    public void start(){
+    public void start() {
         run = true;
     }
 
     /**
      * This will execute the game tick.
      * The order is: building, resources, recruiting and troopmovement
+     *
      * @throws GameNotRunningException if the game isn't started
      */
     public void tick() throws GameNotRunningException {
-        if(!run){
+        if (!run) {
             throw new GameNotRunningException();
         }
 
-        building.update();
-        resource.update();
-        recruiting.update();
-        troopMovement.update();
+        building.run();
+        resource.run();
+        recruiting.run();
+        troopMovement.run();
     }
 }

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <!--
+        <property name="connection.driver_class">org.h2.Driver</property>
+        <property name="connection.url">jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE</property>
+        <property name="connection.username">sa</property>
+        <property name="connection.password"/>
+        -->
+
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property>
+
+        <property name="hibernate.connection.driver_class">
+            com.mysql.jdbc.Driver
+        </property>
+
+        <!-- Assume test is the database name -->
+
+        <property name="hibernate.connection.url">
+            jdbc:mysql://77.164.24.110:3306/TestUnirea
+        </property>
+
+        <property name="hibernate.connection.username">
+            Unirea
+        </property>
+
+        <property name="hibernate.connection.password">
+            test123
+        </property>
+
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">create-drop</property> <!--create or update-->
+
+        <!-- The mapping information of entities -->
+        <mapping class="com.models.Player"/>
+        <mapping class="com.models.Clan"/>
+        <mapping class="com.models.Resource"/>
+        <mapping class="com.models.Town"/>
+        <mapping class="com.models.Building"/>
+        <mapping class="com.models.TownResourceId"/>
+        <mapping class="com.models.TownResources"/>
+        <mapping class="com.models.TownBuildingId"/>
+        <mapping class="com.models.TownBuilding"/>
+        <mapping class="com.models.BuildingQueue"/>
+        <mapping class="com.models.TownArmyId"/>
+        <mapping class="com.models.TownArmy"/>
+        <mapping class="com.models.Army"/>
+        <mapping class="com.models.ArmyCategory"/>
+        <mapping class="com.models.AccessToken"/>
+
+
+    </session-factory>
+</hibernate-configuration>
