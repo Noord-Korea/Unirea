@@ -12,15 +12,15 @@ public class TownResponse {
     private Map<String, Integer> townBuildings = new HashMap<>();
     private int x;
     private int y;
-    private Player player;
+    private String username;
     private String name;
 
-    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, Player player, String name) {
+    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, String username, String name) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.x = x;
         this.y = y;
-        this.player = player;
+        this.username = username;
         this.name = name;
     }
 
@@ -38,14 +38,6 @@ public class TownResponse {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public String getName() {
@@ -70,5 +62,13 @@ public class TownResponse {
 
     public void setTownBuildings(Map<String, Integer> townBuildings) {
         this.townBuildings = townBuildings;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
