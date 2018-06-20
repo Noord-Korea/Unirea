@@ -1,7 +1,8 @@
 package com.models;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Proxy;
 
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Town_Building")

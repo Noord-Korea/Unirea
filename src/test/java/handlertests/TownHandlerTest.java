@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import repotests.AbstractRepoTest;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Level;

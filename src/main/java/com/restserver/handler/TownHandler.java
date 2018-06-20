@@ -31,8 +31,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(TownResourcesToMap(town), TownBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName());
-            String json = gson.toJson(townResponse);
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -45,7 +44,7 @@ public class TownHandler implements ITownHandler {
         } else {
             Set<TownResponse> townResponseSet = new HashSet();
             for (Town town : towns) {
-                townResponseSet.add(new TownResponse(TownResourcesToMap(town), TownBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName()));
+                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName()));
             }
             return new Reply(Status.OK, gson.toJson(townResponseSet));
         }
@@ -73,7 +72,7 @@ public class TownHandler implements ITownHandler {
 
     }
 
-    public Map<String, Integer> TownResourcesToMap(Town town){
+    private Map<String, Integer> townResourcesToMap(Town town){
         Map<String, Integer> townResources = new HashMap<>();
         for (TownResources resources : town.getTownResources()){
             int totalResources = resources.getValue();
@@ -83,7 +82,7 @@ public class TownHandler implements ITownHandler {
         return townResources;
     }
 
-    public Map<String, Integer> TownBuildingsToMap(Town town){
+    private Map<String, Integer> townBuildingsToMap(Town town){
         Map<String, Integer> townBuildings = new HashMap<>();
         for (TownBuilding buildings : town.getTownBuildings()){
             int buildingLevel = buildings.getLevel();
