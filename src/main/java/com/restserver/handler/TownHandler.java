@@ -32,6 +32,7 @@ public class TownHandler implements ITownHandler {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
             TownResponse townResponse = new TownResponse(TownResourcesToMap(town), TownBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer(), town.getName());
+            String json = gson.toJson(townResponse);
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
