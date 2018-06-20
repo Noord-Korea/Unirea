@@ -22,7 +22,7 @@ public class ResourceTick implements Runnable {
 
     @Override
     public void run() {
-        Logger.getInstance().log("RecruitingTick Running", LogLevel.INFORMATION);
+        Logger.getInstance().log("ResourceTick Running", LogLevel.INFORMATION);
 
         BuildingHandler buildingHandler = new BuildingHandler();
         townRepository = new TownRepository();
