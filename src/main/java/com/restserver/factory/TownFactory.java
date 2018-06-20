@@ -36,21 +36,41 @@ public class TownFactory implements ITownFactory {
         townRepository.save(town);
 
         ArrayList<Building> buildings = new ArrayList<>();
-        //Oilbuilding
+        //Oil Refinery
         buildings.add(buildingRepository.findOne(1));
-        //Ironbuilding
+        //Iron Mine
         buildings.add(buildingRepository.findOne(2));
-        //Woodbuilding
+        //Forestry
         buildings.add(buildingRepository.findOne(3));
+        //Headquarters
+        buildings.add(buildingRepository.findOne(4));
+        //Warehouse
+        buildings.add(buildingRepository.findOne(5));
+        //Barracks
+        buildings.add(buildingRepository.findOne(6));
+        //Training Grounds
+        buildings.add(buildingRepository.findOne(7));
+        //Foundry
+        buildings.add(buildingRepository.findOne(8));
+        //Ammunition Depot
+        buildings.add(buildingRepository.findOne(9));
+        //Wall
+        buildings.add(buildingRepository.findOne(10));
 
         for (Building building : buildings) {
             TownBuilding townBuilding = new TownBuilding();
             townBuilding.setBuilding(building);
             townBuilding.setTown(town);
-            townBuilding.setLevel(1);
+            if (townBuilding.getBuilding().getId() == 1 || townBuilding.getBuilding().getId() == 2 || townBuilding.getBuilding().getId() == 3 || townBuilding.getBuilding().getId() == 4){
+                townBuilding.setLevel(1);
+            } else {
+                townBuilding.setLevel(0);
+            }
 
             townBuildingRepository.save(townBuilding);
         }
+
+
 
 
         //region iron
