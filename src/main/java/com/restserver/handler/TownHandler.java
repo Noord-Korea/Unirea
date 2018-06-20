@@ -4,7 +4,10 @@ import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.repository.TownRepository;
 import com.google.gson.Gson;
-import com.models.*;
+import com.models.Player;
+import com.models.Town;
+import com.models.TownBuilding;
+import com.models.TownResources;
 import com.restserver.exception.PlayerHasTownException;
 import com.restserver.factory.TownFactory;
 import com.restserver.json.response.Reply;
@@ -32,7 +35,8 @@ public class TownHandler implements ITownHandler {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
             TownResponse townResponse = new TownResponse(TownResourcesToMap(town), TownBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer(), town.getName());
-            return new Reply(Status.OK, gson.toJson(townResponse));
+            String json = gson.toJson(townResponse);
+            return new Reply(Status.OK, json);
         }
     }
 
@@ -72,9 +76,9 @@ public class TownHandler implements ITownHandler {
 
     }
 
-    public Map<String, Integer> TownResourcesToMap(Town town){
+    public Map<String, Integer> TownResourcesToMap(Town town) {
         Map<String, Integer> townResources = new HashMap<>();
-        for (TownResources resources : town.getTownResources()){
+        for (TownResources resources : town.getTownResources()) {
             int totalResources = resources.getValue();
             String resourceName = resources.getResource().getName();
             townResources.put(resourceName, totalResources);
@@ -82,9 +86,9 @@ public class TownHandler implements ITownHandler {
         return townResources;
     }
 
-    public Map<String, Integer> TownBuildingsToMap(Town town){
+    public Map<String, Integer> TownBuildingsToMap(Town town) {
         Map<String, Integer> townBuildings = new HashMap<>();
-        for (TownBuilding buildings : town.getTownBuildings()){
+        for (TownBuilding buildings : town.getTownBuildings()) {
             int buildingLevel = buildings.getLevel();
             String buildingName = buildings.getBuilding().getName();
             townBuildings.put(buildingName, buildingLevel);

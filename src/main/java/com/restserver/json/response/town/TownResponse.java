@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class TownResponse {
-    private Map<String, Integer> townResources = new HashMap<>();
-    private Map<String, Integer> townBuildings = new HashMap<>();
+    private Map<String, Integer> townResources;
+    private Map<String, Integer> townBuildings;
     private int x;
     private int y;
     private Player player;
