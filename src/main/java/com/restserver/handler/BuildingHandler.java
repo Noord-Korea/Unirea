@@ -11,7 +11,7 @@ import com.restserver.buildings.resource.models.*;
 
 import java.util.Set;
 
-public class BuildingHandler {
+public class BuildingHandler implements IBuildingHandler{
 
     private TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
     private BuildingRepository buildingRepository = new BuildingRepository();

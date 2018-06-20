@@ -4,15 +4,16 @@ import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.repository.TownRepository;
 import com.google.gson.Gson;
-import com.models.Player;
-import com.models.Town;
+import com.models.*;
 import com.restserver.exception.PlayerHasTownException;
 import com.restserver.factory.TownFactory;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 import com.restserver.json.response.town.TownResponse;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class TownHandler implements ITownHandler {
@@ -30,7 +31,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(town.getTownResources(), town.getTownBuildings(), town.getX(), town.getY(), town.getPlayer(), town.getName(), town.getBuildingQueues(), town.getTownArmies());
+            TownResponse townResponse = new TownResponse(TownResourcesToMap(town), TownBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer(), town.getName());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -43,7 +44,7 @@ public class TownHandler implements ITownHandler {
         } else {
             Set<TownResponse> townResponseSet = new HashSet();
             for (Town town : towns) {
-                townResponseSet.add(new TownResponse(town.getTownResources(), town.getTownBuildings(), town.getX(), town.getY(), town.getPlayer(), town.getName(), town.getBuildingQueues(), town.getTownArmies()));
+                townResponseSet.add(new TownResponse(TownResourcesToMap(town), TownBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer(), town.getName()));
             }
             return new Reply(Status.OK, gson.toJson(townResponseSet));
         }
@@ -69,5 +70,25 @@ public class TownHandler implements ITownHandler {
             return new Reply(Status.ERROR, e.getMessage());
         }
 
+    }
+
+    public Map<String, Integer> TownResourcesToMap(Town town){
+        Map<String, Integer> townResources = new HashMap<>();
+        for (TownResources resources : town.getTownResources()){
+            int totalResources = resources.getValue();
+            String resourceName = resources.getResource().getName();
+            townResources.put(resourceName, totalResources);
+        }
+        return townResources;
+    }
+
+    public Map<String, Integer> TownBuildingsToMap(Town town){
+        Map<String, Integer> townBuildings = new HashMap<>();
+        for (TownBuilding buildings : town.getTownBuildings()){
+            int buildingLevel = buildings.getLevel();
+            String buildingName = buildings.getBuilding().getName();
+            townBuildings.put(buildingName, buildingLevel);
+        }
+        return townBuildings;
     }
 }
