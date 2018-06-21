@@ -1,11 +1,14 @@
 package com.models;
 
 
+import com.dbal.repository.TownRepository;
+import com.dbal.specification.TownSpecification;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,9 +26,6 @@ public class Player {
     private String email;
     @NotNull
     private String passHash;
-
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "player", fetch = FetchType.LAZY)
-    private Set<Town> towns = new HashSet<>();
 
     public Player() {
     }
@@ -45,14 +45,13 @@ public class Player {
     }
 
     public Set<Town> getTowns() {
+        TownRepository townRepository = new TownRepository();
+        List<Town> towns = townRepository.findAll(TownSpecification.getByPlayerId(this.playerid));
+
         if (towns == null) {
             return new HashSet<>();
         }
-        return towns;
-    }
-
-    public void setTowns(Set<Town> towns) {
-        this.towns = towns;
+        return new HashSet<>(towns);
     }
 
     public int getId() {
@@ -79,11 +78,7 @@ public class Player {
         }
         return false;
     }
-
-    public void addTown(Town town) {
-        this.towns.add(town);
-    }
-
+    
     public boolean checkPassword(String password) {
         return BCrypt.checkpw(password, this.passHash);
     }
