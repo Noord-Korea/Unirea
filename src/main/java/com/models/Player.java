@@ -24,10 +24,6 @@ public class Player {
     @NotNull
     private String passHash;
 
-    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "clan_id")
-    private Clan clan;
-
     @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "player", fetch = FetchType.EAGER)
     private Set<Town> towns = new HashSet<>();
 
@@ -69,14 +65,6 @@ public class Player {
 
     public String getEmail() {
         return email;
-    }
-
-    public Clan getClan() {
-        return clan;
-    }
-
-    public void setClan(Clan clan) {
-        this.clan = clan;
     }
 
     public void setUsername(String username) {

@@ -19,7 +19,6 @@ public class Main {
         //Stop the very annoying "spam" from hibernate
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         IRepository playerRepository = new PlayerRepository();
-        IRepository clanRepository = new ClanRepository();
         IRepository townRepository = new TownRepository();
         IRepository resourceRepository = new ResourceRepository();
 
