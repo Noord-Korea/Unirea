@@ -4,7 +4,6 @@ import com.dbal.repository.BuildingRepository;
 import com.dbal.repository.TownRepository;
 import com.logging.LogLevel;
 import com.logging.Logger;
-import com.models.Building;
 import com.models.BuildingQueue;
 import com.models.Town;
 import com.restserver.buildings.resource.models.BaseNormalBuilding;
@@ -13,7 +12,6 @@ import com.restserver.handler.BuildingHandler;
 import com.restserver.handler.IBuildingHandler;
 
 import java.util.List;
-import java.util.Set;
 
 public class BuildingTick implements Runnable {
     public void update() {
@@ -26,7 +24,7 @@ public class BuildingTick implements Runnable {
             if (town.getBuildingQueues().isEmpty()) {
                 continue;
             } else {
-                Set<BuildingQueue> queues = town.getBuildingQueues();
+                List<BuildingQueue> queues = town.getBuildingQueues();
                 for (BuildingQueue queue : queues) {
                     if (queue.getValue() == 0){
                         int buildingId = queue.getPk().getBuilding().getId();

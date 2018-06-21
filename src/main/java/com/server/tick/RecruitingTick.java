@@ -19,7 +19,7 @@ public class RecruitingTick implements Runnable {
         for (Town town : towns) {
             if (town.getArmyQueues().isEmpty()) {
             } else {
-                Set<ArmyQueue> queues = town.getArmyQueues();
+                List<ArmyQueue> queues = town.getArmyQueues();
                 for (ArmyQueue queue : queues) {
                     if (queue.getValue() == 0) {
                         Set<TownArmy> army = new HashSet<>();

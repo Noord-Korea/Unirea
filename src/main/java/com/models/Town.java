@@ -1,12 +1,12 @@
 package com.models;
 
-import com.restserver.buildings.resource.ResourceType;
+import com.dbal.repository.*;
+import com.dbal.specification.TownIdSpecification;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 @Entity
 @Table(name = "Town")
@@ -22,21 +22,6 @@ public class Town {
     private int x;
     @NotNull
     private int y;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
-    private Set<TownResources> townResources = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
-    private Set<TownBuilding> townBuildings = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
-    private Set<BuildingQueue> buildingQueues = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
-    private Set<ArmyQueue> armyQueues = new HashSet<>(0);
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
-    private Set<TownArmy> townArmies = new HashSet<>(0);
 
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")
@@ -58,24 +43,15 @@ public class Town {
         return y;
     }
 
-    public Set<TownArmy> getTownArmies() {
-        return townArmies;
+    public List<TownArmy> getTownArmies() {
+        TownArmyRepository townArmyRepository = new TownArmyRepository();
+        return townArmyRepository.findAll(TownIdSpecification.getByTownId(this.id));
     }
 
-    public void setTownArmies(Set<TownArmy> townArmies) {
-        this.townArmies = townArmies;
-    }
+    public List<TownResources> getTownResources() {
+        TownResourceRepository townResourceRepository = new TownResourceRepository();
+        return townResourceRepository.findAll(TownIdSpecification.getByTownId(this.id));
 
-    public Set<TownResources> getTownResources() {
-        return townResources;
-    }
-
-    public void setTownResources(Set<TownResources> townResources) {
-        this.townResources = townResources;
-    }
-
-    public void addTownResource(TownResources townResources) {
-        this.townResources.add(townResources);
     }
 
     public void setName(String name) {
@@ -86,43 +62,17 @@ public class Town {
         return id;
     }
 
-    public Set<TownBuilding> getTownBuildings() {
-        return townBuildings;
+    public List<TownBuilding> getTownBuildings() {
+        TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
+        return townBuildingRepository.findAll(TownIdSpecification.getByTownId(id));
     }
 
-    public void setTownBuildings(Set<TownBuilding> townBuildings) {
-        this.townBuildings = townBuildings;
+
+    public List<BuildingQueue> getBuildingQueues() {
+        BuildingQueueRepository buildingQueueRepository = new BuildingQueueRepository();
+        return buildingQueueRepository.findAll(TownIdSpecification.getByTownId(id));
     }
 
-    public void addTownBuilding(TownBuilding townBuilding) {
-        townBuilding.setLevel(1);
-        this.townBuildings.add(townBuilding);
-    }
-
-    public void addResource(Resource resource, int amount) {
-        for (TownResources townResource : townResources) {
-            if (townResource.getResource().getId() == resource.getId()) {
-                townResource.addResource(amount);
-            }
-        }
-    }
-
-    public void addResource(ResourceType resourceType, int amount) {
-        Resource resource = null;
-        for (TownResources townResource : townResources) {
-            if (townResource.getResource().getName().equalsIgnoreCase(String.valueOf(resourceType))) {
-                addResource(townResource.getResource(), amount);
-            }
-        }
-    }
-
-    public Set<BuildingQueue> getBuildingQueues() {
-        return buildingQueues;
-    }
-
-    public void setBuildingQueues(Set<BuildingQueue> buildingQueues) {
-        this.buildingQueues = buildingQueues;
-    }
 
     public String getName() {
         return name;
@@ -140,11 +90,9 @@ public class Town {
         this.y = r.nextInt(50);
     }
 
-    public Set<ArmyQueue> getArmyQueues() {
-        return armyQueues;
+    public List<ArmyQueue> getArmyQueues() {
+        ArmyQueueRepository armyQueueRepository = new ArmyQueueRepository();
+        return armyQueueRepository.findAll(TownIdSpecification.getByTownId(id));
     }
 
-    public void setArmyQueues(Set<ArmyQueue> armyQueues) {
-        this.armyQueues = armyQueues;
-    }
 }

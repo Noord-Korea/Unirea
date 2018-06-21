@@ -11,7 +11,10 @@ import com.restserver.json.request.building.LevelUp;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BuildingHandler implements IBuildingHandler {
 
@@ -25,7 +28,7 @@ public class BuildingHandler implements IBuildingHandler {
         if (town == null) {
             return null;
         }
-        Set<TownBuilding> townBuildings = town.getTownBuildings();
+        List<TownBuilding> townBuildings = town.getTownBuildings();
 
         switch (buildingId) {
             //HEADQUARTERS
@@ -66,7 +69,7 @@ public class BuildingHandler implements IBuildingHandler {
         if (town == null){
             return new Reply(Status.NOTFOUND, "Town could not be found");
         }
-        Set<BuildingQueue> queues = town.getBuildingQueues();
+        List<BuildingQueue> queues = town.getBuildingQueues();
         BuildingQueue queue = new BuildingQueue();
         TownBuildingId buildingPK = null;
         for (TownBuilding building : town.getTownBuildings()){
@@ -82,7 +85,7 @@ public class BuildingHandler implements IBuildingHandler {
             if (checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()) == null){
                 return new Reply(Status.CONFLICT, "Not enough resources to upgrade");
             }
-            town.setTownResources(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
+           // town.setTownResources(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
             time = 60 + (15*building.getBuildingLevel());
             time = time * (1 - (headquarters.getBuildingLevel() / 10));
         } else {
@@ -90,14 +93,14 @@ public class BuildingHandler implements IBuildingHandler {
             if (checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()) == null){
                 return new Reply(Status.CONFLICT, "Not enough resources to upgrade");
             }
-            town.setTownResources(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
+           // town.setTownResources(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
             time = 60 + (15*building.getBuildingLevel());
             time = time * (1 - (headquarters.getBuildingLevel() / 10));
         }
         queue.setValue(time);
         queue.setDate(new Date());
         queues.add(queue);
-        town.setBuildingQueues(queues);
+       // town.setBuildingQueues(queues);
         townRepository.save(town);
         return new Reply(Status.OK , "Building will start upgrading");
 
@@ -109,7 +112,7 @@ public class BuildingHandler implements IBuildingHandler {
         if (town == null) {
             return null;
         }
-        Set<TownBuilding> townBuildings = town.getTownBuildings();
+        List<TownBuilding> townBuildings = town.getTownBuildings();
 
         switch (buildingId) {
             //OIL
@@ -129,7 +132,7 @@ public class BuildingHandler implements IBuildingHandler {
         }
     }
 
-    private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, int resourceType) {
+    private Building constructResourceBuilding(List<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, int resourceType) {
         for (TownBuilding townBuilding : townBuildings) {
             if (townBuilding.getBuilding().getId() == buildingId) {
                 building.setName(townBuilding.getBuilding().getName());
@@ -141,7 +144,7 @@ public class BuildingHandler implements IBuildingHandler {
         return building;
     }
 
-    private Building constructNormalTownBuilding(Set<TownBuilding> townBuildings, BaseNormalBuilding building, int buildingId) {
+    private Building constructNormalTownBuilding(List<TownBuilding> townBuildings, BaseNormalBuilding building, int buildingId) {
         for (TownBuilding townBuilding : townBuildings) {
             if (townBuilding.getBuilding().getId() == buildingId) {
                 building.setName(townBuilding.getBuilding().getName());
@@ -156,7 +159,7 @@ public class BuildingHandler implements IBuildingHandler {
         return 30 * pow;
     }
 
-    private Set<TownResources> checkResourceRequirements(Set<TownResources> resources, int buildingLevel, int buildingId){
+    private List<TownResources> checkResourceRequirements(List<TownResources> resources, int buildingLevel, int buildingId){
         int woodAvailable = 0;
         int ironAvailable = 0;
         int oilAvailable = 0;
