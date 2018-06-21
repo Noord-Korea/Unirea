@@ -8,6 +8,7 @@ import com.models.Town;
 import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.models.OilBuilding;
 import com.restserver.handler.BuildingHandler;
+import com.restserver.handler.IBuildingHandler;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ResourceTick implements Runnable {
     public void run() {
         Logger.getInstance().log("ResourceTick Running", LogLevel.INFORMATION);
 
-        BuildingHandler buildingHandler = new BuildingHandler();
+        IBuildingHandler buildingHandler = new BuildingHandler();
         townRepository = new TownRepository();
 
         List<Town> towns = townRepository.findAll();

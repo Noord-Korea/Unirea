@@ -33,6 +33,9 @@ public class Town {
     private Set<BuildingQueue> buildingQueues = new HashSet<>(0);
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
+    private Set<ArmyQueue> armyQueues = new HashSet<>(0);
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pk.town")
     private Set<TownArmy> townArmies = new HashSet<>(0);
 
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
@@ -135,5 +138,13 @@ public class Town {
         this.name = name;
         this.x = r.nextInt(50);
         this.y = r.nextInt(50);
+    }
+
+    public Set<ArmyQueue> getArmyQueues() {
+        return armyQueues;
+    }
+
+    public void setArmyQueues(Set<ArmyQueue> armyQueues) {
+        this.armyQueues = armyQueues;
     }
 }
