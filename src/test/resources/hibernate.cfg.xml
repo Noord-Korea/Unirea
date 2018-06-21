@@ -44,7 +44,6 @@
 
         <!-- The mapping information of entities -->
         <mapping class="com.models.Player"/>
-        <mapping class="com.models.Clan"/>
         <mapping class="com.models.Resource"/>
         <mapping class="com.models.Town"/>
         <mapping class="com.models.Building"/>
@@ -58,7 +57,7 @@
         <mapping class="com.models.Army"/>
         <mapping class="com.models.ArmyCategory"/>
         <mapping class="com.models.AccessToken"/>
-
+        <mapping class="com.models.ArmyQueue"/>
 
     </session-factory>
 </hibernate-configuration>
