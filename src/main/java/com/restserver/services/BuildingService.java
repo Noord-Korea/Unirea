@@ -11,6 +11,7 @@ import com.restserver.utils.accesstoken.AccessTokenUtil;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 @Path("/building")
 public class BuildingService {
@@ -19,7 +20,7 @@ public class BuildingService {
     @POST
     @Consumes("application/json")
     @Path("/levelup")
-    public void levelUp(String data) {
+    public Response levelUp(String data) {
         Reply reply = null;
         Gson gson = new Gson();
         LevelUp levelUp = gson.fromJson(data, LevelUp.class);
@@ -33,5 +34,8 @@ public class BuildingService {
         if (reply == null) {
             reply = new Reply(Status.ERROR, "Something went wrong");
         }
+
+        return Response.status(reply.getStatus().getCode())
+                .entity(reply.getMessage()).build();
     }
 }
