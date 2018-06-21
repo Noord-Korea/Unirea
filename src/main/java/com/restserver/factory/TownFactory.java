@@ -1,15 +1,14 @@
 package com.restserver.factory;
 
-import com.dbal.repository.BuildingRepository;
-import com.dbal.repository.TownBuildingRepository;
-import com.dbal.repository.TownRepository;
-import com.models.Building;
-import com.models.Player;
-import com.models.Town;
-import com.models.TownBuilding;
+import com.dbal.repository.*;
+import com.models.*;
+import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.factory.IResourceBuildingFactory;
 import com.restserver.buildings.resource.factory.ResourceBuildingFactory;
+import com.restserver.buildings.resource.factory.ResourceFactory;
+import com.restserver.buildings.resource.models.OilBuilding;
 import com.restserver.exception.PlayerHasTownException;
+import com.restserver.json.response.town.TownResponse;
 
 import java.util.ArrayList;
 
@@ -19,6 +18,7 @@ public class TownFactory implements ITownFactory {
     private static TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
     private static BuildingRepository buildingRepository = new BuildingRepository();
     private static IResourceBuildingFactory resourceBuildingFactory = new ResourceBuildingFactory();
+    private static TownResourceRepository townResourceRepository = new TownResourceRepository();
 
     private TownFactory() {
 
@@ -69,6 +69,25 @@ public class TownFactory implements ITownFactory {
 
             townBuildingRepository.save(townBuilding);
         }
+
+        ResourceFactory resourceFactory = new ResourceFactory(new ResourceRepository());
+
+        ResourceType[] resourceTypes = new ResourceType[3];
+        resourceTypes[0] = ResourceType.OIL;
+        resourceTypes[1] = ResourceType.IRON;
+        resourceTypes[2] = ResourceType.WOOD;
+
+        for (ResourceType resourceType : resourceTypes) {
+            Resource resource = resourceFactory.getResourceWithResourceType(resourceType);
+
+            TownResources townResources = new TownResources();
+            townResources.setValue(50);
+            townResources.setResource(resource);
+            townResources.setTown(town);
+
+            townResourceRepository.save(townResources);
+        }
+
 
 
 

@@ -13,7 +13,7 @@ public abstract class ResourceSpecification {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("name", name);
+                return Restrictions.eq("name", name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
             }
         };
     }
