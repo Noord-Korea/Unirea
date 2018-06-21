@@ -75,7 +75,7 @@ public class TownHandler implements ITownHandler {
 
     }
 
-    private Map<String, Integer> townResourcesToMap(Town town){
+    public Map<String, Integer> townResourcesToMap(Town town){
         Map<String, Integer> townResources = new HashMap<>();
         for (TownResources resources : town.getTownResources()){
             int totalResources = resources.getValue();
@@ -85,7 +85,7 @@ public class TownHandler implements ITownHandler {
         return townResources;
     }
 
-    private Map<String, Integer> townBuildingsToMap(Town town){
+    public Map<String, Integer> townBuildingsToMap(Town town){
         Map<String, Integer> townBuildings = new HashMap<>();
         for (TownBuilding buildings : town.getTownBuildings()){
             int buildingLevel = buildings.getLevel();

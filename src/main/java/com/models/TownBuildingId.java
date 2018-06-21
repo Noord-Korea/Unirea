@@ -18,7 +18,7 @@ public class TownBuildingId implements Serializable {
         this.town = town;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "building_id")
     public Building getBuilding() {
         return building;

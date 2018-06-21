@@ -8,10 +8,11 @@ import com.models.Town;
 import com.models.TownBuilding;
 import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.models.*;
+import com.restserver.json.request.building.LevelUp;
 
 import java.util.Set;
 
-public class BuildingHandler implements IBuildingHandler{
+public class BuildingHandler implements IBuildingHandler {
 
     private TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
     private BuildingRepository buildingRepository = new BuildingRepository();
@@ -57,6 +58,10 @@ public class BuildingHandler implements IBuildingHandler{
         }
     }
 
+    public void levelUp(LevelUp levelUp) {
+
+    }
+
     public Building getResourceBuilding(int townId, int buildingId) {
 
         Town town = townRepository.findOne(townId);
@@ -66,7 +71,7 @@ public class BuildingHandler implements IBuildingHandler{
         Set<TownBuilding> townBuildings = town.getTownBuildings();
 
         switch (buildingId) {
-            //OIL
+            //OIL (Open innovation lab)
             case 1:
                 OilBuilding oilBuilding = new OilBuilding();
                 return constructResourceBuilding(townBuildings, oilBuilding, buildingId, ResourceType.OIL.getCode());
@@ -84,8 +89,8 @@ public class BuildingHandler implements IBuildingHandler{
     }
 
     private Building constructResourceBuilding(Set<TownBuilding> townBuildings, BaseResourceBuilding building, int buildingId, int resourceType) {
-        for (TownBuilding townBuilding : townBuildings){
-            if(townBuilding.getBuilding().getId() == buildingId){
+        for (TownBuilding townBuilding : townBuildings) {
+            if (townBuilding.getBuilding().getId() == buildingId) {
                 building.setName(townBuilding.getBuilding().getName());
                 building.setBuildingLevel(townBuilding.getLevel());
                 building.setResourceProduction(calculateResourceProduction(townBuilding.getLevel()));
@@ -105,10 +110,8 @@ public class BuildingHandler implements IBuildingHandler{
         return building;
     }
 
-    private int calculateResourceProduction(int buildingLevel) {
-        int production = 30 * buildingLevel;
-        return (int) Math.pow(production, 1.5);
+    private double calculateResourceProduction(int buildingLevel) {
+        double pow = Math.pow(buildingLevel, 1.5);
+        return 30 * pow;
     }
-
-
 }
