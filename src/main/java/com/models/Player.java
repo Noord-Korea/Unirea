@@ -24,7 +24,7 @@ public class Player {
     @NotNull
     private String passHash;
 
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "player", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "player", fetch = FetchType.LAZY)
     private Set<Town> towns = new HashSet<>();
 
     public Player() {
