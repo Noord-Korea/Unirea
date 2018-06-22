@@ -163,13 +163,13 @@ public class BuildingHandler implements IBuildingHandler {
         int oilAvailable = 0;
         for (TownResources resource : resources){
             switch (resource.getResource().getName()){
-                case "Iron Mine":
+                case "Iron":
                     ironAvailable = resource.getValue();
                     break;
-                case "Oil Refinery":
+                case "Oil":
                     oilAvailable = resource.getValue();
                     break;
-                case "Forestry":
+                case "Wood":
                     woodAvailable = resource.getValue();
                     break;
             }
@@ -183,13 +183,13 @@ public class BuildingHandler implements IBuildingHandler {
             woodAvailable = woodAvailable - requirements.get("Wood");
             for (TownResources resource : resources){
                 switch (resource.getResource().getName()){
-                    case "Iron Mine":
+                    case "Iron":
                         resource.setValue(ironAvailable);
                         break;
-                    case "Oil Refinery":
+                    case "Oil":
                         resource.setValue(oilAvailable);
                         break;
-                    case "Forestry":
+                    case "Wood":
                         resource.setValue(woodAvailable);
                         break;
                 }
