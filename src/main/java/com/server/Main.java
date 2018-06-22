@@ -1,9 +1,6 @@
 package com.server;
 
-import com.dbal.repository.IRepository;
-import com.dbal.repository.PlayerRepository;
-import com.dbal.repository.ResourceRepository;
-import com.dbal.repository.TownRepository;
+import com.dbal.repository.*;
 import com.logging.LogLevel;
 import com.logging.Logger;
 import com.server.tick.BuildingTick;
@@ -32,19 +29,9 @@ public class Main {
 
         exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
-
-        boolean running = true;
-        int i = 0;
-        while (running) {
-            logger.log("Main thread", LogLevel.DEBUG);
-            running = i != 100;
-            i++;
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                logger.log(e);
-            }
-        }
     }
 }
