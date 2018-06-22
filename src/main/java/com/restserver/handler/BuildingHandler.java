@@ -180,7 +180,7 @@ public class BuildingHandler implements IBuildingHandler {
         } else{
             oilAvailable = oilAvailable - requirements.get("Oil");
             ironAvailable = ironAvailable - requirements.get("Iron");
-            woodAvailable = woodAvailable - requirements.get("wood");
+            woodAvailable = woodAvailable - requirements.get("Wood");
             for (TownResources resource : resources){
                 switch (resource.getResource().getName()){
                     case "Iron Mine":
