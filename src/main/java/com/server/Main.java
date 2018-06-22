@@ -29,22 +29,9 @@ public class Main {
 
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);
 
-        exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
-
-        boolean running = true;
-        int i = 0;
-        while (running) {
-            logger.log("Main thread", LogLevel.DEBUG);
-            running = i != 100;
-            i++;
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                logger.log(e);
-            }
-        }
     }
 }
