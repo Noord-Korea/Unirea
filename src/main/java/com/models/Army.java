@@ -17,19 +17,6 @@ public class Army {
     @NotNull
     private String name;
 
-
-    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "armycategory_id")
-    private ArmyCategory armyCategory;
-
-    public ArmyCategory getArmyCategory() {
-        return armyCategory;
-    }
-
-    public void setArmyCategory(ArmyCategory armyCategory) {
-        this.armyCategory = armyCategory;
-    }
-
     public int getId() {
         return id;
     }

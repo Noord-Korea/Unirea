@@ -94,5 +94,4 @@ public class Town {
         ArmyQueueRepository armyQueueRepository = new ArmyQueueRepository();
         return armyQueueRepository.findAll(TownIdSpecification.getByTownId(id));
     }
-
 }

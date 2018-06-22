@@ -12,3 +12,7 @@ INSERT into Building (BUILDING_ID, name) VALUES (10, 'Wall') ON DUPLICATE KEY UP
 INSERT into Resource (RESOURCE_ID, name) VALUES (1, 'Oil') ON DUPLICATE KEY UPDATE name = 'Oil';
 INSERT into Resource (RESOURCE_ID, name) VALUES (2, 'Iron') ON DUPLICATE KEY UPDATE name = 'Iron';
 INSERT into Resource (RESOURCE_ID, name) VALUES (3, 'Wood') ON DUPLICATE KEY UPDATE name = 'Wood';
+
+INSERT into Army (ARMY_ID, name) VALUES (1, 'Infantry') ON DUPLICATE KEY UPDATE name = 'Infantry';
+INSERT into Army (ARMY_ID, name) VALUES (2, 'Cavalry') on DUPLICATE KEY UPDATE name = 'Cavalry';
+INSERT INTO Army (ARMY_ID, name) VALUES (3, 'Armored') on DUPLICATE key UPDATE name = 'Armored';

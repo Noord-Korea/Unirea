@@ -9,7 +9,7 @@ public class TownBuildingId implements Serializable {
     private transient Building building;
 
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "town_id")
+    @JoinColumn(name = "TOWN_ID")
     public Town getTown() {
         return town;
     }
