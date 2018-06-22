@@ -1,6 +1,9 @@
 package com.models;
 
-import com.dbal.repository.*;
+import com.dbal.repository.BuildingQueueRepository;
+import com.dbal.repository.TownArmyRepository;
+import com.dbal.repository.TownBuildingRepository;
+import com.dbal.repository.TownResourceRepository;
 import com.dbal.specification.TownIdSpecification;
 
 import javax.persistence.*;
@@ -90,8 +93,5 @@ public class Town {
         this.y = r.nextInt(50);
     }
 
-    public List<ArmyQueue> getArmyQueues() {
-        ArmyQueueRepository armyQueueRepository = new ArmyQueueRepository();
-        return armyQueueRepository.findAll(TownIdSpecification.getByTownId(id));
-    }
+
 }
