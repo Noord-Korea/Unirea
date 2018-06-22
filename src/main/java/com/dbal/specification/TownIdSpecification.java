@@ -14,7 +14,7 @@ public abstract class TownIdSpecification {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("TOWN_ID", townId);
+                return Restrictions.eq("id.town.id", townId);
             }
         };
     }
