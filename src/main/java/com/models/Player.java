@@ -78,7 +78,7 @@ public class Player {
         }
         return false;
     }
-    
+
     public boolean checkPassword(String password) {
         return BCrypt.checkpw(password, this.passHash);
     }
