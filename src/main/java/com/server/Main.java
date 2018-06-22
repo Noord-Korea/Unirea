@@ -4,7 +4,6 @@ import com.dbal.repository.*;
 import com.logging.LogLevel;
 import com.logging.Logger;
 import com.server.tick.BuildingTick;
-import com.server.tick.RecruitingTick;
 import com.server.tick.ResourceTick;
 import com.server.tick.TroopMovement;
 
@@ -23,12 +22,13 @@ public class Main {
         IRepository resourceRepository = new ResourceRepository();
 
         Runnable building = new BuildingTick();
-        Runnable recruiting = new RecruitingTick();
         Runnable resourceTick = new ResourceTick();
         Runnable troopMovement = new TroopMovement();
 
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);
 
+        exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
         //exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
         //exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
         //exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);

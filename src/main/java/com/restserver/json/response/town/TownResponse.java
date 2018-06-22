@@ -14,14 +14,16 @@ public class TownResponse {
     private int y;
     private String username;
     private String name;
+    private int id;
 
-    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, String username, String name) {
+    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, String username, String name, int id) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.x = x;
         this.y = y;
         this.username = username;
         this.name = name;
+        this.id = id;
     }
 
     public int getX() {
@@ -70,5 +72,13 @@ public class TownResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

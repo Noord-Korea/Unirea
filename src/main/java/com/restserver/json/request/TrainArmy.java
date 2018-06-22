@@ -1,16 +1,13 @@
 package com.restserver.json.request;
 
-import com.models.AccessToken;
-import com.models.Army;
-
 public class TrainArmy {
-    private Army army;
+    private int armyId;
     private int value;
     private int townId;
-    private AccessToken token;
+    private String token;
 
-    public TrainArmy(Army army, int value, int townId, AccessToken token) {
-        this.army = army;
+    public TrainArmy(int army, int value, int townId, String token) {
+        this.armyId = army;
         this.value = value;
         this.townId = townId;
         this.token = token;
@@ -24,20 +21,20 @@ public class TrainArmy {
         this.townId = townId;
     }
 
-    public AccessToken getToken() {
+    public String getToken() {
         return token;
     }
 
-    public void setToken(AccessToken token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
-    public Army getArmy() {
-        return army;
+    public int getArmy() {
+        return armyId;
     }
 
-    public void setArmy(Army army) {
-        this.army = army;
+    public void setArmy(int army) {
+        this.armyId = army;
     }
 
     public int getValue() {
