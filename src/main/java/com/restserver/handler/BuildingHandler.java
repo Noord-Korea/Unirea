@@ -1,9 +1,6 @@
 package com.restserver.handler;
 
-import com.dbal.repository.BuildingRepository;
-import com.dbal.repository.ResourceRepository;
-import com.dbal.repository.TownBuildingRepository;
-import com.dbal.repository.TownRepository;
+import com.dbal.repository.*;
 import com.models.*;
 import com.restserver.buildings.resource.ResourceType;
 import com.restserver.buildings.resource.models.*;
@@ -22,6 +19,8 @@ public class BuildingHandler implements IBuildingHandler {
     private BuildingRepository buildingRepository = new BuildingRepository();
     private TownRepository townRepository = new TownRepository();
     private ResourceRepository resourceRepository = new ResourceRepository();
+    private TownResourceRepository townResourceRepository = new TownResourceRepository();
+    private BuildingQueueRepository buildingQueueRepository = new BuildingQueueRepository();
 
     public Building getNormalTownBuildings(int townId, int buildingId) {
         Town town = townRepository.findOne(townId);
@@ -85,7 +84,7 @@ public class BuildingHandler implements IBuildingHandler {
             if (checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()) == null){
                 return new Reply(Status.CONFLICT, "Not enough resources to upgrade");
             }
-           // town.setTownResources(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
+            townResourceRepository.save(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
             time = 60 + (15*building.getBuildingLevel());
             time = time * (1 - (headquarters.getBuildingLevel() / 10));
         } else {
@@ -93,15 +92,14 @@ public class BuildingHandler implements IBuildingHandler {
             if (checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()) == null){
                 return new Reply(Status.CONFLICT, "Not enough resources to upgrade");
             }
-           // town.setTownResources(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
+            townResourceRepository.save(checkResourceRequirements(town.getTownResources(), building.getBuildingLevel(), levelUp.getBuildingId()));
             time = 60 + (15*building.getBuildingLevel());
             time = time * (1 - (headquarters.getBuildingLevel() / 10));
         }
         queue.setValue(time);
         queue.setDate(new Date());
         queues.add(queue);
-       // town.setBuildingQueues(queues);
-        townRepository.save(town);
+        buildingQueueRepository.save(queues);
         return new Reply(Status.OK , "Building will start upgrading");
 
     }
