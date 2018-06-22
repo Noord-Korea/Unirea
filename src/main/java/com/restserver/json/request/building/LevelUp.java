@@ -1,24 +1,14 @@
 package com.restserver.json.request.building;
 
-import com.models.AccessToken;
-
 public class LevelUp {
-    private AccessToken token;
+    private String token;
     private int townId;
     private int buildingId;
 
-    public LevelUp(AccessToken token, int townId, int buildingId) {
+    public LevelUp(String token, int townId, int buildingId) {
         this.token = token;
         this.townId = townId;
         this.buildingId = buildingId;
-    }
-
-    public AccessToken getToken() {
-        return token;
-    }
-
-    public void setToken(AccessToken token) {
-        this.token = token;
     }
 
     public int getTownId() {
@@ -35,5 +25,13 @@ public class LevelUp {
 
     public void setBuildingId(int buildingId) {
         this.buildingId = buildingId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
