@@ -39,7 +39,7 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create-drop</property> <!--create or update-->
+        <property name="hbm2ddl.auto">update</property> <!--create or update-->
 
         <!-- The mapping information of entities -->
         <mapping class="com.models.Player"/>
@@ -56,6 +56,9 @@
         <mapping class="com.models.Army"/>
         <mapping class="com.models.AccessToken"/>
         <mapping class="com.models.ArmyQueue"/>
+
+
+
 
     </session-factory>
 </hibernate-configuration>
