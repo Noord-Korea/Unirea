@@ -19,13 +19,16 @@ import java.util.List;
 public class BuildingTick implements Runnable {
     public void run() {
         Logger.getInstance().log("BuildingTick Running", LogLevel.INFORMATION);
-        BuildingRepository buildingRepository = new BuildingRepository();
+
         BuildingQueueRepository buildingQueueRepository = new BuildingQueueRepository();
         TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
         TownRepository townRepository = new TownRepository();
-        List<Town> towns = townRepository.findAllNoDuplicates(null);
+
         IBuildingHandler buildingHandler = new BuildingHandler();
+
+        List<Town> towns = townRepository.findAllNoDuplicates(null);
         boolean removeQueue = false;
+
         for (Town town : towns) {
             if (town.getBuildingQueues().isEmpty()) {
                 continue;
@@ -56,6 +59,7 @@ public class BuildingTick implements Runnable {
                     queue.setValue(queue.getValue() - 5);
                     if (!removeQueue){
                         buildingQueueRepository.save(queue);
+                        removeQueue = false;
                     }
                 }
             }
