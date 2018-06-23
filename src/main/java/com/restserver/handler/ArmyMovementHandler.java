@@ -5,11 +5,13 @@ import com.dbal.repository.TownArmyRepository;
 import com.dbal.repository.TownRepository;
 import com.dbal.repository.TownResourceRepository;
 import com.dbal.specification.ArmyMovementQueueSpecification;
+import com.dbal.specification.TownArmySpecification;
 import com.models.*;
 import com.restserver.json.request.MoveArmy;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,19 +33,30 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         Town homeTown = townRepository.findOne(moveArmy.getTownId());
         double distance  = calcDistanceToTarget(moveArmy);
         ArmyMovementQueue queue = new ArmyMovementQueue();
-        List<TownArmy> armies = homeTown.getTownArmies();
+        TownArmyId infantryPk = null;
+        TownArmyId cavalryPk = null;
+        TownArmyId armoredPk = null;
         for (TownArmy army : homeTown.getTownArmies()){
-            int id = army.getArmy().getId();
-            if (army.getArmy().getId() == armies.get(id).getArmy().getId() && armies.get(id).getValue() >= moveArmy.getValue()){
-                armies.get(id).setInTown(armies.get(id).getValue() - moveArmy.getValue());
-
-            } else {
+            if (army.getArmy().getName().equals("Infantry") && army.getValue() >= moveArmy.getValue()){
+                army.setInTown(army.getValue() - moveArmy.getValue());
+                infantryPk = army.getPk();
+            } else if (army.getArmy().getName().equals("Cavalry") && army.getValue() >= moveArmy.getValue()){
+                army.setInTown(army.getValue() - moveArmy.getValue());
+                cavalryPk = army.getPk();
+            } else if (army.getArmy().getName().equals("Armored") && army.getValue() >= moveArmy.getValue()){
+                army.setInTown(army.getValue() - moveArmy.getValue());
+                armoredPk = army.getPk();
+            }
+            else {
                 return new Reply(Status.CONFLICT, "Not enough troops in town");
             }
         }
-        townArmyRepository.save(armies);
+        townArmyRepository.save(homeTown.getTownArmies());
 
         // add pk's here
+        queue.setInfantryPk(infantryPk);
+        queue.setCavalryPk(cavalryPk);
+        queue.setArmoredPk(armoredPk);
         queue.setValue((int) distance);
         queue.setTargetTownId(moveArmy.getTargetTownId());
         queue.setHomeTownId(moveArmy.getTownId());
@@ -74,7 +87,10 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         Town targetTown = townRepository.findOne(queue.getTargetTownId());
 
         //preparing armies
-        List<TownArmy> attackingArmy = queue.getArmies();
+        List<TownArmy> attackingArmy = new ArrayList<>();
+        attackingArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getInfantryPk())));
+        attackingArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getCavalryPk())));
+        attackingArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getArmoredPk())));
         List<TownArmy> defendingArmy = targetTown.getTownArmies();
 
         //preparing buildings that have influence on the battle
@@ -89,20 +105,18 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         }
         // simulating battle
         for (TownArmy army : defendingArmy){
-            if (attackingArmy != null) {
-                int id = army.getArmy().getId();
-                int defence = army.getInTown() * (1 + (wallLevel / 20));
-                int result = (attackingArmy.get(id).getValue() - attackingArmy.get(id).getInTown()) - defence;
-                if (result <= 0){
-                    townArmyRepository.delete(attackingArmy.get(id));
-                    army.setValue((army.getValue() - army.getInTown()) + Math.abs((result / (1 + (wallLevel /20)))));
-                    townArmyRepository.save(army);
-                    return false;
-                } else {
-                    attackingArmy.get(id).setValue(result + attackingArmy.get(id).getInTown());
-                    townArmyRepository.save(attackingArmy.get(id));
-                    townArmyRepository.delete(army);
-                }
+            int id = army.getArmy().getId();
+            int defence = army.getInTown() * (1 + (wallLevel / 20));
+            int result = (attackingArmy.get(id).getValue() - attackingArmy.get(id).getInTown()) - defence;
+            if (result <= 0){
+                townArmyRepository.delete(attackingArmy.get(id));
+                army.setValue((army.getValue() - army.getInTown()) + Math.abs((result / (1 + (wallLevel /20)))));
+                townArmyRepository.save(army);
+                return false;
+            } else {
+                attackingArmy.get(id).setValue(result + attackingArmy.get(id).getInTown());
+                townArmyRepository.save(attackingArmy.get(id));
+                townArmyRepository.delete(army);
             }
         }
 
@@ -112,7 +126,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
             switch(targetResources.getResource().getName()){
                 case "Oil":
                     for (TownResources homeResources: homeTown.getTownResources()){
-                        if (homeResources.getResource().getName() == "Oil"){
+                        if (homeResources.getResource().getName().equals("Oil")){
                             targetResources.setValue(targetResources.getValue() - warehouseResourceProtection);
                             homeResources.setValue(homeResources.getValue() + targetResources.getValue());
                             townResourceRepository.save(homeResources);
@@ -123,7 +137,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                     break;
                 case "Iron":
                     for (TownResources homeResources: homeTown.getTownResources()){
-                        if (homeResources.getResource().getName() == "Iron"){
+                        if (homeResources.getResource().getName().equals("Iron")){
                             targetResources.setValue(targetResources.getValue() - warehouseResourceProtection);
                             homeResources.setValue(homeResources.getValue() + targetResources.getValue());
                             townResourceRepository.save(homeResources);
@@ -134,7 +148,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                     break;
                 case "Wood":
                     for (TownResources homeResources: homeTown.getTownResources()){
-                        if (homeResources.getResource().getName() == "Wood"){
+                        if (homeResources.getResource().getName().equals("Wood")){
                             targetResources.setValue(targetResources.getValue() - warehouseResourceProtection);
                             homeResources.setValue(homeResources.getValue() + targetResources.getValue());
                             townResourceRepository.save(homeResources);
@@ -149,9 +163,13 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
     }
 
     public void updateTroopsInTown(ArmyMovementQueue queue){
-        for (TownArmy army : queue.getArmies()){
+        List<TownArmy> townArmy = new ArrayList<>();
+        townArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getInfantryPk())));
+        townArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getCavalryPk())));
+        townArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getArmoredPk())));
+        for (TownArmy army : townArmy){
             army.setInTown(army.getValue());
         }
-        townArmyRepository.save(queue.getArmies());
+        townArmyRepository.save(townArmy);
     }
 }
