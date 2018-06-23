@@ -37,14 +37,14 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         TownArmyId cavalryPk = null;
         TownArmyId armoredPk = null;
         for (TownArmy army : homeTown.getTownArmies()){
-            if (army.getArmy().getName().equals("Infantry") && army.getValue() >= moveArmy.getValue()){
-                army.setInTown(army.getValue() - moveArmy.getValue());
+            if (army.getArmy().getName().equals("Infantry") && army.getValue() >= moveArmy.getTroopAmount().get(1)){
+                army.setInTown(army.getValue() - moveArmy.getTroopAmount().get(1));
                 infantryPk = army.getPk();
-            } else if (army.getArmy().getName().equals("Cavalry") && army.getValue() >= moveArmy.getValue()){
-                army.setInTown(army.getValue() - moveArmy.getValue());
+            } else if (army.getArmy().getName().equals("Cavalry") && army.getValue() >= moveArmy.getTroopAmount().get(2)){
+                army.setInTown(army.getValue() - moveArmy.getTroopAmount().get(2));
                 cavalryPk = army.getPk();
-            } else if (army.getArmy().getName().equals("Armored") && army.getValue() >= moveArmy.getValue()){
-                army.setInTown(army.getValue() - moveArmy.getValue());
+            } else if (army.getArmy().getName().equals("Armored") && army.getValue() >= moveArmy.getTroopAmount().get(3)){
+                army.setInTown(army.getValue() - moveArmy.getTroopAmount().get(3));
                 armoredPk = army.getPk();
             }
             else {

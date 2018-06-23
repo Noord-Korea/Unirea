@@ -1,17 +1,18 @@
 package com.restserver.json.request;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MoveArmy {
-    private Map<Integer, Integer> armyIds;
+    private ArrayList<Integer> troopAmount;
     private int targetTownId;
     private int value;
     private int townId;
     private String token;
 
-    public MoveArmy(HashMap<Integer, Integer> armyIds, int targetTownId, int value, int townId, String token) {
-        this.armyIds = armyIds;
+    public MoveArmy(ArrayList<Integer> troopAmount, int targetTownId, int value, int townId, String token) {
+        this.troopAmount = troopAmount;
         this.targetTownId = targetTownId;
         this.value = value;
         this.townId = townId;
@@ -50,11 +51,11 @@ public class MoveArmy {
         this.token = token;
     }
 
-    public Map<Integer, Integer> getArmyIds() {
-        return armyIds;
+    public ArrayList<Integer> getTroopAmount() {
+        return troopAmount;
     }
 
-    public void setArmyIds(Map<Integer, Integer> armyIds) {
-        this.armyIds = armyIds;
+    public void setTroopAmount(ArrayList<Integer> troopAmount) {
+        this.troopAmount = troopAmount;
     }
 }
