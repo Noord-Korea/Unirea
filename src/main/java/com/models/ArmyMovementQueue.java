@@ -2,8 +2,6 @@ package com.models;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "ArmyMovement")
@@ -15,7 +13,7 @@ import java.util.Map;
 
 })
 public class ArmyMovementQueue {
-    private List<TownArmy> armies;
+    private TownArmyId pk;
     private int value;
     private Date date;
     private int homeTownId;
@@ -53,7 +51,23 @@ public class ArmyMovementQueue {
     public void setHomeTownId(int homeTownId) {
         this.homeTownId = homeTownId;
     }
+    @Transient
+    public Town getTown() {
+        return pk.getTown();
+    }
 
+    public void setTown(Town town) {
+        pk.setTown(town);
+    }
+
+    @Transient
+    public Army getArmy() {
+        return pk.getArmy();
+    }
+
+    public void setArmy(Army army) {
+        pk.setArmy(army);
+    }
     public boolean isGoingHome() {
         return goingHome;
     }
@@ -62,11 +76,4 @@ public class ArmyMovementQueue {
         this.goingHome = goingHome;
     }
 
-    public List<TownArmy> getArmies() {
-        return armies;
-    }
-
-    public void setArmies(List<TownArmy> armies) {
-        this.armies = armies;
-    }
 }
