@@ -48,9 +48,20 @@ public class ArmyMovementQueue {
         return homeTownId;
     }
 
+    @EmbeddedId
+    public TownArmyId getPk() {
+        return pk;
+    }
+
+    public void setPk(TownArmyId pk) {
+        this.pk = pk;
+    }
+
+
     public void setHomeTownId(int homeTownId) {
         this.homeTownId = homeTownId;
     }
+
     @Transient
     public Town getTown() {
         return pk.getTown();
@@ -68,6 +79,7 @@ public class ArmyMovementQueue {
     public void setArmy(Army army) {
         pk.setArmy(army);
     }
+
     public boolean isGoingHome() {
         return goingHome;
     }
