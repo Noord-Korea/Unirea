@@ -1,9 +1,6 @@
 package com.models;
 
-import com.dbal.repository.BuildingQueueRepository;
-import com.dbal.repository.TownArmyRepository;
-import com.dbal.repository.TownBuildingRepository;
-import com.dbal.repository.TownResourceRepository;
+import com.dbal.repository.*;
 import com.dbal.specification.TownIdSpecification;
 
 import javax.persistence.*;
@@ -75,6 +72,12 @@ public class Town {
         BuildingQueueRepository buildingQueueRepository = new BuildingQueueRepository();
         return buildingQueueRepository.findAll(TownIdSpecification.getByTownId(id));
     }
+
+    public List<ArmyMovementQueue> getArmyMovementQueues() {
+        ArmyMovementQueueRepository armyMovementQueueRepository = new ArmyMovementQueueRepository();
+        return armyMovementQueueRepository.findAll(TownIdSpecification.getByTownId(id));
+    }
+
 
 
     public String getName() {

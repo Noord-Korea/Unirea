@@ -1,7 +1,6 @@
 package com.server.tick;
 
 import com.dbal.repository.BuildingQueueRepository;
-import com.dbal.repository.BuildingRepository;
 import com.dbal.repository.TownBuildingRepository;
 import com.dbal.repository.TownRepository;
 import com.logging.LogLevel;
@@ -9,8 +8,6 @@ import com.logging.Logger;
 import com.models.BuildingQueue;
 import com.models.Town;
 import com.models.TownBuilding;
-import com.restserver.buildings.resource.models.BaseNormalBuilding;
-import com.restserver.buildings.resource.models.BaseResourceBuilding;
 import com.restserver.handler.BuildingHandler;
 import com.restserver.handler.IBuildingHandler;
 

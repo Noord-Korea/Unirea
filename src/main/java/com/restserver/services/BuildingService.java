@@ -15,7 +15,11 @@ import javax.ws.rs.core.Response;
 
 @Path("/building")
 public class BuildingService {
-    private BuildingHandler handler = new BuildingHandler();
+    private static BuildingHandler handler;
+
+    public static void setHandler(BuildingHandler buildingHandler) {
+        handler = buildingHandler;
+    }
 
     @POST
     @Consumes("application/json")
