@@ -3,6 +3,7 @@ package com.restserver.services;
 import com.google.gson.Gson;
 import com.restserver.handler.ArmyHandler;
 import com.restserver.handler.ArmyMovementHandler;
+import com.restserver.handler.IArmyMovementHandler;
 import com.restserver.json.request.MoveArmy;
 import com.restserver.json.request.TrainArmy;
 import com.restserver.json.response.Reply;
@@ -48,7 +49,7 @@ public class ArmyService {
     @Consumes("application/json")
     @Path("/move")
     public Response moveArmy(String data) {
-        ArmyMovementHandler handler = new ArmyMovementHandler();
+        IArmyMovementHandler handler = new ArmyMovementHandler();
         Reply reply = null;
         Gson gson = new Gson();
         MoveArmy moveArmy = gson.fromJson(data, MoveArmy.class);
@@ -56,7 +57,7 @@ public class ArmyService {
             reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
         if (reply == null) {
-            reply = handler.MoveArmy(moveArmy);
+            reply = handler.moveArmy(moveArmy);
         }
         if (reply == null) {
             reply = new Reply(Status.ERROR, "something went wrong");

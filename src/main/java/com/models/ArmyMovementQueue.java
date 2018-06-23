@@ -8,6 +8,7 @@ public class ArmyMovementQueue {
     private Date date;
     private int homeTownId;
     private int targetTownId;
+    private boolean goingHome;
 
     public TownArmyId getPk() {
         return pk;
@@ -47,5 +48,13 @@ public class ArmyMovementQueue {
 
     public void setHomeTownId(int homeTownId) {
         this.homeTownId = homeTownId;
+    }
+
+    public boolean isGoingHome() {
+        return goingHome;
+    }
+
+    public void setGoingHome(boolean goingHome) {
+        this.goingHome = goingHome;
     }
 }

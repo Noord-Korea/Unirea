@@ -16,6 +16,7 @@ public class TownArmy {
 
     private TownArmyId pk = new TownArmyId();
     private int value;
+    private boolean inTown = true;
 
     @EmbeddedId
     public TownArmyId getPk() {
@@ -51,5 +52,14 @@ public class TownArmy {
 
     public void setArmy(Army army) {
         pk.setArmy(army);
+    }
+
+    @Column(name = "inTown")
+    public boolean isInTown() {
+        return inTown;
+    }
+
+    public void setInTown(boolean inTown) {
+        this.inTown = inTown;
     }
 }

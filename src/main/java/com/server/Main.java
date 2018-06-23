@@ -29,7 +29,7 @@ public class Main {
 
         exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
         //exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
-        //exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
         exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
     }
 }
