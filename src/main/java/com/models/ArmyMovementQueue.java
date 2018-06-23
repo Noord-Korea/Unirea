@@ -1,9 +1,19 @@
 package com.models;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Entity
+@Table(name = "ArmyMovement")
+@AssociationOverrides({
+        @AssociationOverride(name = "pk.town",
+                joinColumns = @JoinColumn(name = "TOWN_ID")),
+        @AssociationOverride(name = "pk.army",
+                joinColumns = @JoinColumn(name = "ARMY_ID"))
+
+})
 public class ArmyMovementQueue {
     private List<TownArmy> armies;
     private int value;
