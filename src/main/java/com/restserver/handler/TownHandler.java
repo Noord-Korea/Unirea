@@ -58,7 +58,7 @@ public class TownHandler implements ITownHandler {
         if (towns.isEmpty()) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            Set<TownResponse> townResponseSet = new HashSet();
+            Set<TownResponse> townResponseSet = new HashSet<>();
             for (Town town : towns) {
                 townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName(), town.getId()));
             }
