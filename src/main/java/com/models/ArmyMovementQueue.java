@@ -1,7 +1,17 @@
 package com.models;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "ArmyMovement")
+@AssociationOverrides({
+        @AssociationOverride(name = "pk.town",
+                joinColumns = @JoinColumn(name = "TOWN_ID")),
+        @AssociationOverride(name = "pk.army",
+                joinColumns = @JoinColumn(name = "ARMY_ID"))
+
+})
 public class ArmyMovementQueue {
     private TownArmyId pk = new TownArmyId();
     private int value;
@@ -10,6 +20,7 @@ public class ArmyMovementQueue {
     private int targetTownId;
     private boolean goingHome;
 
+    @EmbeddedId
     public TownArmyId getPk() {
         return pk;
     }
@@ -32,6 +43,24 @@ public class ArmyMovementQueue {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Transient
+    public Town getTown() {
+        return pk.getTown();
+    }
+
+    public void setTown(Town town) {
+        pk.setTown(town);
+    }
+
+    @Transient
+    public Army getArmy() {
+        return getPk().getArmy();
+    }
+
+    public void setArmy(Army army) {
+        pk.setArmy(army);
     }
 
     public int getTargetTownId() {
