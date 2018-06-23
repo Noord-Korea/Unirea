@@ -1,26 +1,21 @@
 package com.restserver.json.request;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MoveArmy {
-    private int armyId;
+    private Map<Integer, Integer> armyIds;
     private int targetTownId;
     private int value;
     private int townId;
     private String token;
 
-    public MoveArmy(int armyId, int targetTownId, int value, int townId, String token) {
-        this.armyId = armyId;
+    public MoveArmy(HashMap<Integer, Integer> armyIds, int targetTownId, int value, int townId, String token) {
+        this.armyIds = armyIds;
         this.targetTownId = targetTownId;
         this.value = value;
         this.townId = townId;
         this.token = token;
-    }
-
-    public int getArmyId() {
-        return armyId;
-    }
-
-    public void setArmyId(int armyId) {
-        this.armyId = armyId;
     }
 
     public int getTargetTownId() {
@@ -53,5 +48,13 @@ public class MoveArmy {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Map<Integer, Integer> getArmyIds() {
+        return armyIds;
+    }
+
+    public void setArmyIds(Map<Integer, Integer> armyIds) {
+        this.armyIds = armyIds;
     }
 }

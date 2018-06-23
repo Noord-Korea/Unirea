@@ -8,8 +8,6 @@ import com.logging.Logger;
 import com.models.BuildingQueue;
 import com.models.Town;
 import com.models.TownBuilding;
-import com.restserver.handler.BuildingHandler;
-import com.restserver.handler.IBuildingHandler;
 
 import java.util.List;
 
@@ -21,10 +19,8 @@ public class BuildingTick implements Runnable {
         TownBuildingRepository townBuildingRepository = new TownBuildingRepository();
         TownRepository townRepository = new TownRepository();
 
-        IBuildingHandler buildingHandler = new BuildingHandler();
-
         List<Town> towns = townRepository.findAllNoDuplicates(null);
-        boolean removeQueue = false;
+        boolean removeQueue;
 
         for (Town town : towns) {
             if (town.getBuildingQueues().isEmpty()) {
@@ -32,6 +28,7 @@ public class BuildingTick implements Runnable {
             } else {
                 List<BuildingQueue> queues = town.getBuildingQueues();
                 for (BuildingQueue queue : queues) {
+                    removeQueue = false;
                     if (queue.getValue() <= 0){
                         int buildingId = queue.getPk().getBuilding().getId();
                         if (buildingId > 3) {
@@ -56,7 +53,6 @@ public class BuildingTick implements Runnable {
                     queue.setValue(queue.getValue() - 5);
                     if (!removeQueue){
                         buildingQueueRepository.save(queue);
-                        removeQueue = false;
                     }
                 }
             }

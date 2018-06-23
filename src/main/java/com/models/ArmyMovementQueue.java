@@ -1,22 +1,16 @@
 package com.models;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class ArmyMovementQueue {
-    private TownArmyId pk = new TownArmyId();
+    private List<TownArmy> armies;
     private int value;
     private Date date;
     private int homeTownId;
     private int targetTownId;
     private boolean goingHome;
-
-    public TownArmyId getPk() {
-        return pk;
-    }
-
-    public void setPk(TownArmyId pk) {
-        this.pk = pk;
-    }
 
     public int getValue() {
         return value;
@@ -56,5 +50,13 @@ public class ArmyMovementQueue {
 
     public void setGoingHome(boolean goingHome) {
         this.goingHome = goingHome;
+    }
+
+    public List<TownArmy> getArmies() {
+        return armies;
+    }
+
+    public void setArmies(List<TownArmy> armies) {
+        this.armies = armies;
     }
 }

@@ -4,6 +4,7 @@ import com.dbal.repository.ArmyMovementQueueRepository;
 import com.dbal.repository.TownArmyRepository;
 import com.dbal.repository.TownRepository;
 import com.dbal.repository.TownResourceRepository;
+import com.dbal.specification.ArmyMovementQueueSpecification;
 import com.models.*;
 import com.restserver.json.request.MoveArmy;
 import com.restserver.json.response.Reply;
@@ -23,23 +24,26 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         if (townRepository.findOne(moveArmy.getTownId()) == null || townRepository.findOne(moveArmy.getTargetTownId()) == null){
             return new Reply(Status.NOTFOUND, "Town could not be found");
         }
+        if (armyMovementQueueRepository.findOne(ArmyMovementQueueSpecification.getByHomeTownId(moveArmy.getTownId())) != null){
+            return new Reply(Status.CONFLICT, "You are already sending troops somewhere");
+        }
 
         Town homeTown = townRepository.findOne(moveArmy.getTownId());
         double distance  = calcDistanceToTarget(moveArmy);
         ArmyMovementQueue queue = new ArmyMovementQueue();
-        TownArmyId townArmyPK = new TownArmyId();
-
+        List<TownArmy> armies = homeTown.getTownArmies();
         for (TownArmy army : homeTown.getTownArmies()){
-            if (army.getArmy().getId() == moveArmy.getArmyId() && army.isInTown()){
-                townArmyPK = army.getPk();
-                army.setInTown(false);
-                townArmyRepository.save(army);
-            } else if (!army.isInTown()){
-                return new Reply(Status.CONFLICT, "Army not in town");
+            int id = army.getArmy().getId();
+            if (army.getArmy().getId() == armies.get(id).getArmy().getId() && armies.get(id).getValue() >= moveArmy.getValue()){
+                armies.get(id).setInTown(armies.get(id).getValue() - moveArmy.getValue());
+
+            } else {
+                return new Reply(Status.CONFLICT, "Not enough troops in town");
             }
         }
+        townArmyRepository.save(armies);
 
-        queue.setPk(townArmyPK);
+        queue.setArmies(armies);
         queue.setValue((int) distance);
         queue.setTargetTownId(moveArmy.getTargetTownId());
         queue.setHomeTownId(moveArmy.getTownId());
@@ -68,14 +72,9 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
     public Boolean calcArmyBattle(ArmyMovementQueue queue){
         Town homeTown = townRepository.findOne(queue.getHomeTownId());
         Town targetTown = townRepository.findOne(queue.getTargetTownId());
-        TownArmy attackingArmy = null;
 
         //preparing armies
-        for (TownArmy townArmy : homeTown.getTownArmies()){
-            if (townArmy.getPk() == queue.getPk()){
-                attackingArmy = townArmy;
-            }
-        }
+        List<TownArmy> attackingArmy = queue.getArmies();
         List<TownArmy> defendingArmy = targetTown.getTownArmies();
 
         //preparing buildings that have influence on the battle
@@ -91,19 +90,20 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         // simulating battle
         for (TownArmy army : defendingArmy){
             if (attackingArmy != null) {
-                int defence = army.getValue() * (1 + (wallLevel / 20));
-                int result = attackingArmy.getValue() - defence;
+                int id = army.getArmy().getId();
+                int defence = army.getInTown() * (1 + (wallLevel / 20));
+                int result = (attackingArmy.get(id).getValue() - attackingArmy.get(id).getInTown()) - defence;
                 if (result <= 0){
-                    townArmyRepository.delete(attackingArmy);
-                    army.setValue(Math.abs((result / (1 + (wallLevel /20)))));
+                    townArmyRepository.delete(attackingArmy.get(id));
+                    army.setValue((army.getValue() - army.getInTown()) + Math.abs((result / (1 + (wallLevel /20)))));
                     townArmyRepository.save(army);
                     return false;
                 } else {
-                    attackingArmy.setValue(result);
+                    attackingArmy.get(id).setValue(result + attackingArmy.get(id).getInTown());
+                    townArmyRepository.save(attackingArmy.get(id));
                     townArmyRepository.delete(army);
                 }
             }
-
         }
 
         // if battle is won take resources from enemy town
@@ -146,5 +146,12 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
             }
         }
         return true;
+    }
+
+    public void updateTroopsInTown(ArmyMovementQueue queue){
+        for (TownArmy army : queue.getArmies()){
+            army.setInTown(army.getValue());
+        }
+        townArmyRepository.save(queue.getArmies());
     }
 }
