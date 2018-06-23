@@ -11,4 +11,6 @@ public interface ITownHandler {
     Reply getTownsByPlayerId(int playerId);
 
     Reply createTown(Player player);
+
+    Reply getTownByAccesstoken(String token);
 }

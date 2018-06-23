@@ -1,11 +1,6 @@
 package com.restserver.json.response.town;
 
-import com.models.*;
-
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class TownResponse {
     private Map<String, Integer> townResources;
@@ -14,16 +9,16 @@ public class TownResponse {
     private int y;
     private String username;
     private String name;
-    private int id;
+    private int townId;
 
-    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, String username, String name, int id) {
+    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, String username, String name, int townId) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.x = x;
         this.y = y;
         this.username = username;
         this.name = name;
-        this.id = id;
+        this.townId = townId;
     }
 
     public int getX() {
@@ -74,11 +69,11 @@ public class TownResponse {
         this.username = username;
     }
 
-    public int getId() {
-        return id;
+    public int getTownId() {
+        return townId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTownId(int townId) {
+        this.townId = townId;
     }
 }

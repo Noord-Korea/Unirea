@@ -1,13 +1,12 @@
 package com.restserver.handler;
 
+import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.IRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.repository.TownRepository;
+import com.dbal.specification.AccessTokenSpecification;
 import com.google.gson.Gson;
-import com.models.Player;
-import com.models.Town;
-import com.models.TownBuilding;
-import com.models.TownResources;
+import com.models.*;
 import com.restserver.exception.PlayerHasTownException;
 import com.restserver.factory.TownFactory;
 import com.restserver.json.response.Reply;
@@ -22,6 +21,7 @@ import java.util.Set;
 public class TownHandler implements ITownHandler {
     private TownRepository townRepository;
     private PlayerRepository playerRepository = new PlayerRepository();
+    private AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
     private Gson gson = new Gson();
 
     public TownHandler(IRepository townRepository) {
@@ -30,6 +30,19 @@ public class TownHandler implements ITownHandler {
 
     @Override
     public Reply getTown(int townId) {
+        Town town = townRepository.findOne(townId);
+        if (town == null) {
+            return new Reply(Status.NOTFOUND, "No town found");
+        } else {
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName(), town.getId());
+            return new Reply(Status.OK, gson.toJson(townResponse));
+        }
+    }
+
+    @Override
+    public Reply getTownByAccesstoken(String token) {
+        AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(token));
+        int townId = accessToken.getPlayer().getTowns().iterator().next().getId();
         Town town = townRepository.findOne(townId);
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");

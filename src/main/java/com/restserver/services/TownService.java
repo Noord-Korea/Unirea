@@ -36,7 +36,7 @@ public class TownService {
             reply = new Reply(Status.NOAUTH, "Accesstoken not valid");
         }
         if (reply == null) {
-            reply = handler.getTown(town.getTownId());
+            reply = handler.getTownByAccesstoken(town.getToken());
         }
 
         if (reply == null) {

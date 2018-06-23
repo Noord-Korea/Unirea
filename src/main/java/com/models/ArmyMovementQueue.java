@@ -13,7 +13,9 @@ import java.util.Date;
 
 })
 public class ArmyMovementQueue {
-    private TownArmyId pk;
+    private TownArmyId infantryPk;
+    private TownArmyId cavalryPk;
+    private TownArmyId armoredPk;
     private int value;
     private Date date;
     private int homeTownId;
@@ -49,12 +51,30 @@ public class ArmyMovementQueue {
     }
 
     @EmbeddedId
-    public TownArmyId getPk() {
-        return pk;
+    public TownArmyId getInfantryPk() {
+        return infantryPk;
     }
 
-    public void setPk(TownArmyId pk) {
-        this.pk = pk;
+    public void setInfantryPk(TownArmyId pk) {
+        this.infantryPk = pk;
+    }
+
+    @EmbeddedId
+    public TownArmyId getCavalryPk() {
+        return cavalryPk;
+    }
+
+    public void setCavalryPk(TownArmyId cavalryPk) {
+        this.cavalryPk = cavalryPk;
+    }
+
+    @EmbeddedId
+    public TownArmyId getArmoredPk() {
+        return armoredPk;
+    }
+
+    public void setArmoredPk(TownArmyId armoredPk) {
+        this.armoredPk = armoredPk;
     }
 
 
@@ -64,20 +84,20 @@ public class ArmyMovementQueue {
 
     @Transient
     public Town getTown() {
-        return pk.getTown();
+        return infantryPk.getTown();
     }
 
     public void setTown(Town town) {
-        pk.setTown(town);
+        infantryPk.setTown(town);
     }
 
     @Transient
     public Army getArmy() {
-        return pk.getArmy();
+        return infantryPk.getArmy();
     }
 
     public void setArmy(Army army) {
-        pk.setArmy(army);
+        infantryPk.setArmy(army);
     }
 
     public boolean isGoingHome() {
@@ -87,5 +107,4 @@ public class ArmyMovementQueue {
     public void setGoingHome(boolean goingHome) {
         this.goingHome = goingHome;
     }
-
 }

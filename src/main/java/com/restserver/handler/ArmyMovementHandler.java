@@ -43,7 +43,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         }
         townArmyRepository.save(armies);
 
-        queue.setArmies(armies);
+        // add pk's here
         queue.setValue((int) distance);
         queue.setTargetTownId(moveArmy.getTargetTownId());
         queue.setHomeTownId(moveArmy.getTownId());
