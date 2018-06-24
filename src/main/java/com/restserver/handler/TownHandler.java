@@ -105,11 +105,20 @@ public class TownHandler implements ITownHandler {
 
     public ArrayList<ArmyResponse> townArmyToMap(Town town){
         ArrayList<ArmyResponse> townArmy = new ArrayList<>();
-        for (TownArmy army : town.getTownArmies()){
-            ArmyResponse armyResponse = new ArmyResponse();
-            armyResponse.setAmount(army.getValue());
-            armyResponse.setId(army.getArmy().getId());
-            townArmy.add(armyResponse);
+        if (town.getTownArmies().isEmpty()){
+            for (int i = 1; i < 4; i++){
+                ArmyResponse armyResponse = new ArmyResponse();
+                armyResponse.setAmount(0);
+                armyResponse.setId(i);
+                townArmy.add(armyResponse);
+            }
+        } else {
+            for (TownArmy army : town.getTownArmies()) {
+                ArmyResponse armyResponse = new ArmyResponse();
+                armyResponse.setAmount(army.getValue());
+                armyResponse.setId(army.getArmy().getId());
+                townArmy.add(armyResponse);
+            }
         }
         return townArmy;
     }

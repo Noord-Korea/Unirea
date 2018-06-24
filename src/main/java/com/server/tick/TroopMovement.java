@@ -12,8 +12,6 @@ import com.restserver.handler.IArmyMovementHandler;
 import java.util.List;
 
 public class TroopMovement implements Runnable {
-
-    @Override
     public void run() {
         Logger.getInstance().log("Troopmovement Running", LogLevel.INFORMATION);
 
