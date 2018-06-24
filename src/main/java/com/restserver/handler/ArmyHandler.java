@@ -3,6 +3,7 @@ package com.restserver.handler;
 import com.dbal.repository.ArmyRepository;
 import com.dbal.repository.TownArmyRepository;
 import com.dbal.repository.TownRepository;
+import com.dbal.specification.ArmySpecification;
 import com.models.Army;
 import com.models.Town;
 import com.models.TownArmy;
@@ -19,7 +20,7 @@ public class ArmyHandler {
         TownArmy townArmy = new TownArmy();
         ArmyRepository armyRepository = new ArmyRepository();
 
-        Army army = armyRepository.findOne(trainArmy.getArmy());
+        Army army = armyRepository.findOne(ArmySpecification.getByArmyID(trainArmy.getArmy()));
         townArmy.setArmy(army);
 
         TownRepository townRepository = new TownRepository();
