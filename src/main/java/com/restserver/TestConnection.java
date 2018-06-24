@@ -69,7 +69,7 @@ public class TestConnection {
         HttpPost requestcreateTown = new HttpPost("http://localhost:8090/town/create");
         requestcreateTown.setEntity(entitycreateTown);
 
-        //HttpResponse responsecreateTown = httpClientcreateTown.execute(requestcreateTown);
+        HttpResponse responsecreateTown = httpClientcreateTown.execute(requestcreateTown);
 
         //
 
