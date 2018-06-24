@@ -200,6 +200,9 @@ public class BuildingHandler implements IBuildingHandler {
 
     public Map<String, Integer> getResourceRequirements(int buildingLevel, int buildingId){
         Map<String, Integer> requirements = new HashMap<>();
+        if (buildingLevel == 0){
+            buildingLevel = 1;
+        }
         double pow = 0;
         switch(buildingId){
             //OIL

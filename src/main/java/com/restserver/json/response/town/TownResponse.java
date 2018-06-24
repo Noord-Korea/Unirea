@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TownResponse {
     private ArrayList<ResourceResponse> townResources;
     private ArrayList<BuildingResponse> townBuildings;
+    private ArrayList<ArmyResponse> townArmy;
     private int x;
     private int y;
     private String username;
@@ -12,9 +13,10 @@ public class TownResponse {
     private String name;
     private int townId;
 
-    public TownResponse(ArrayList<ResourceResponse> townResources, ArrayList<BuildingResponse> townBuildings, int x, int y, String username, int playerId, String name, int townId) {
+    public TownResponse(ArrayList<ResourceResponse> townResources, ArrayList<BuildingResponse> townBuildings, ArrayList<ArmyResponse> townArmy, int x, int y, String username, int playerId, String name, int townId) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
+        this.townArmy = townArmy;
         this.x = x;
         this.y = y;
         this.username = username;
@@ -85,5 +87,13 @@ public class TownResponse {
 
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
+    }
+
+    public ArrayList<ArmyResponse> getTownArmy() {
+        return townArmy;
+    }
+
+    public void setTownArmy(ArrayList<ArmyResponse> townArmy) {
+        this.townArmy = townArmy;
     }
 }
