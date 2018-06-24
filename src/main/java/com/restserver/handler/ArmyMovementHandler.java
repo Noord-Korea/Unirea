@@ -108,10 +108,15 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
             int id = army.getArmy().getId() - 1;
             int defence = army.getInTown() * (1 + (wallLevel / 20));
             int result = (attackingArmy.get(id).getValue() - attackingArmy.get(id).getInTown()) - defence;
-            if (result <= 0) {
+            if (result < 0) {
                 townArmyRepository.delete(attackingArmy.get(id));
-                army.setValue((army.getValue() - army.getInTown()) + Math.abs((result / (1 + (wallLevel / 20)))));
+                army.setValue(((army.getValue() - army.getInTown())) + Math.abs(result));
+                army.setInTown(Math.abs(result));
                 townArmyRepository.save(army);
+                return false;
+            } else if (result == 0){
+                townArmyRepository.delete(attackingArmy.get(id));
+                townArmyRepository.delete(army);
                 return false;
             } else {
                 attackingArmy.get(id).setValue(result + attackingArmy.get(id).getInTown());
@@ -128,7 +133,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                     for (TownResources homeResources : homeTown.getTownResources()) {
                         if (homeResources.getResource().getName().equals("Oil")) {
                             targetResources.setValue(warehouseResourceProtection);
-                            homeResources.setValue(homeResources.getValue() + targetResources.getValue());
+                            homeResources.setValue(homeResources.getValue() + (targetResources.getValue() - warehouseResourceProtection));
                             townResourceRepository.save(homeResources);
                             townResourceRepository.save(targetResources);
 
@@ -139,7 +144,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                     for (TownResources homeResources : homeTown.getTownResources()) {
                         if (homeResources.getResource().getName().equals("Iron")) {
                             targetResources.setValue(warehouseResourceProtection);
-                            homeResources.setValue(homeResources.getValue() + targetResources.getValue());
+                            homeResources.setValue(homeResources.getValue() + (targetResources.getValue() - warehouseResourceProtection));
                             townResourceRepository.save(homeResources);
                             townResourceRepository.save(targetResources);
 
@@ -150,7 +155,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                     for (TownResources homeResources : homeTown.getTownResources()) {
                         if (homeResources.getResource().getName().equals("Wood")) {
                             targetResources.setValue(warehouseResourceProtection);
-                            homeResources.setValue(homeResources.getValue() + targetResources.getValue());
+                            homeResources.setValue(homeResources.getValue() + (targetResources.getValue() - warehouseResourceProtection));
                             townResourceRepository.save(homeResources);
                             townResourceRepository.save(targetResources);
 
