@@ -14,6 +14,7 @@ import com.restserver.json.response.Status;
 import com.restserver.json.response.town.TownResponse;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import repotests.AbstractRepoTest;
 
@@ -35,7 +36,8 @@ public class TownHandlerTest {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
 
-    @Test
+    @Test    @Ignore
+
     public void testCreateTown() {
         PlayerRepository repo = new PlayerRepository();
         Player player = repo.save(new Player("testUser " + LocalTime.now(), "test@test.com", "testPass"));
@@ -43,7 +45,8 @@ public class TownHandlerTest {
         assertEquals(Status.OK, reply.getStatus());
     }
 
-    @Test
+    @Test    @Ignore
+
     public void testGetTownByAccessToken() {
         PlayerRepository repo = new PlayerRepository();
         Player player = repo.save(new Player("testUser " + LocalTime.now(), "test@test.com", "testPass"));

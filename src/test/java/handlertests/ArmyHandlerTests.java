@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.restserver.handler.ArmyHandler;
 import com.restserver.json.request.army.TrainArmy;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ArmyHandlerTests {
@@ -13,7 +14,8 @@ public class ArmyHandlerTests {
     public void init() {
         handler = new ArmyHandler();
     }
-    @Test
+    @Test    @Ignore
+
     public void testTrainArmy() {
         TrainArmy trainArmy = new TrainArmy(1, 1, 1, "test");
         handler.trainArmy(trainArmy);
