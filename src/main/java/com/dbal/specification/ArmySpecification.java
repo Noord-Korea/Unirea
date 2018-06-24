@@ -12,7 +12,7 @@ public abstract class ArmySpecification {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("ARMY_ID", id);
+                return Restrictions.eq("id", id);
             }
         };
     }
