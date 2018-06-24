@@ -34,9 +34,6 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         Town homeTown = townRepository.findOne(moveArmy.getTownId());
         double distance = calcDistanceToTarget(moveArmy);
         ArmyMovementQueue queue = new ArmyMovementQueue();
-        TownArmyId infantryPk = null;
-        TownArmyId cavalryPk = null;
-        TownArmyId armoredPk = null;
         int infantryAmount = 0;
         int cavalryAmount = 0;
         int armoredAmount = 0;
@@ -52,23 +49,16 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         for (TownArmy army : homeTown.getTownArmies()) {
             if (army.getArmy().getName().equals("Infantry") && army.getValue() >= infantryAmount) {
                 army.setInTown(army.getValue() - infantryAmount);
-                infantryPk = army.getPk();
             } else if (army.getArmy().getName().equals("Cavalry") && army.getValue() >= cavalryAmount) {
                 army.setInTown(army.getValue() - cavalryAmount);
-                cavalryPk = army.getPk();
             } else if (army.getArmy().getName().equals("Armored") && army.getValue() >= armoredAmount) {
                 army.setInTown(army.getValue() - armoredAmount);
-                armoredPk = army.getPk();
             } else {
                 return new Reply(Status.CONFLICT, "Not enough troops in town");
             }
         }
         townArmyRepository.save(homeTown.getTownArmies());
 
-        // add pk's here
-        queue.setInfantryPk(infantryPk);
-        queue.setCavalryPk(cavalryPk);
-        queue.setArmoredPk(armoredPk);
         queue.setValue((int) distance);
         queue.setTargetTownId(moveArmy.getTargetTownId());
         queue.setHomeTownId(moveArmy.getTownId());
@@ -100,10 +90,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         Town targetTown = townRepository.findOne(queue.getTargetTownId());
 
         //preparing armies
-        List<TownArmy> attackingArmy = new ArrayList<>();
-        attackingArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getInfantryPk())));
-        attackingArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getCavalryPk())));
-        attackingArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getArmoredPk())));
+        List<TownArmy> attackingArmy = new ArrayList<>(homeTown.getTownArmies());
         List<TownArmy> defendingArmy = targetTown.getTownArmies();
 
         //preparing buildings that have influence on the battle
@@ -176,10 +163,8 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
     }
 
     public void updateTroopsInTown(ArmyMovementQueue queue) {
-        List<TownArmy> townArmy = new ArrayList<>();
-        townArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getInfantryPk())));
-        townArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getCavalryPk())));
-        townArmy.add(townArmyRepository.findOne(TownArmySpecification.getByArmyPk(queue.getArmoredPk())));
+        Town homeTown = townRepository.findOne(queue.getHomeTownId());
+        List<TownArmy> townArmy = new ArrayList<>(homeTown.getTownArmies());
         for (TownArmy army : townArmy) {
             army.setInTown(army.getValue());
         }

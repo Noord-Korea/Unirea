@@ -5,17 +5,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ArmyMovement")
-@AssociationOverrides({
-        @AssociationOverride(name = "pk.town",
-                joinColumns = @JoinColumn(name = "TOWN_ID")),
-        @AssociationOverride(name = "pk.army",
-                joinColumns = @JoinColumn(name = "ARMY_ID"))
 
-})
 public class ArmyMovementQueue {
-    private TownArmyId infantryPk;
-    private TownArmyId cavalryPk;
-    private TownArmyId armoredPk;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ArmyQueue_ID", unique = true, nullable = false)
+    private int id;
     private int value;
     private Date date;
     private int homeTownId;
@@ -50,54 +45,8 @@ public class ArmyMovementQueue {
         return homeTownId;
     }
 
-    @EmbeddedId
-    public TownArmyId getInfantryPk() {
-        return infantryPk;
-    }
-
-    public void setInfantryPk(TownArmyId pk) {
-        this.infantryPk = pk;
-    }
-
-    @EmbeddedId
-    public TownArmyId getCavalryPk() {
-        return cavalryPk;
-    }
-
-    public void setCavalryPk(TownArmyId cavalryPk) {
-        this.cavalryPk = cavalryPk;
-    }
-
-    @EmbeddedId
-    public TownArmyId getArmoredPk() {
-        return armoredPk;
-    }
-
-    public void setArmoredPk(TownArmyId armoredPk) {
-        this.armoredPk = armoredPk;
-    }
-
-
     public void setHomeTownId(int homeTownId) {
         this.homeTownId = homeTownId;
-    }
-
-    @Transient
-    public Town getTown() {
-        return infantryPk.getTown();
-    }
-
-    public void setTown(Town town) {
-        infantryPk.setTown(town);
-    }
-
-    @Transient
-    public Army getArmy() {
-        return infantryPk.getArmy();
-    }
-
-    public void setArmy(Army army) {
-        infantryPk.setArmy(army);
     }
 
     public boolean isGoingHome() {
