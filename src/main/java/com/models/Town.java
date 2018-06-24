@@ -1,6 +1,7 @@
 package com.models;
 
 import com.dbal.repository.*;
+import com.dbal.specification.ArmyMovementQueueSpecification;
 import com.dbal.specification.TownIdSpecification;
 
 import javax.persistence.*;
@@ -75,7 +76,7 @@ public class Town {
 
     public List<ArmyMovementQueue> getArmyMovementQueues() {
         ArmyMovementQueueRepository armyMovementQueueRepository = new ArmyMovementQueueRepository();
-        return armyMovementQueueRepository.findAll(TownIdSpecification.getByTownId(id));
+        return armyMovementQueueRepository.findAll(ArmyMovementQueueSpecification.getByHomeTownId(id));
     }
 
 
