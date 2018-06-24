@@ -96,7 +96,7 @@ public class TownHandler implements ITownHandler {
         for (TownResources resources : town.getTownResources()){
             ResourceResponse resourceResponse = new ResourceResponse();
             resourceResponse.setAmount(resources.getValue());
-            resourceResponse.setName(resources.getResource().getName());
+            resourceResponse.setId(resources.getResource().getId());
             townResources.add(resourceResponse);
         }
         return townResources;
@@ -113,7 +113,13 @@ public class TownHandler implements ITownHandler {
             ArrayList<ResourceResponse> resourceCost = new ArrayList<>();
             for (Map.Entry<String, Integer> pair : cost.entrySet()) {
                 ResourceResponse resourceResponse = new ResourceResponse();
-                resourceResponse.setName(pair.getKey());
+                if (pair.getKey().equals("Oil")){
+                    resourceResponse.setId(1);
+                } else if (pair.getKey().equals("Iron")){
+                    resourceResponse.setId(2);
+                } else if (pair.getKey().equals("Wood")){
+                    resourceResponse.setId(3);
+                }
                 resourceResponse.setAmount(pair.getValue());
                 resourceCost.add(resourceResponse);
             }
