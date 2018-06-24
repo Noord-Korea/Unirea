@@ -1,14 +1,14 @@
-package com.restserver.json.request;
+package com.restserver.json.request.army;
 
 import java.util.ArrayList;
 
 public class MoveArmy {
-    private ArrayList<Integer> troopAmount;
+    private ArrayList<ArmyAmount> troopAmount;
     private int targetTownId;
     private int townId;
     private String token;
 
-    public MoveArmy(ArrayList<Integer> troopAmount, int targetTownId, int value, int townId, String token) {
+    public MoveArmy(ArrayList<ArmyAmount> troopAmount, int targetTownId, int townId, String token) {
         this.troopAmount = troopAmount;
         this.targetTownId = targetTownId;
         this.townId = townId;
@@ -39,11 +39,11 @@ public class MoveArmy {
         this.token = token;
     }
 
-    public ArrayList<Integer> getTroopAmount() {
+    public ArrayList<ArmyAmount> getTroopAmount() {
         return troopAmount;
     }
 
-    public void setTroopAmount(ArrayList<Integer> troopAmount) {
+    public void setTroopAmount(ArrayList<ArmyAmount> troopAmount) {
         this.troopAmount = troopAmount;
     }
 }

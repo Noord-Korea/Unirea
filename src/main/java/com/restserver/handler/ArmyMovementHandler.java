@@ -7,7 +7,8 @@ import com.dbal.repository.TownResourceRepository;
 import com.dbal.specification.ArmyMovementQueueSpecification;
 import com.dbal.specification.TownArmySpecification;
 import com.models.*;
-import com.restserver.json.request.MoveArmy;
+import com.restserver.json.request.army.ArmyAmount;
+import com.restserver.json.request.army.MoveArmy;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 
@@ -36,15 +37,27 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         TownArmyId infantryPk = null;
         TownArmyId cavalryPk = null;
         TownArmyId armoredPk = null;
+        int infantryAmount = 0;
+        int cavalryAmount = 0;
+        int armoredAmount = 0;
+        for (ArmyAmount amount :moveArmy.getTroopAmount()){
+            if (amount.getArmyId() == 1){
+                infantryAmount = amount.getTroopAmount();
+            } else if(amount.getArmyId() == 2){
+                cavalryAmount = amount.getTroopAmount();
+            } else if(amount.getArmyId() == 3){
+                armoredAmount = amount.getTroopAmount();
+            }
+        }
         for (TownArmy army : homeTown.getTownArmies()){
-            if (army.getArmy().getName().equals("Infantry") && army.getValue() >= moveArmy.getTroopAmount().get(1)){
-                army.setInTown(army.getValue() - moveArmy.getTroopAmount().get(1));
+            if (army.getArmy().getName().equals("Infantry") && army.getValue() >= infantryAmount){
+                army.setInTown(army.getValue() - infantryAmount);
                 infantryPk = army.getPk();
-            } else if (army.getArmy().getName().equals("Cavalry") && army.getValue() >= moveArmy.getTroopAmount().get(2)){
-                army.setInTown(army.getValue() - moveArmy.getTroopAmount().get(2));
+            } else if (army.getArmy().getName().equals("Cavalry") && army.getValue() >= cavalryAmount){
+                army.setInTown(army.getValue() - cavalryAmount);
                 cavalryPk = army.getPk();
-            } else if (army.getArmy().getName().equals("Armored") && army.getValue() >= moveArmy.getTroopAmount().get(3)){
-                army.setInTown(army.getValue() - moveArmy.getTroopAmount().get(3));
+            } else if (army.getArmy().getName().equals("Armored") && army.getValue() >= armoredAmount){
+                army.setInTown(army.getValue() - armoredAmount);
                 armoredPk = army.getPk();
             }
             else {
@@ -62,12 +75,13 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         queue.setHomeTownId(moveArmy.getTownId());
         queue.setDate(new Date());
         queue.setGoingHome(false);
+        int time = queue.getValue() * 2;
 
         List<ArmyMovementQueue> queues = homeTown.getArmyMovementQueues();
         queues.add(queue);
         armyMovementQueueRepository.save(queues);
 
-        return new Reply(Status.OK, "Troops have been sent");
+        return new Reply(Status.OK, time);
     }
 
     private double calcDistanceToTarget(MoveArmy moveArmy){

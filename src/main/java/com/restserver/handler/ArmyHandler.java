@@ -7,7 +7,7 @@ import com.models.Army;
 import com.models.Town;
 import com.models.TownArmy;
 import com.models.TownResources;
-import com.restserver.json.request.TrainArmy;
+import com.restserver.json.request.army.TrainArmy;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
 

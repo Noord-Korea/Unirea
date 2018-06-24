@@ -1,4 +1,4 @@
-package com.restserver.json.request;
+package com.restserver.json.request.army;
 
 public class TrainArmy {
     private int armyId;

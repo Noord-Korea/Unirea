@@ -1,7 +1,7 @@
 package com.restserver.handler;
 
 import com.models.ArmyMovementQueue;
-import com.restserver.json.request.MoveArmy;
+import com.restserver.json.request.army.MoveArmy;
 import com.restserver.json.response.Reply;
 
 public interface IArmyMovementHandler {
