@@ -2,7 +2,6 @@ package com.server;
 
 import com.server.exception.GameNotRunningException;
 import com.server.tick.BuildingTick;
-import com.server.tick.RecruitingTick;
 import com.server.tick.ResourceTick;
 import com.server.tick.TroopMovement;
 
@@ -17,7 +16,6 @@ public class Game {
     public Game() {
         run = false;
         building = new BuildingTick();
-        recruiting = new RecruitingTick();
         resource = new ResourceTick();
         troopMovement = new TroopMovement();
     }

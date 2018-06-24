@@ -15,7 +15,7 @@ public class MapHandler implements IMapHandler {
         TownRepository townRepository = new TownRepository();
         List<Town> towns = townRepository.findAllNoDuplicates(null);
         for (Town town : towns) {
-            map.add(new TownPosition(town.getId(), town.getX(), town.getY()));
+            map.add(new TownPosition(town.getId(), town.getPlayer().getPlayerId(), town.getX(), town.getY()));
         }
 
         return map;

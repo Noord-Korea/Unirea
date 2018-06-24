@@ -3,17 +3,16 @@ package com.dbal.specification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-public abstract class ClanSpecification {
-    private ClanSpecification() {
+public abstract class ArmySpecification {
+    private ArmySpecification() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Specifiable getbyName(String name) {
-
+    public static Specifiable getByArmyID(int id) {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("name", name);
+                return Restrictions.eq("id", id);
             }
         };
     }

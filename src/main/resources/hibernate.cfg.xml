@@ -37,14 +37,12 @@
 
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">false</property>
-
+        <property name="show_sql">true</property>
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property> <!--create or update-->
 
         <!-- The mapping information of entities -->
         <mapping class="com.models.Player"/>
-        <mapping class="com.models.Clan"/>
         <mapping class="com.models.Resource"/>
         <mapping class="com.models.Town"/>
         <mapping class="com.models.Building"/>
@@ -56,12 +54,8 @@
         <mapping class="com.models.TownArmyId"/>
         <mapping class="com.models.TownArmy"/>
         <mapping class="com.models.Army"/>
-        <mapping class="com.models.ArmyCategory"/>
         <mapping class="com.models.AccessToken"/>
-
-
-
-
+        <mapping class="com.models.ArmyMovementQueue"/>
 
 
 

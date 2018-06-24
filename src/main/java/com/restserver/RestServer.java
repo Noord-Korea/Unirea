@@ -3,12 +3,8 @@ package com.restserver;
 import com.dbal.repository.AccessTokenRepository;
 import com.dbal.repository.PlayerRepository;
 import com.dbal.repository.TownRepository;
-import com.restserver.handler.AccountHandler;
-import com.restserver.handler.MapHandler;
-import com.restserver.handler.TownHandler;
-import com.restserver.services.AccountService;
-import com.restserver.services.MapService;
-import com.restserver.services.TownService;
+import com.restserver.handler.*;
+import com.restserver.services.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -46,6 +42,12 @@ public class RestServer {
 
         MapHandler mapHandler = new MapHandler();
         MapService.setHandler(mapHandler);
+
+        ArmyHandler armyHandler = new ArmyHandler();
+        ArmyService.setHandler(armyHandler);
+
+        BuildingHandler buildingHandler = new BuildingHandler();
+        BuildingService.setHandler(buildingHandler);
 
         TownHandler townHandler = new TownHandler(new TownRepository());
         TownService.setHandler(townHandler);

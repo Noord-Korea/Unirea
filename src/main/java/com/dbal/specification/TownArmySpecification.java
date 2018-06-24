@@ -1,19 +1,19 @@
 package com.dbal.specification;
 
+import com.models.TownArmyId;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-public abstract class ResourceSpecification {
-    private ResourceSpecification() {
+public abstract class TownArmySpecification {
+    private TownArmySpecification() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Specifiable getByName(String name) {
-
+    public static Specifiable getByArmyPk(TownArmyId pk) {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("name", name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
+                return Restrictions.eq("pk", pk);
             }
         };
     }

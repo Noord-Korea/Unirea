@@ -6,7 +6,7 @@ public abstract class BaseResourceBuilding extends Building implements IResource
     private String name;
     private int resourceType;
     private int buildingLevel;
-    private int resourceProduction;
+    private double resourceProduction;
 
 
     BaseResourceBuilding(String name, int resourceType) {
@@ -35,11 +35,11 @@ public abstract class BaseResourceBuilding extends Building implements IResource
         this.resourceType = resourceType;
     }
 
-    public int getResourceProduction() {
+    public double getResourceProduction() {
         return resourceProduction;
     }
 
-    public void setResourceProduction(int resourceProduction) {
+    public void setResourceProduction(double resourceProduction) {
         this.resourceProduction = resourceProduction;
     }
 }

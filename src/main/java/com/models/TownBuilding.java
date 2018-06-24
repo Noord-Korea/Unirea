@@ -2,7 +2,6 @@ package com.models;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "Town_Building")
 @AssociationOverrides({

@@ -31,7 +31,7 @@ public class AccountHandler implements IAccountHandler {
         } else if (!player.getEmail().equals(data.getEmail()) || !player.checkPassword(data.getPassword())) {
             return new Reply(Status.NOACCESS, "Your login credentials were incorrect");
         }
-        AccessToken temp = accessTokenRepository.findOne(AccessTokenSpecification.getByPlayerId(player.getId()));
+        AccessToken temp = accessTokenRepository.findOne(AccessTokenSpecification.getByPlayerId(player.getPlayerId()));
         if (temp != null) {
             return new Reply(Status.CONFLICT, "Accesstoken already exists");
         }
@@ -114,7 +114,7 @@ public class AccountHandler implements IAccountHandler {
             }
             Gson gson = new Gson();
             Player player = accessToken.getPlayer();
-            Info info = new Info(player.getId(), player.getUsername(), player.getEmail());
+            Info info = new Info(player.getPlayerId(), player.getUsername(), player.getEmail());
             String account = gson.toJson(info);
             return new Reply(Status.OK, account);
         }
