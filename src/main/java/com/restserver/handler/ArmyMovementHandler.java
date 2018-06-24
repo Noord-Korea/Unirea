@@ -127,7 +127,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                 case "Oil":
                     for (TownResources homeResources : homeTown.getTownResources()) {
                         if (homeResources.getResource().getName().equals("Oil")) {
-                            targetResources.setValue(targetResources.getValue() - warehouseResourceProtection);
+                            targetResources.setValue(warehouseResourceProtection);
                             homeResources.setValue(homeResources.getValue() + targetResources.getValue());
                             townResourceRepository.save(homeResources);
                             townResourceRepository.save(targetResources);
@@ -138,7 +138,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                 case "Iron":
                     for (TownResources homeResources : homeTown.getTownResources()) {
                         if (homeResources.getResource().getName().equals("Iron")) {
-                            targetResources.setValue(targetResources.getValue() - warehouseResourceProtection);
+                            targetResources.setValue(warehouseResourceProtection);
                             homeResources.setValue(homeResources.getValue() + targetResources.getValue());
                             townResourceRepository.save(homeResources);
                             townResourceRepository.save(targetResources);
@@ -149,7 +149,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
                 case "Wood":
                     for (TownResources homeResources : homeTown.getTownResources()) {
                         if (homeResources.getResource().getName().equals("Wood")) {
-                            targetResources.setValue(targetResources.getValue() - warehouseResourceProtection);
+                            targetResources.setValue(warehouseResourceProtection);
                             homeResources.setValue(homeResources.getValue() + targetResources.getValue());
                             townResourceRepository.save(homeResources);
                             townResourceRepository.save(targetResources);
