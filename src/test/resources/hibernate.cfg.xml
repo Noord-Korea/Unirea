@@ -55,9 +55,7 @@
         <mapping class="com.models.TownArmyId"/>
         <mapping class="com.models.TownArmy"/>
         <mapping class="com.models.Army"/>
-        <mapping class="com.models.ArmyCategory"/>
         <mapping class="com.models.AccessToken"/>
-        <mapping class="com.models.ArmyQueue"/>
 
     </session-factory>
 </hibernate-configuration>

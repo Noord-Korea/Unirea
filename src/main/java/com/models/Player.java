@@ -16,6 +16,10 @@ import java.util.regex.Pattern;
 @Entity
 @Table(name = "Player")
 public class Player {
+    public int getPlayerid() {
+        return playerid;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int playerid;
@@ -46,7 +50,7 @@ public class Player {
 
     public Set<Town> getTowns() {
         TownRepository townRepository = new TownRepository();
-        List<Town> towns = townRepository.findAll(TownSpecification.getByPlayerId(this.playerid));
+        List<Town> towns = townRepository.findAllNoDuplicates(TownSpecification.getByPlayerId(playerid));
 
         if (towns == null) {
             return new HashSet<>();
@@ -54,7 +58,7 @@ public class Player {
         return new HashSet<>(towns);
     }
 
-    public int getId() {
+    public int getPlayerId() {
         return playerid;
     }
 
@@ -78,7 +82,6 @@ public class Player {
         }
         return false;
     }
-
     public boolean checkPassword(String password) {
         return BCrypt.checkpw(password, this.passHash);
     }

@@ -20,7 +20,8 @@ import repotests.AbstractRepoTest;
 
 import java.util.logging.Level;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class AccountHandlerTest {
 
@@ -114,7 +115,7 @@ public class AccountHandlerTest {
         Login login = new Login("test@gmail.com", "testpass");
         reply = handler.login(login);
         assertEquals(Status.OK, reply.getStatus());
-        AccessToken token = repoToken.findOne(AccessTokenSpecification.getByPlayerId(repo.findOne(PlayerSpecification.getByEmail("test@gmail.com")).getId()));
+        AccessToken token = repoToken.findOne(AccessTokenSpecification.getByPlayerId(repo.findOne(PlayerSpecification.getByEmail("test@gmail.com")).getPlayerId()));
         assertNotNull(token);
     }
 

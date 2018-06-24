@@ -15,7 +15,10 @@ import com.restserver.json.response.town.BuildingResponse;
 import com.restserver.json.response.town.ResourceResponse;
 import com.restserver.json.response.town.TownResponse;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class TownHandler implements ITownHandler {
     private TownRepository townRepository;
@@ -34,7 +37,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getId(), town.getName(), town.getId());
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -50,7 +53,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getId(), town.getName(), town.getId());
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -63,7 +66,7 @@ public class TownHandler implements ITownHandler {
         } else {
             Set<TownResponse> townResponseSet = new HashSet<>();
             for (Town town : towns) {
-                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getId(), town.getName(), town.getId()));
+                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId()));
             }
             return new Reply(Status.OK, gson.toJson(townResponseSet));
         }

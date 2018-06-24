@@ -7,12 +7,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import repotests.AbstractRepoTest;
 
 import java.util.logging.Level;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class PlayerRepoTest extends AbstractRepoTest {
     private PlayerRepository repo;
@@ -48,7 +46,7 @@ public class PlayerRepoTest extends AbstractRepoTest {
         Player player = new Player("test", "test@gmail.com", "test");
         repo.save(player);
         result = repo.findOne(PlayerSpecification.getByUsername("test"));
-        assertEquals(player.getId(), result.getId());
+        assertEquals(player.getPlayerId(), result.getPlayerId());
     }
 
     @Test
@@ -64,7 +62,7 @@ public class PlayerRepoTest extends AbstractRepoTest {
         Player player = new Player("test", "test@gmail.com", "test");
         repo.save(player);
         result = repo.findOne(PlayerSpecification.getByEmail("test@gmail.com"));
-        assertEquals(player.getId(), result.getId());
+        assertEquals(player.getPlayerId(), result.getPlayerId());
     }
 
     @Test
