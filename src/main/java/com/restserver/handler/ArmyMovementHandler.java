@@ -76,7 +76,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         queue.setGoingHome(false);
         int time = queue.getValue() * 2;
 
-        List<ArmyMovementQueue> queues = homeTown.getArmyMovementQueues();
+        List<ArmyMovementQueue> queues = new ArrayList<>(homeTown.getArmyMovementQueues());
         queues.add(queue);
         armyMovementQueueRepository.save(queues);
 
