@@ -11,14 +11,12 @@ import com.restserver.exception.PlayerHasTownException;
 import com.restserver.factory.TownFactory;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
+import com.restserver.json.response.town.ArmyResponse;
 import com.restserver.json.response.town.BuildingResponse;
 import com.restserver.json.response.town.ResourceResponse;
 import com.restserver.json.response.town.TownResponse;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TownHandler implements ITownHandler {
     private TownRepository townRepository;
@@ -37,7 +35,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId());
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), townArmyToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -53,7 +51,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId());
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), townArmyToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -66,7 +64,7 @@ public class TownHandler implements ITownHandler {
         } else {
             Set<TownResponse> townResponseSet = new HashSet<>();
             for (Town town : towns) {
-                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId()));
+                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), townArmyToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getPlayerId(), town.getName(), town.getId()));
             }
             return new Reply(Status.OK, gson.toJson(townResponseSet));
         }
@@ -103,6 +101,17 @@ public class TownHandler implements ITownHandler {
             townResources.add(resourceResponse);
         }
         return townResources;
+    }
+
+    public ArrayList<ArmyResponse> townArmyToMap(Town town){
+        ArrayList<ArmyResponse> townArmy = new ArrayList<>();
+        for (TownArmy army : town.getTownArmies()){
+            ArmyResponse armyResponse = new ArmyResponse();
+            armyResponse.setAmount(army.getValue());
+            armyResponse.setId(army.getArmy().getId());
+            townArmy.add(armyResponse);
+        }
+        return townArmy;
     }
 
     public ArrayList<BuildingResponse> townBuildingsToMap(Town town){
