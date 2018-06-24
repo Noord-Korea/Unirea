@@ -11,17 +11,17 @@ import com.restserver.exception.PlayerHasTownException;
 import com.restserver.factory.TownFactory;
 import com.restserver.json.response.Reply;
 import com.restserver.json.response.Status;
+import com.restserver.json.response.town.BuildingResponse;
+import com.restserver.json.response.town.ResourceResponse;
 import com.restserver.json.response.town.TownResponse;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TownHandler implements ITownHandler {
     private TownRepository townRepository;
     private PlayerRepository playerRepository = new PlayerRepository();
     private AccessTokenRepository accessTokenRepository = new AccessTokenRepository();
+    private IBuildingHandler buildingHandler = new BuildingHandler();
     private Gson gson = new Gson();
 
     public TownHandler(IRepository townRepository) {
@@ -42,7 +42,10 @@ public class TownHandler implements ITownHandler {
     @Override
     public Reply getTownByAccesstoken(String token) {
         AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(token));
-        int townId = accessToken.getPlayer().getTowns().iterator().next().getId();
+        int townId = 0;
+        for (Town town : accessToken.getPlayer().getTowns()){
+            townId = town.getId();
+        }
         Town town = townRepository.findOne(townId);
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
@@ -88,22 +91,37 @@ public class TownHandler implements ITownHandler {
 
     }
 
-    public Map<String, Integer> townResourcesToMap(Town town){
-        Map<String, Integer> townResources = new HashMap<>();
+    public ArrayList<ResourceResponse> townResourcesToMap(Town town){
+        ArrayList<ResourceResponse> townResources = new ArrayList<>();
         for (TownResources resources : town.getTownResources()){
-            int totalResources = resources.getValue();
-            String resourceName = resources.getResource().getName();
-            townResources.put(resourceName, totalResources);
+            ResourceResponse resourceResponse = new ResourceResponse();
+            resourceResponse.setAmount(resources.getValue());
+            resourceResponse.setName(resources.getResource().getName());
+            townResources.add(resourceResponse);
         }
         return townResources;
     }
 
-    public Map<String, Integer> townBuildingsToMap(Town town){
-        Map<String, Integer> townBuildings = new HashMap<>();
+    public ArrayList<BuildingResponse> townBuildingsToMap(Town town){
+        ArrayList<BuildingResponse> townBuildings = new ArrayList<>();
         for (TownBuilding buildings : town.getTownBuildings()){
-            int buildingLevel = buildings.getLevel();
-            String buildingName = buildings.getBuilding().getName();
-            townBuildings.put(buildingName, buildingLevel);
+            BuildingResponse buildingResponse = new BuildingResponse();
+            buildingResponse.setId(buildings.getBuilding().getId());
+            buildingResponse.setLevel(buildings.getLevel());
+            buildingResponse.setName(buildings.getBuilding().getName());
+            Map<String, Integer> cost = buildingHandler.getResourceRequirements(buildingResponse.getLevel(),buildingResponse.getId());
+            ArrayList<ResourceResponse> resourceCost = new ArrayList<>();
+            for (Map.Entry<String, Integer> pair : cost.entrySet()) {
+                ResourceResponse resourceResponse = new ResourceResponse();
+                resourceResponse.setName(pair.getKey());
+                resourceResponse.setAmount(pair.getValue());
+                resourceCost.add(resourceResponse);
+            }
+            buildingResponse.setUpgradeCost(resourceCost);
+            if (buildings.getBuilding().getId() < 4){
+                buildingResponse.setResourceProduction((int) buildingHandler.calculateResourceProduction(buildings.getLevel()));
+            }
+            townBuildings.add(buildingResponse);
         }
         return townBuildings;
     }

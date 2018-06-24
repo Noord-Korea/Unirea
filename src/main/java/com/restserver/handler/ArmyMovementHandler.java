@@ -105,7 +105,7 @@ public class ArmyMovementHandler implements IArmyMovementHandler {
         }
         // simulating battle
         for (TownArmy army : defendingArmy){
-            int id = army.getArmy().getId();
+            int id = army.getArmy().getId() - 1;
             int defence = army.getInTown() * (1 + (wallLevel / 20));
             int result = (attackingArmy.get(id).getValue() - attackingArmy.get(id).getInTown()) - defence;
             if (result <= 0){

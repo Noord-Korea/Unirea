@@ -152,7 +152,7 @@ public class BuildingHandler implements IBuildingHandler {
         return building;
     }
 
-    private double calculateResourceProduction(int buildingLevel) {
+    public double calculateResourceProduction(int buildingLevel) {
         double pow = Math.pow(buildingLevel, 1.5);
         return 30 * pow;
     }
@@ -198,7 +198,7 @@ public class BuildingHandler implements IBuildingHandler {
         }
     }
 
-    private Map<String, Integer> getResourceRequirements(int buildingLevel, int buildingId){
+    public Map<String, Integer> getResourceRequirements(int buildingLevel, int buildingId){
         Map<String, Integer> requirements = new HashMap<>();
         double pow = 0;
         switch(buildingId){

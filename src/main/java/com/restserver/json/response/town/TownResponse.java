@@ -1,17 +1,18 @@
 package com.restserver.json.response.town;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class TownResponse {
-    private Map<String, Integer> townResources;
-    private Map<String, Integer> townBuildings;
+    private ArrayList<ResourceResponse> townResources;
+    private ArrayList<BuildingResponse> townBuildings;
     private int x;
     private int y;
     private String username;
     private String name;
     private int townId;
 
-    public TownResponse(Map<String, Integer> townResources, Map<String, Integer> townBuildings, int x, int y, String username, String name, int townId) {
+    public TownResponse(ArrayList<ResourceResponse> townResources, ArrayList<BuildingResponse> townBuildings, int x, int y, String username, String name, int townId) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.x = x;
@@ -45,22 +46,6 @@ public class TownResponse {
         this.name = name;
     }
 
-    public Map<String, Integer> getTownResources() {
-        return townResources;
-    }
-
-    public void setTownResources(Map<String, Integer> townResources) {
-        this.townResources = townResources;
-    }
-
-    public Map<String, Integer> getTownBuildings() {
-        return townBuildings;
-    }
-
-    public void setTownBuildings(Map<String, Integer> townBuildings) {
-        this.townBuildings = townBuildings;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -75,5 +60,21 @@ public class TownResponse {
 
     public void setTownId(int townId) {
         this.townId = townId;
+    }
+
+    public ArrayList<BuildingResponse> getTownBuildings() {
+        return townBuildings;
+    }
+
+    public void setTownBuildings(ArrayList<BuildingResponse> townBuildings) {
+        this.townBuildings = townBuildings;
+    }
+
+    public ArrayList<ResourceResponse> getTownResources() {
+        return townResources;
+    }
+
+    public void setTownResources(ArrayList<ResourceResponse> townResources) {
+        this.townResources = townResources;
     }
 }

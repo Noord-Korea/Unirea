@@ -1,8 +1,6 @@
 package com.restserver.json.request;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MoveArmy {
     private ArrayList<Integer> troopAmount;
