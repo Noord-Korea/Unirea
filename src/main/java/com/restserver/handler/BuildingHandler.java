@@ -100,7 +100,7 @@ public class BuildingHandler implements IBuildingHandler {
         queue.setDate(new Date());
         queues.add(queue);
         buildingQueueRepository.save(queues);
-        return new Reply(Status.OK , "Building will start upgrading");
+        return new Reply(Status.OK , time);
 
     }
 
