@@ -1,7 +1,6 @@
 package com.restserver.json.response.town;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class TownResponse {
     private ArrayList<ResourceResponse> townResources;
@@ -9,15 +8,17 @@ public class TownResponse {
     private int x;
     private int y;
     private String username;
+    private int playerId;
     private String name;
     private int townId;
 
-    public TownResponse(ArrayList<ResourceResponse> townResources, ArrayList<BuildingResponse> townBuildings, int x, int y, String username, String name, int townId) {
+    public TownResponse(ArrayList<ResourceResponse> townResources, ArrayList<BuildingResponse> townBuildings, int x, int y, String username, int playerId, String name, int townId) {
         this.townResources = townResources;
         this.townBuildings = townBuildings;
         this.x = x;
         this.y = y;
         this.username = username;
+        this.playerId = playerId;
         this.name = name;
         this.townId = townId;
     }
@@ -76,5 +77,13 @@ public class TownResponse {
 
     public void setTownResources(ArrayList<ResourceResponse> townResources) {
         this.townResources = townResources;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 }

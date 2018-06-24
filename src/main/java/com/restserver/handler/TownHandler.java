@@ -34,7 +34,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName(), town.getId());
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getId(), town.getName(), town.getId());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -50,7 +50,7 @@ public class TownHandler implements ITownHandler {
         if (town == null) {
             return new Reply(Status.NOTFOUND, "No town found");
         } else {
-            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName(), town.getId());
+            TownResponse townResponse = new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getId(), town.getName(), town.getId());
             return new Reply(Status.OK, gson.toJson(townResponse));
         }
     }
@@ -63,7 +63,7 @@ public class TownHandler implements ITownHandler {
         } else {
             Set<TownResponse> townResponseSet = new HashSet<>();
             for (Town town : towns) {
-                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getName(), town.getId()));
+                townResponseSet.add(new TownResponse(townResourcesToMap(town), townBuildingsToMap(town), town.getX(), town.getY(), town.getPlayer().getUsername(), town.getPlayer().getId(), town.getName(), town.getId()));
             }
             return new Reply(Status.OK, gson.toJson(townResponseSet));
         }
