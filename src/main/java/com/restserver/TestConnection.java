@@ -1,6 +1,7 @@
 package com.restserver;
 
 import com.google.gson.Gson;
+import com.restserver.json.request.account.Account;
 import com.restserver.json.request.account.Login;
 import com.restserver.json.request.account.Register;
 import com.restserver.json.request.army.ArmyAmount;
@@ -19,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class TestConnection {
@@ -43,8 +45,9 @@ public class TestConnection {
         HttpPost requestLogin = new HttpPost("http://localhost:8090/account/login");
         requestLogin.setEntity(entityLogin);
 
-        //HttpResponse response = httpClient.execute(request);
+        HttpResponse response = httpClient.execute(request);
 
+        System.out.println("logging in");
         HttpResponse responseLogin = httpClientLogin.execute(requestLogin);
         String accessToken = "";
         try {
@@ -73,7 +76,7 @@ public class TestConnection {
         HttpPost requestcreateTown = new HttpPost("http://localhost:8090/town/create");
         requestcreateTown.setEntity(entitycreateTown);
 
-        //HttpResponse responsecreateTown = httpClientcreateTown.execute(requestcreateTown);
+        HttpResponse responsecreateTown = httpClientcreateTown.execute(requestcreateTown);
 
         //
 
@@ -86,8 +89,8 @@ public class TestConnection {
         HttpPost requestTown = new HttpPost("http://localhost:8090/town/get");
         requestTown.setEntity(entityTown);
 
-        //HttpResponse responseTown = httpClientTown.execute(requestTown);
-        /*try {
+        HttpResponse responseTown = httpClientTown.execute(requestTown);
+        try {
             BufferedReader rd;
             InputStreamReader stream = new InputStreamReader(responseTown.getEntity().getContent());
             rd = new BufferedReader(stream);
@@ -101,7 +104,7 @@ public class TestConnection {
             stream.close();
             System.out.println("Json: " + result.toString());
         } catch (IOException e){
-        }*/
+        }
 
         TrainArmy trainArmy = new TrainArmy(1,10,1,accessToken);
         String payloadArmy = gson.toJson(trainArmy);
@@ -111,23 +114,6 @@ public class TestConnection {
         HttpClient httpClientArmy = HttpClientBuilder.create().build();
         HttpPost requestArmy = new HttpPost("http://localhost:8090/army/train");
         requestArmy.setEntity(entityArmy);
-
-        HttpResponse responseArmy = httpClientArmy.execute(requestArmy);
-        try {
-            BufferedReader rd;
-            InputStreamReader stream = new InputStreamReader(responseArmy.getEntity().getContent());
-            rd = new BufferedReader(stream);
-
-            StringBuilder result = new StringBuilder();
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-            rd.close();
-            stream.close();
-            System.out.println("Json: " + result.toString());
-        } catch (IOException e){
-        }
 
         ArmyAmount armyAmount = new ArmyAmount();
         armyAmount.setArmyId(1);
@@ -143,10 +129,19 @@ public class TestConnection {
         HttpPost requestmoveArmy = new HttpPost("http://localhost:8090/army/move");
         requestmoveArmy.setEntity(entitymoveArmy);
 
-        HttpResponse responsemoveArmy = httpClientmoveArmy.execute(requestmoveArmy);
+
+        Account account = new Account(accessToken);
+        String payloadAccount = gson.toJson(account);
+        StringEntity entityAccount = new StringEntity(payloadAccount,
+                ContentType.APPLICATION_JSON);
+
+        HttpClient httpClientAccount = HttpClientBuilder.create().build();
+        HttpPost requestAccount = new HttpPost("http://localhost:8090/account/getaccount");
+        requestAccount.setEntity(entityAccount);
+        HttpResponse responseAccount = httpClientAccount.execute(requestAccount);
         try {
             BufferedReader rd;
-            InputStreamReader stream = new InputStreamReader(responsemoveArmy.getEntity().getContent());
+            InputStreamReader stream = new InputStreamReader(responseAccount.getEntity().getContent());
             rd = new BufferedReader(stream);
 
             StringBuilder result = new StringBuilder();

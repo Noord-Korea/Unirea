@@ -33,7 +33,7 @@ public class AccountHandler implements IAccountHandler {
         }
         AccessToken temp = accessTokenRepository.findOne(AccessTokenSpecification.getByPlayerId(player.getPlayerId()));
         if (temp != null) {
-            return new Reply(Status.CONFLICT, "Accesstoken already exists");
+            return new Reply(Status.OK, temp.getAccessToken());
         }
         AccessToken token = generateAccessToken(player);
         accessTokenRepository.save(token);
@@ -104,8 +104,7 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public Reply getAccount(Account data) throws InterruptedException {
-            Thread.sleep(1000);
+    public Reply getAccount(Account data) {
             AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
             if (accessToken == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
@@ -115,7 +114,6 @@ public class AccountHandler implements IAccountHandler {
             Info info = new Info(player.getPlayerId(), player.getUsername(), player.getEmail());
             String account = gson.toJson(info);
             return new Reply(Status.OK, account);
-
     }
 
     @Override
