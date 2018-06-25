@@ -16,7 +16,7 @@ public interface IAccountHandler {
 
     Reply update(UpdateAccount data);
 
-    Reply getAccount(Account data);
+    Reply getAccount(Account data) throws InterruptedException;
 
     Reply holidayReplacement(HolidayReplacement data);
 

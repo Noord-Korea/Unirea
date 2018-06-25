@@ -104,10 +104,8 @@ public class AccountHandler implements IAccountHandler {
     }
 
     @Override
-    public Reply getAccount(Account data) {
-        if (!AccessTokenUtil.checkAccess(data.getToken(), AccessTokenLevel.LOGGEDIN)) {
-            return new Reply(Status.NOACCESS, "Not logged in");
-        } else {
+    public Reply getAccount(Account data) throws InterruptedException {
+            Thread.sleep(1000);
             AccessToken accessToken = accessTokenRepository.findOne(AccessTokenSpecification.getByAccessToken(data.getToken()));
             if (accessToken == null) {
                 return new Reply(Status.NOTFOUND, "Player doesnt exist");
@@ -117,7 +115,7 @@ public class AccountHandler implements IAccountHandler {
             Info info = new Info(player.getPlayerId(), player.getUsername(), player.getEmail());
             String account = gson.toJson(info);
             return new Reply(Status.OK, account);
-        }
+
     }
 
     @Override

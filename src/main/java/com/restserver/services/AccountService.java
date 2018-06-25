@@ -95,7 +95,7 @@ public class AccountService {
     @POST
     @Consumes("application/json")
     @Path("/getaccount")
-    public Response getAccount(String data) {
+    public Response getAccount(String data) throws InterruptedException {
         Gson gson = new Gson();
         Account getAccount = gson.fromJson(data, Account.class);
         Reply reply = handler.getAccount(getAccount);

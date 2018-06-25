@@ -27,9 +27,9 @@ public class Main {
 
         ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);
 
-        exec.scheduleAtFixedRate(building, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(building, 100, 100, TimeUnit.SECONDS);
         //exec.scheduleAtFixedRate(recruiting, 5, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(troopMovement, 5, 5, TimeUnit.SECONDS);
-        exec.scheduleAtFixedRate(resourceTick, 5, 5, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(troopMovement, 100, 100, TimeUnit.SECONDS);
+        exec.scheduleAtFixedRate(resourceTick, 100, 100, TimeUnit.SECONDS);
     }
 }
