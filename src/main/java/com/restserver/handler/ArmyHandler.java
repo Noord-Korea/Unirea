@@ -31,6 +31,7 @@ public class ArmyHandler {
         if (enoughResources(town, army)) {
             townArmy.setTown(town);
             townArmy.setValue(townArmy.getValue() + trainArmy.getValue());
+            townArmy.setInTown(townArmy.getValue());
             TownArmyRepository townArmyRepository = new TownArmyRepository();
             townArmyRepository.save(townArmy);
             return new Reply(Status.OK, "succeeded");
