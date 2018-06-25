@@ -21,7 +21,7 @@ public abstract class AccessTokenSpecification {
         return new AbstractSpecification() {
             @Override
             public Criterion toCriterion() {
-                return Restrictions.eq("player", playerId);
+                return Restrictions.eq("player.id", playerId);
             }
         };
     }
